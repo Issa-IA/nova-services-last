@@ -1,0 +1,28 @@
+<odoo>
+<data>
+<record id="crm_team_form_inherit" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook" position="inside">
+                <page string="Objectif" name="crm_page_TOlls">
+                  <group name="crm_group_TOlls">
+                    <group name="crm_group_TOlls_left">
+                      <field name="crm_team_comer" string="Marge"/>
+                      <field name="crm_team_chif" string="Chiffre d'affaire"/>
+                    </group>
+                    <group name="crm_group_TOlls_right">
+                      <field name="crm_team_N_client" string="Nombre de clients"/>
+                      <field name="crm_team_N_contrat" string="Nombre de contrats"/>
+                    </group>
+                  </group>
+                </page>
+              </xpath>
+        </field>
+</record>
+</data>
+</odoo>
+
+
+

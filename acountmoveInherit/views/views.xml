@@ -1,0 +1,36 @@
+<odoo>
+<data>
+<odoo>
+<data>
+<record id="account_move_form_inherit1" model="ir.ui.view">
+        <field name="name">account.move.form.inherit1</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']"
+                       position="after">
+                <field name="date_de_prelevement"/>
+            </xpath>
+        </field>
+    </record>
+        
+<record id="account_move_form_inherit_line" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.line</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                       position="before">
+                <field name="move_line_serie" string="N° serie"/>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</odoo>
+
+</data>
+</odoo>
+
+
+

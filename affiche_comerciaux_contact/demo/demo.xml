@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+
+          <record id="object0" model="afichercontacts">
+            <field name="comercial_contact_affiche">False</field>
+            <field name="comercial_contact_retirer">False</field>
+          </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<odoo>
+<data>
+
+    <record id="contact_inherit_1" model="ir.ui.view">
+        <field name="name">contact inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form/sheet/div[1]" position="inside">
+
+                <button name="open_action_parc" type="object" class="oe_stat_button" icon="fa-credit-card">
+                                <div class="o_stat_info">
+                                    <field name="parc_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Parc</span>
+                                </div>
+                </button>
+                <button name="open_action_fact" type="object" class="oe_stat_button" icon="fa-square-o">
+                                <div class="o_stat_info">
+                                    <field name="par_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Factures maintenances</span>
+                                </div>
+                </button>
+            </xpath>
+
+            <xpath expr="//page[@name='contact_addresses']/field/kanban/templates/t/div/div[2]/field[@name='name']" position="after">                
+                <div t-if="record.title.raw_value"><field name="title"/></div>
+            </xpath>
+            
+            <xpath expr="//notebook/page/field[@name='child_ids']" position="attributes">
+                <attribute name="context">{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'contact'}</attribute>
+            </xpath>
+
+    </field>
+    </record>
+</data>
+</odoo>
+
+
+

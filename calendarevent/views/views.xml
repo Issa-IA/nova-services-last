@@ -1,0 +1,21 @@
+<odoo>
+<data>
+    <!--
+<record id="siew_calendar_event_form_inherit" model="ir.ui.view">
+        <field name="name">view_calendar_event.form.inherit</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='duration']"
+                       position="before">
+                <field name="test" string="test"/>
+            </xpath>
+        </field>
+
+</record>
+-->
+</data>
+</odoo>
+
+
+

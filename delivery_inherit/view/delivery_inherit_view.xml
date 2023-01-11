@@ -1,0 +1,50 @@
+<odoo>
+<data>
+
+        <record id="stock_form_inherit" model="ir.ui.view">
+                <field name="name">stock.form.inherit</field>
+                <field name="model">stock.picking</field>
+                <field name="inherit_id" ref="stock.view_picking_form"/>
+                <field name="arch" type="xml">                     
+                      <xpath expr="//field[@name='partner_id']" position ="after">
+                         <field name="stock_block_yes_1"   invisible="1" />
+                      </xpath>  
+                      <!--  
+                     <xpath expr="//button[@name='button_validate']" position="after" >
+                            <button name="button_validate" attrs="{'invisible': [('state', '!=', 'delivery')]}" string="Valider" type="object" class="oe_highlight" groups="stock.group_stock_user" data-hotkey="v"/>
+                    </xpath>
+                    -->
+                    <xpath expr="//button[@name='187']" position="after" >
+                             <button name="print_delivery" attrs="{'invisible': ['|','|',('state', '=', 'delivery'),('picking_type_id', '!=', 2),('stock_block_yes_1','=','Impaye')]}" string="Bon livraison" type="object" class="oe_highlight"/>
+                        
+                    </xpath>
+                         <xpath expr="//button[@name='print_delivery']" position="after" >
+                             <button name="print_reprise" attrs="{'invisible': [('picking_type_id', '!=', 6)]}" string="Bon de reprise" type="object" class="oe_highlight"/>
+                          
+                    </xpath>
+                 <xpath expr="//button[@name='action_cancel']" position="attributes" >
+                            <attribute name="attrs">{'invisible':[('state','not in', ('delivery','assigned', 'confirmed', 'draft', 'waiting'))]}</attribute>       
+                  </xpath> 
+                 <xpath expr="//button[@name='action_cancel']" position="attributes" >
+                            <attribute name="attrs">{'invisible':[('state','not in', ('delivery','assigned', 'confirmed', 'draft', 'waiting'))]}</attribute>       
+                  </xpath>     
+                  
+                   <xpath expr="//button[@name='do_unreserve']" position="attributes" >
+                            <attribute name="attrs">{'invisible': ['|', '|', '|', ('picking_type_code', '=', 'incoming'), ('immediate_transfer', '=', True), '&amp;', ('state', 'not in', ('assigned','delivery')), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('assigned', 'confirmed','delivery')), ('move_type', '=', 'one')]}</attribute>       
+                  </xpath> 
+                        
+                        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                        <page string="Signature" name="signture_livraison">
+                          <group name="groupe1">
+                            <group name="left">
+                              <field widget="signature" name="signature"/>
+                            </group>
+                            <group name="right"/>
+                          </group>
+                        </page>
+                 </xpath>
+                </field>
+        </record>
+
+</data>
+</odoo>

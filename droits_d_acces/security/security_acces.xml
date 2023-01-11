@@ -1,0 +1,60 @@
+<odoo>
+    <!-- new groupe -->
+	 <record model="ir.module.category" id="module_category_contact">
+            <field name="name">Contact</field>
+            <field name="description">Gestionnaire de contacts</field>
+	 </record>
+
+	<record id="group_Technicien_contact" model="res.groups">
+			<field name="name">Commercial contact </field>
+			<field name="category_id" ref="module_category_contact"/>
+			 <!--    <field name="perm_read" eval="True"/>-->
+             <!--    <field name="perm_write" eval="True"/>-->
+             <!--    <field name="perm_create" eval="False"/>-->
+             <!--    <field name="perm_unlink" eval="False"/>-->
+	</record>
+	
+	<!-- fin groupe -->
+
+
+	   <record model="ir.module.category" id="module_category_parc">
+            <field name="name">Management de parcs </field>
+            <field name="description">management et gestion de parcs d'identification</field>
+
+       </record>
+
+		<record id="group_Technicien" model="res.groups">
+			<field name="name">Technicien</field>
+			<field name="category_id" ref="module_category_parc"/>
+			 <!--    <field name="perm_read" eval="True"/>-->
+             <!--    <field name="perm_write" eval="True"/>-->
+             <!--    <field name="perm_create" eval="False"/>-->
+             <!--    <field name="perm_unlink" eval="False"/>-->
+		</record>
+
+	    <record id="group_commercial" model="res.groups">
+			<field name="name">Commercial</field>
+			<field name="category_id" ref="module_category_parc"/>
+			<!-- <field name="implied_ids" eval="[(4, ref('group_Technicien'))]"/> -->
+			 <!--    <field name="perm_read" eval="True"/>-->
+             <!--    <field name="perm_write" eval="True"/>-->
+             <!--    <field name="perm_create" eval="False"/>-->
+             <!--    <field name="perm_unlink" eval="False"/>-->
+		</record>
+
+
+		
+
+	<!--
+	<record model="ir.rule" id="record_not_shared_multi_company_rule_parc">
+		<field name="name">Non Shared Records:model</field>
+		<field name="model_id" ref="fleet.model_fleet_vehicle"/>
+		<field name="global" eval="True"/>
+		<field name="domain_force">
+		   [('company_id', 'in', company_ids)]
+		</field>
+		</record>
+	-->
+
+
+</odoo>

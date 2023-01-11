@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_commercial,fleet_vehicle,fleet.model_fleet_vehicle,group_commercial,1,1,1,1
+access_technicien,fleet_vehicle,fleet.model_fleet_vehicle,group_Technicien,1,1,1,0

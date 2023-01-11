@@ -1,0 +1,40 @@
+<odoo>
+<data>
+
+
+        <record id="crm_inherit_form_inherits" model="ir.ui.view">
+                <field name="name">crm.form.inherit</field>
+                <field name="model">crm.lead</field>
+                <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='user_id']" position="before" >
+                             <field name="action_field" required="1"/>
+                             <field name="materiels" />
+                             <field name="num_dossier" />
+
+                    </xpath>
+                    <xpath expr="//page[@name='internal_notes']" position="after" >
+                        <page string="Offres commerciales" name="offres_commerciales">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </xpath>
+                </field>
+        </record>
+
+
+    <!-- view Kanban -->
+		<record model="ir.ui.view" id="crm_kanban">
+			<field name="name">crm_view_inherit.kanban</field>
+			<field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+			<field name="arch" type="xml">
+                   <xpath expr="//field[@name='tag_ids']" position="before" >
+                            <div style="color:#545e69"><field name="action_field"/></div>
+                             <div style="color:#545e69"><field name="materiels"/></div>
+                    </xpath>
+
+			</field>
+		</record>
+
+</data>
+</odoo>

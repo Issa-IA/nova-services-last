@@ -1,0 +1,80 @@
+<odoo>
+<data>
+        <record id="origin_window" model="ir.actions.act_window">
+          <field name="name">Origine</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">partner.origin</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Origine" id="origin_partner" parent="contacts.res_partner_menu_config"
+              action="origin_window"/>
+
+     <record id="origine_list" model="ir.ui.view">
+                <field name="name">origine.list</field>
+                <field name="model">partner.origin</field>
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name="name"/>
+                    </tree>
+                </field>
+     </record>
+
+        <record id="partner_form_inherit" model="ir.ui.view">
+                <field name="name">partner.form.inherit</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                            <xpath expr="//sheet/div[2]/h1[1]/field[2]" position="after">   
+                                     <span> - </span> <field name="type_contact" style="background-color: #5E8EBA;" attrs="{'invisible': [('type_contact','=','Prospect')]}"/>
+                                    <field name="type_contact" attrs="{'invisible': [('type_contact','=','Client')]}"/>
+                      
+                      </xpath>
+                   
+                     <xpath expr="//sheet/div[2]/div[1]" position="after">
+                               <br/>   <h4><label for="code_client"/>
+                            <field name="code_client"/></h4>
+
+                    </xpath>
+                    <xpath expr="//field[@name='vat']" position="after" >
+                             <field name="activity"/>
+                             <field name="origine"/>
+
+
+                    </xpath>
+                    <xpath expr="//page[@name='contact_addresses']" position="after" >
+                        <page string="Parc machines" name="parc_machine">
+                            <field name="parc_machine"/>
+                        </page>
+                    </xpath>
+                    <xpath expr="//page[@name='internal_notes']" position="after" >
+                        <page string="Budget partenariat" name="budget_partenariat">
+                            <group string="Conditions et montant">
+                            <group>
+                                <field name="montant_tot_partenariat" widget="monetary"/>
+
+                            </group>
+                                <group>
+                                     <field name="montant_rest_regl"  widget="monetary"/>
+                                </group>
+                            </group>
+                            <group  string="Suivi des partenariats">
+
+                            </group>
+                            <field name="partenariat_ids" class="test">
+                                    <tree string="suivie partenariat"  editable="bottom">
+                                        <field name="annee"  options="{'format': 'YYYY'}"/>
+                                            <field name="currency_id" string="Payment Currency" optional="hide"/>
+                                        <field name="montant_a_regler" widget="monetary" options="{'currency_field': 'currency_id'}" style="justify-content: center; display :flex ;"> €</field>
+                                        <field name="statut"></field>
+                                        <field name="date_reglement"></field>
+                                    </tree>
+                                </field>
+
+                        </page>
+                    </xpath>
+                </field>
+        </record>
+
+</data>
+</odoo>

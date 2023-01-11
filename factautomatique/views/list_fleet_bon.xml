@@ -1,0 +1,36 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="listboncommandefleet_list_view">
+      <field name="name">liste de bon de commande et matériel</field>
+      <field name="model">listboncommandefleet</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fleet_id"/>
+          <field name="devis_id"/>
+          <field name="comp_couleur_diff"/>
+          <field name="comp_noir_diff"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="listboncommandefleet_form_view">
+      <field name="name">list bon commande matériel</field>
+      <field name="model">listboncommandefleet</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="fleet_id"/>
+            <field name="devis_id"/>
+            <field name="comp_couleur_diff"/>
+            <field name="comp_noir_diff"/>
+            </group>
+
+        </form>
+      </field>
+    </record>
+    <!-- explicit from view definition -->
+  </data>
+</odoo>

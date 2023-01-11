@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+        <report         id="report_parck1"
+                        model="account.move"
+                        string="Rapport xml"
+                        name="factureADD.report_facture_view1"
+                        file="factureADD.report_course"
+                        report_type="qweb-xml"
+        />
+         <template id="report_facture_view1">
+                        <root>
+                            <OPERATION t-esc="operation" />
+                            <OPERATIONTYPE t-esc="operation_type" />
+                            <record t-foreach="docs" t-as="o">
+                                <Customer t-esc="o.partner_id.name" />
+                            </record>
+                        </root>
+         </template>
+  </data>
+</odoo>
+
+
+

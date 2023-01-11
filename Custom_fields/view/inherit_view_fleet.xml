@@ -1,0 +1,23 @@
+<odoo>
+<data>
+
+
+        <record id="fleet_form_inherits" model="ir.ui.view">
+                <field name="name">fleet.form.inherit</field>
+                <field name="model">fleet.vehicle</field>
+                <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='tag_ids']" position="after" >
+
+                              <div>
+                            <label for="partner_id" />
+
+                                <field name="partner_id"/></div>
+
+                    </xpath>
+                </field>
+        </record>
+
+
+</data>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+<data>
+<record id="sale_order_form_inheritButton" model="ir.ui.view">
+        <field name="name">sale.order.form.inheritButton</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+               <button name="action_open_listSerial" type="object" class="oe_stat_button" icon="fa-credit-card">
+                </button>
+
+            </xpath>
+        </field>
+    </record>
+</data>
+</odoo>

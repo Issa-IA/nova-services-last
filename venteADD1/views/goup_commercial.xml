@@ -1,0 +1,25 @@
+<odoo>
+<data>
+<record id="contact_form_view_form_goup_comer" model="ir.ui.view">
+            <field name="name">contact.form.goup_comer</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="venteADD1.sale_order_form_inherit1" />
+            <field name="groups_id" eval="[(6, 0, [ref('droits_d_acces.group_Technicien_contact') ])]" />
+            <field name="arch" type="xml">
+                 <field name="partner_id" position="attributes">
+                    <attribute name="required">False</attribute>
+                </field> 
+                <field name="partner_id" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </field>
+                 <field name="partner_id_new" position="attributes">
+                   <attribute name="invisible">0</attribute>
+                </field>
+                <field name="partner_id_new" position="attributes">
+                   <attribute name="required">True</attribute>
+                </field>
+            </field>
+  <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
+</record>
+</data>
+</odoo>

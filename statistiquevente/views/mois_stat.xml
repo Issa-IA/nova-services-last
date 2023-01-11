@@ -1,0 +1,40 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="mois_list_view">
+      <field name="name">Mois list</field>
+      <field name="model">moisvente</field>
+      <field name="arch" type="xml">
+          <tree default_order='mois_int desc'>
+              <field name="mois_int"/>
+              <field name="mois"/>
+              <field name="moi_comer"/>
+              <field name="moi_chifre_aff"/>
+              <field name="moi_contrat"/>
+              <field name="moi_client"/>
+          </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="mois_form_view">
+      <field name="name">Mois form</field>
+       <field name="model">moisvente</field>
+        <field name="arch" type="xml">
+         <form>
+          <group>
+              <field name="mois_int"/>
+              <field name="mois"/>
+              <field name="moi_comer"/>
+              <field name="moi_chifre_aff"/>
+              <field name="moi_contrat"/>
+              <field name="moi_client"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+
+</data>
+</odoo>

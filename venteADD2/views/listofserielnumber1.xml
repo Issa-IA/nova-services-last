@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="listofserielnumberform" model="ir.ui.view">
+            <field name="name">listofserielnumber.form</field>
+            <field name="model">listofserielnumber</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="product_id" />
+                        <field name="list_serial_number"  widget="one2many" style="color:white;"/>
+                    </group>
+                    <footer>
+                        <button name="create_serial" string="Confirm" type="object" class ="oe_highlight"/>
+                        <button string="Cancel" class ="oe_highlight" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+</odoo>

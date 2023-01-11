@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="serielnumber_list_view">
+      <field name="name">seriel number</field>
+      <field name="model">serielnumber</field>
+      <field name="arch" type="xml">
+        <tree editable ="bottom">
+         <field name="name"/>
+         <field name="cocher"  />
+        </tree>
+      </field>
+    </record>
+
+        <record id="serielnumberform" model="ir.ui.view">
+            <field name="name">serielnumber.form</field>
+            <field name="model">serielnumber</field>
+            <field name="arch" type="xml">
+                <form >
+                    <group>
+                        <field name="name"/>
+                        <field name="listofseriel1"  />
+                    </group>
+                    <footer>
+                        <button name="create_serial_fin" string="Confirm" type="object" class ="oe_highlight"/>
+                        <button string="Cancel" class ="oe_highlight" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+</odoo>

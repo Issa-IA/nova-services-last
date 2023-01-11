@@ -1,0 +1,18 @@
+<odoo>
+<data>
+
+<record id="contact_form_view_form_new_confirm" model="ir.ui.view">
+            <field name="name">contact.form.inherit.confirm</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="groups_id" eval="[(6, 0, [ref('droits_d_acces.group_Technicien_contact') ])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                  <attribute name="attrs">{'invisible': [('sale_notifcation_ok', '=', False)]}</attribute>
+                </xpath>
+
+            </field>
+  
+</record>
+</data>
+</odoo>

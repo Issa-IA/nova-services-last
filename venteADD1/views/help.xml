@@ -1,0 +1,156 @@
+   <page string="Financement" name="financement">
+                    <group >
+                                <group >
+                                    <field name="sale_type" />
+                                    <field name="sale_leaser" />
+                                    <field name="sale_finance" />
+                                </group>
+                              <group >
+                                <group >
+                                    <field name="sale_duree" />
+                                    <field name="sale_accord" />
+                                    <field name="sale_loyer" />
+                                </group>
+                                 <group >
+                                     <field name="sale_periodicite" />
+                                    <field name="sale_reglement" />
+                                    <field name="sale_frais" />
+                                </group>
+                                </group>
+                    </group>
+                </page>
+
+   <page string="Financement" name="financement">
+                    <group >
+                                <table  style="width:100%;" class="table table-sm">
+
+                                <tbody>
+                                            <tr>
+                                                <td> <field name="sale_type" /> </td>
+
+                                                <td><field name="sale_duree"  /> </td>
+
+                                                <td><field name="sale_periodicite" />   </td>
+                                             </tr>
+                                             <tr>
+                                                <td><field name="sale_leaser" /> </td>
+
+                                                <td><field name="sale_accord" /> </td>
+
+                                                <td><field name="sale_reglement"  />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><field name="sale_finance" /></td>
+
+                                                <td><field name="sale_loyer" /> </td>
+
+                                                <td><field name="sale_frais"  />   </td>
+                                             </tr>
+
+                                  </tbody>
+                            </table>
+                    </group>
+                </page>
+
+<record id="sale_order_form_inherit1" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="before">
+                <h1>Dossier N°</h1>
+            </xpath>
+
+
+
+        </field>
+</record>
+
+
+<group >
+                                <group >
+                                    <field name="sale_vr_client" />
+                                    <field name="sale_ir_prospects" />
+                                    <field name="sale_rachat_matriel" />
+                                </group>
+                                <group >
+                                    <group >
+                                        <field name="sale_leaser_ra" />
+                                        <field name="sale_partenariat" />
+                                        <field name="sale_marque_reference" />
+                                    </group>
+                                     <group >
+                                         <field name="sale_accord_rachat" />
+                                        <field name="sale_solde_2_fois" />
+                                        <field name="sale_Gratuite" />
+                                    </group>
+                                </group>
+                    </group>
+
+
+   <group >
+                                <group >
+                                    <field name="sale_type" />
+                                    <field name="sale_leaser" />
+                                    <field name="sale_finance" />
+                                </group>
+                              <group >
+                                    <group >
+                                        <field name="sale_duree" />
+                                        <field name="sale_accord" />
+                                        <field name="sale_loyer" />
+                                    </group>
+                                     <group >
+                                         <field name="sale_periodicite" />
+                                        <field name="sale_reglement" />
+                                        <field name="sale_frais" />
+                                    </group>
+                                </group>
+                    </group>
+<page string="Rachats" name="rachats">
+                    <group >
+
+                         <table  style="width:100%;" class="table table-sm">
+                                  <thead>
+                                    <tr>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                            <tr>
+                                                <td><strong> VR clients </strong> </td>
+                                                <td><field name="sale_vr_client" nolabel="1"  /> </td>
+                                                <td><strong>Leaser </strong> </td>
+                                                <td><field name="sale_leaser_ra" nolabel="1"  />   </td>
+                                                <td><strong>N° d'accord </strong> </td>
+                                                <td><field name="sale_accord_rachat" nolabel="1"  />   </td>
+                                                <td><strong>Date de fin du partenariat</strong> </td>
+                                                <td><field name="sale_date_fin_F" nolabel="1"  />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong> IR prospects </strong> </td>
+                                                <td><field name="sale_ir_prospects" nolabel="1"  /> </td>
+                                                <td><strong>Partenariat </strong> </td>
+                                                <td><field name="sale_partenariat" nolabel="1"  />   </td>
+                                                <td><strong>Solde en 2 fois</strong> </td>
+                                                <td><field name="sale_solde_2_fois" nolabel="1"  />   </td>
+                                                  <td><strong>Date de 2éme solde à effectuer</strong> </td>
+                                                <td><field name="sale_date_2_solde" nolabel="1"  />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong>Rachat matriél</strong> </td>
+                                                <td><field name="sale_rachat_matriel" nolabel="1"  /> </td>
+                                                <td><strong>Marque et référence </strong> </td>
+                                                <td><field name="sale_marque_reference" nolabel="1"  />   </td>
+                                                <td><strong>Gratuitée</strong> </td>
+                                                <td><field name="sale_Gratuite" nolabel="1"  />   </td>
+                                             </tr>
+
+
+
+                                  </tbody>
+                            </table>
+
+                    </group>
+                </page>

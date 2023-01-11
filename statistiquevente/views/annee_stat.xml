@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="annee_list_view">
+      <field name="name">stat par an list</field>
+      <field name="model">anneevente</field>
+      <field name="arch" type="xml">
+        <tree default_order='annee desc'>
+          <field name="annee"/>
+          <field name="annee_comer"/>
+          <field name="annee_chifre_aff"/>
+          <field name="anee_contrat"/>
+          <field name="annee_client"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="anne_form_view">
+      <field name="name">stat par an form</field>
+      <field name="model">anneevente</field>
+      <field name="arch" type="xml">
+        <form class="o_purchase_order">
+              <header>
+                <button name="refrech_po" type="object" string="Rafraîchir" icon="fa-check" class ="oe_highlight"  />
+              </header>
+         <sheet>
+              <group>
+                <field name="annee"/>
+              </group>
+              <group>
+
+                 <field name="mois"  nolabel="1"  widget="one2many"/>
+
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+  <record model="ir.actions.act_window" id="stat_annee_window">
+      <field name="name">Statistiques</field>
+      <field name="res_model">anneevente</field>
+      <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem name="Statistiques" id="affiche_stat_action" parent="sale.sale_menu_root" 
+              action="stat_annee_window" sequence="200"/>
+</data>
+</odoo>

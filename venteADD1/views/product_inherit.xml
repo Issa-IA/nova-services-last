@@ -1,0 +1,33 @@
+<odoo>
+<data>
+
+<record id="product_form_inheritFirst" model="ir.ui.view">
+        <field name="name">product_form_inheritFirst</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[3]/span[2]" position="after">
+               <span class="d-inline-block">
+                            <field name="parc_ok"/>
+                            <label for="parc_ok"/>
+               </span>
+            </xpath>
+
+            <xpath expr="//page[@name='inventory']" position="after">
+                <page name="infoMat" string="infos MATÉRIELS" attrs="{'invisible': [('parc_ok', '=', False)]}">
+                    <group>
+                        <field name="product_Modele"/>
+                        <field name="product_marque"/>
+                        <field name="product_type1"/>
+                        <field name="product_type" invisible="1" />
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+</data>
+</odoo>

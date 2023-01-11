@@ -1,0 +1,343 @@
+<odoo>
+<data>
+<record id="sale_order_form_inherit1" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml"> 
+            <xpath expr="//button[@name='action_confirm'][2]" position="after">
+                <button
+                    name="demande_confirmer_devis"
+                    string="Demande de validation"
+                    type="object"
+                    attrs="{'invisible': ['|',('state', 'not in', ('draft', 'sent')),('sale_notifcation_ok','=',True)]}"
+                    groups="droits_d_acces.group_Technicien_contact"    
+                />
+            </xpath>  
+             <xpath expr="//field[@name='name']" position="after">                
+                     <field name="sale_notifcation_ok" invisible="1"/>
+            </xpath> 
+                
+                
+            <xpath expr="//field[@name='name']" position="after">
+                <label for="sale_dossier"/>
+                     <field name="sale_dossier"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>    
+            <xpath expr="//form/sheet/div[1]/button[2]" position="after">
+                 <button name="action_open_stock" type="object" class="oe_stat_button" icon="fa-truck">
+                                <div class="o_stat_info">
+                                    <field name="par_stock_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Reprise</span>
+                                </div>
+                </button>
+                <button name="action_open_acount" type="object" class="oe_stat_button" icon="fa-pencil">
+                                <div class="o_stat_info">
+                                    <field name="account_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Facture F </span>
+                                </div>
+                </button>
+                <button name="action_open_rfq" type="object" class="oe_stat_button" icon="fa-credit-card">
+                                <div class="o_stat_info">
+                                    <field name="par_mat_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Parc </span>
+                                </div>
+                </button>
+
+            </xpath>
+
+
+            <xpath expr="//form/sheet/group[1]" position="after">
+                     <group name="sale_header_1">
+                        <group name="partner_details_1">
+                             <field name="partner_id_new" invisible="1" domain="[('user_id','=',context.get('uid'))]"/> 
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_vat': True}" options="{&quot;always_reload&quot;: True}"/>
+                            <label for="street_client" string="adress" style="color:white;"/>
+                            <div>
+                                <field name="street_client" nolabel="1" /><br/>
+                                <field name="zip_client" nolabel="1"  />&#x2063;&#x2063; <field name="city_client" class="oe_inline"  nolabel="1"/>
+                            </div>
+                             <field name="sale_type_client1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                             <field name="sale_materiels_vendu" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>  
+
+                        </group>
+                        <group name="order_details_1">
+                            <field name="sale_date_traitement" />                               
+                            <field name="partner_invoice_id" string="Organisme de facturation" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}" options="{&quot;always_reload&quot;: True}"/>
+                            <label for="street_client" string="adress" style="color:white;"/>
+                            <!--<div>
+                                <field name="street_fact" nolabel="1" /><br/>
+                                <field name="zip_fact" nolabel="1"  />&#x2063;&#x2063; <field name="city_fact" class="oe_inline"  nolabel="1"/>
+                            </div>
+                            -->
+                            <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}" options="{&quot;always_reload&quot;: True}"/>
+                           <label for="street_livraison" string="adress" style="color:white;"/>
+                            <div>
+                                <field name="street_livraison" nolabel="1" /><br/>
+                                <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
+                            </div>
+                        </group>
+                    </group>
+            </xpath>
+
+            <xpath expr="//form/sheet/group[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+
+
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="string" >Code</attribute>
+            </xpath>
+            
+            <!--    
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']" position="after">
+              <field name="designation" />
+            </xpath>
+            -->
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="string" >Prix total</attribute>
+            </xpath>
+             <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='qty_invoiced']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='qty_delivered']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="price_sale_1" />
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="price_sale" />
+            </xpath>
+                
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                <field name="order_line_serie" attrs="{'invisible': [('order_line_serie', '=', 'False'),('product_uom_qty', '=!', '1')]}"/>
+            </xpath>
+
+
+            <xpath expr="//form/sheet/notebook/page[@name='order_lines']" position="attributes">
+                <attribute name="string" >Matériels</attribute>
+            </xpath>
+            <!--
+            <field name="tax_totals_json" position="after">
+                <field name="sale_marge" />  &#160;
+            </field>
+            -->
+            <xpath expr="//form/sheet/notebook/page/group[1]" position="after">
+                <group name="note_group1" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                    <field name="note" class="oe-bordered-editor" nolabel="1" placeholder="Terms and conditions..."/>
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total1">
+                                     <field name="sale_total_achat" colspan="2" invisible="1"/>
+                                    <field name="sale_total_vente" colspan="2"/>
+                                     <field name="sale_marge" colspan="2"/>
+                                    <field name="sale_marge_reel" colspan="2"/>
+                                </group>
+                                <div class="oe_clear"/>
+                 </group>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page/group[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='tax_totals_json']" position="after">
+                <field name="sale_marge" />
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
+                <page string="Financement" name="financement">
+                   <group >
+
+                         <table  style="width:100%;" class="table table-sm">
+                                  <thead>
+                                    <tr>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                            <tr>
+                                                <td><strong>Type </strong> </td>
+                                                <td><field name="sale_type" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><strong>&#160;&#160;&#160;&#160;&#160;Durée</strong> </td>
+                                                <td><field name="sale_duree" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><strong>Periodicité</strong> </td>
+                                                <td><field name="sale_periodicite" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong>Leaser</strong> </td>
+                                                <td><field name="sale_leaser" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><strong>&#160;&#160;&#160;&#160;&#160;N° d'accord</strong> </td>
+                                                <td><field name="sale_accord" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><strong>Mode de reglement</strong> </td>
+                                                <td><field name="sale_reglement" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong>Montant financé</strong> </td>
+                                                <td><field name="sale_finance" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><strong>&#160;&#160;&#160;&#160;&#160;Loyer</strong> </td>
+                                                <td><field name="sale_loyer" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><strong>Frais de logistique à facturer</strong> </td>
+                                                <td><field name="sale_frais" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                             </tr>
+                                             <tr>
+                                                <td><strong>Frais de restitution</strong> </td>
+                                                 <td><field name="sale_frais_restitution" nolabel="1" invisible="1" /> <field name="sale_frais_restitution_1" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /></td>
+                                                <td><strong>Frais de livraison</strong> </td>
+                                                <td><field name="sale_frais_livraison_new" nolabel="1" invisible="1" />  <field name="sale_frais_livraison_new_1" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"  /> </td>    
+                                                <td><strong>Calage</strong> </td>
+                                                <td><field name="sale_collage" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>     
+                                             </tr>
+
+                                  </tbody>
+                            </table>
+
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
+                <page string="Rachats" name="rachats">
+                    <group >
+                        
+                        <group string="reprises PRSOPECT">
+                            
+                            <field name="sale_rachat_matriel" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                             <field name="sale_montatnt_IR" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_Gratuite" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                           
+                        </group>
+                         
+                        <group string="BUDGETS">
+                            <field name="sale_partenariat" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_date_fin_F" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_solde_2_fois" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_date_2_solde" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
+                        </group>
+                    </group>
+                    <group string="reprises  clients">
+                            <field name="sale_bonretour"  nolabel="1"  widget="one2many" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                   </group>    
+                </page>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
+                <page string="Maintenance" name="maintenance">
+                <group >
+                       <group>
+                         <table  style="width:100%;" class="table table-sm">
+                                  <thead>
+                                    <tr>
+                                        <th > </th>
+                                        <th ><strong>NB </strong></th>
+                                        <th ><strong>Couleur </strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                            <tr>
+                                                <td><strong> Cout copie Signé </strong> </td>
+
+                                                <td><field name="sale_cout_signe_nb" nolabel="1" class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/></td>
+
+                                                <td>  <field name="sale_cout_signe_col" nolabel="1" class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/> </td>
+                                             </tr>
+                                             <tr>
+                                                <td><strong> Cout copie Actuel </strong> </td>
+
+                                                <td><field name="sale_cout_actuel_nb" nolabel="1"  class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/> </td>
+
+                                                <td><field name="sale_cout_actuel_col" nolabel="1"  class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong> Ecart Actuel/Signé </strong> </td>
+
+                                                <td><field name="sale_cout_actuel_signe_nb" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}" nolabel="1"/> <field name="sale_cout_actuel_signe_nb" nolabel="1"  attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&lt;', 0)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&lt;', 0)]}"/>  </td>
+                                                <td><field name="sale_cout_actuel_signe_col" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}" nolabel="1"/> <field name="sale_cout_actuel_signe_col" nolabel="1"  attrs="{'invisible':[('sale_cout_actuel_signe_col', '&lt;', 0)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&lt;', 0)]}" />  </td>
+
+                                             </tr>
+
+                                  </tbody>
+                            </table>
+                           </group>
+                    <group>
+                    <table  style="width:100%;" class="table table-sm" >
+                                  <thead>
+                                    <tr>
+                                        <th > </th>
+                                        <th ><strong>NB </strong></th>
+                                        <th ><strong>Couleur </strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                            <tr>
+                                                <td><strong> Forfait copie Signé </strong> </td>
+
+                                                <td><field name="sale_forfait_signe_nb" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+
+                                                <td><field name="sale_forfait_signe_col" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                             </tr>
+                                             <tr>
+                                                <td><strong> Forfait copie Actuel</strong> </td>
+
+                                                <td><field name="sale_forfait_actuel_nb" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+
+                                                <td><field name="sale_forfait_actuel_col" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                             </tr>
+                                              <tr>
+                                                <td><strong> Ecart Actuel/Signé </strong> </td>
+                                                   <td><field name="sale_forfait_actuel_signe_nb" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_forfait_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}"/><field name="sale_forfait_actuel_signe_nb" nolabel="1"  attrs="{'invisible':[('sale_forfait_actuel_signe_nb', '&lt;', 0)]}"/> </td>
+                                                   <td><field name="sale_forfait_actuel_signe_col" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_forfait_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}"/><field name="sale_forfait_actuel_signe_col" nolabel="1"  attrs="{'invisible':[('sale_forfait_actuel_signe_col', '&lt;', 0)]}"/> </td>
+                                              </tr>
+                                  </tbody>
+                            </table>
+
+                          </group>
+
+                                 <group >
+                                            <field name="sale_abonnement_service" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                                            <field name="sale_autre_frais" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
+                                 </group>
+
+                 </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='customer_signature']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            
+
+        </field>
+ </record>
+
+<record id="sale_order_form_inherit2" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit2</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='optional_products']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+</record>
+
+
+
+
+
+
+</data>
+</odoo>

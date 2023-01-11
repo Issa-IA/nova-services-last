@@ -1,0 +1,31 @@
+<odoo>
+<data>
+
+
+
+<record id="res_partner_search_advanced" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="partner_parc_ids" string="Dossier N°" filter_domain="[('partner_parc_ids.fleet_dossier_devis','ilike',self)]"/>
+                <field name="partner_parc_ids" string="N° serie" filter_domain="[('partner_parc_ids.fleet_serie','ilike',self)]"/>
+                <field name="partner_parc_ids" string="Modèle" filter_domain="[('partner_parc_ids.fleet_Modele','ilike',self)]"/>
+                <field name="partner_parc_ids" string="Marque" filter_domain="[('partner_parc_ids.fleet_marque','ilike',self)]"/>
+                <field name="partner_parc_ids" string="Fournisseur" filter_domain="[('partner_parc_ids.fleet_fournisseur','ilike',self)]"/>
+                <field name="partner_parc_ids" string="Periodicité" filter_domain="[('partner_parc_ids.fleet_periodicite','ilike',self)]"/>                
+                <field name="partner_parc_ids" string="Commerciale" filter_domain="[('partner_parc_ids.fleet_user_id','ilike',self)]"/>    
+                <!-- à voir ne marche pas -->   
+                <filter name="partner_parc_ids" string="Actif Parc" domain="[('partner_parc_ids.state_id.id','=',1)]"/> 
+                <filter name="partner_parc_ids" string="Date d'installation cette semaine" domain="[('partner_parc_ids.fleet_date_inst','>=',(context_today()+datetime.timedelta(-6)).strftime('%Y-%m-%d'))]"/>
+                
+                <filter name="partner_parc_ids" string="Durée de contrat >= 3" domain="[('partner_parc_ids.fleet_duree','>=',3)]"/>
+                <filter name="partner_parc_ids" string="Durée restante >= 3" domain="[('partner_parc_ids.fleet_duree_rest','>=',3)]"/>
+            </xpath>
+        </field>
+</record>
+
+
+</data>
+</odoo>

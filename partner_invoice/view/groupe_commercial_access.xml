@@ -1,0 +1,57 @@
+<odoo>
+<data>
+<record id="contact_form_view_form2" model="ir.ui.view">
+            <field name="name">contact.form.inherit2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="partner_invoice.partner_form_invoice" />
+            <field name="groups_id" eval="[(6, 0, [ref('droits_d_acces.group_Technicien_contact') ])]" />
+            <field name="arch" type="xml">
+                <field name="augmentation_sav_bool" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                <field name="augmentation_sav" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                 <field name="code_service" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                <field name="pfr" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                <field name="x_studio_type_facture" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </field>
+                <field name="x_studio_kdfm" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                </field>
+                 <field name="goup_commerc_ok" position="attributes">
+                   <attribute name="invisible">0</attribute>
+                </field>    
+                 <field name="goup_commerc_ok_1" position="attributes">
+                   <attribute name="invisible">0</attribute>
+                </field>        
+                <field name="moyen_de_paiement" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                
+            </field>
+  <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
+</record>
+<record id="contact_form_view_form3" model="ir.ui.view">
+            <field name="name">contact.form.inherit3</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="studio_customization.odoo_studio_res_part_a277ba32-48de-47cb-9207-278e2b1963be" />
+            <field name="groups_id" eval="[(6, 0, [ref('droits_d_acces.group_Technicien_contact') ])]" />
+            <field name="arch" type="xml">
+                <field name="siret" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                
+            </field>
+  <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
+</record>                
+</data>
+</odoo>
+
+
+

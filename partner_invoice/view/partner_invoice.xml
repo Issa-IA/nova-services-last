@@ -1,0 +1,58 @@
+<odoo>
+<data>
+
+        <record id="partner_form_invoice" model="ir.ui.view">
+                <field name="name">partner.form.invoice</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]/field[@name='street2']" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]/field[@name='state_id']" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/div[1]/field[@name='country_id']" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                    </xpath>
+                     <xpath expr="//field[@name='company_type']" position="attributes">
+                        <attribute name="attrs">{}</attribute>
+                        <attribute name="invisible">1</attribute>
+                      </xpath>
+                    <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='type_facture']" position="attributes">
+                           <attribute name="attrs">{}</attribute>
+                           <attribute name="invisible">1</attribute>
+                    </xpath>
+                    
+                    <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/div[4]/field[@name='lang']" position="attributes">
+                        <attribute name="attrs">{}</attribute>
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//page[@name='budget_partenariat']" position="after" >
+                        <page string="Facturation" name="facturation">
+                            <group>
+                                <group>
+                                    <field name="goup_commerc_ok"  invisible="1"></field>                                        
+                                    <field  name="x_studio_type_facture"/>
+                                    <field  name="type_facture" invisible="1"/>
+                                    <field name="pfr"></field>
+                                    <field name="code_service"></field>
+                                     <field name="augmentation_sav_bool"></field>
+                                    <field name="augmentation_sav" attrs="{'invisible': [('augmentation_sav_bool','!=',True)]}"></field>
+                                </group>
+                                <group>
+                                    <field name="moyen_de_paiement"></field>
+                                        <field name="siret"></field>
+                                        <field name="goup_commerc_ok_1"  invisible="1"></field>
+                                        <field name="x_studio_kdfm"></field>
+                                </group>
+                            </group>
+
+                        </page>
+
+                    </xpath>
+                </field>
+        </record>
+
+</data>
+</odoo>

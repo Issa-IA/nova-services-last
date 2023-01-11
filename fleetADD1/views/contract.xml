@@ -1,0 +1,29 @@
+<odoo>
+<data>
+
+    <!--
+    <record id="fleet_vehicle_log_contract_inherit" model="ir.ui.view">
+        <field name="name">fleet_vehicle_log_contract_inherit</field>
+        <field name="model">fleet.vehicle.log.contract</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+        <field name="arch" type="xml">
+            <field name="cost_subtype_id" position="after">
+                <field name="fleet_periodicite" />
+            </field>
+            <field name="date" position="after">
+                <field name="fleet_duree_rest" />
+            </field>
+            <field name="date" position="after">
+                <field name="fleet_duree" />
+            </field>
+            <field name="amount" position="before">
+                    <field name="fleet_prix_HT" widget='monetary'/>
+                    <field name="fleet_solde_est" widget='monetary'/>
+            </field>
+
+        </field>
+    </record>
+    -->
+
+</data>
+</odoo>

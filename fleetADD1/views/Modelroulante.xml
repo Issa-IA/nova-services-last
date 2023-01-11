@@ -1,0 +1,27 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="type_info_list_view">
+      <field name="name">type info list</field>
+      <field name="model">typeinfo</field>
+      <field name="arch" type="xml">
+        <tree editable ="bottom">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="type_info_form_view">
+      <field name="name">type info form</field>
+      <field name="model">typeinfo</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+          </group>
+        </form>
+      </field>
+    </record>
+</data>
+</odoo>

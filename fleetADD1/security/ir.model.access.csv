@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_type,typeinfo,model_typeinfo,base.group_user,1,1,1,1
+access_type_leaser,typeleaser,model_typeleaser,base.group_user,1,1,1,1
+access_type_format,typformat,model_typformat,base.group_user,1,1,1,1

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="portal_layout"
+        name="Portal layout: fleet menu entry"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="50"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'fleet' or fleet"
+                t-attf-class="breadcrumb-item #{'active ' if not fleet else ''}"
+            >
+                <a
+                    t-if="fleet"
+                    t-attf-href="/my/fleets?{{ keep_query() }}"
+                >Parc Matériels </a>
+                <t t-else="">Parc Matériels</t>
+            </li>
+            <li t-if="fleet" class="breadcrumb-item active">
+                <t t-esc="fleet.name" />
+            </li>
+        </xpath>
+    </template>
+    <template
+        id="portal_my_home"
+        name="Portal My Home : fleet entries"
+        inherit_id="portal.portal_my_home"
+        priority="40"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="fleet_count" t-call="portal.portal_docs_entry">
+               <t t-set="title">Parc Matériels</t>
+                <t t-set="url" t-value="'/my/fleets'" />
+                <t t-set="count" t-value="fleet_count" />
+            </t>
+            <form method="POST" t-attf-action="/new/fleet">
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    t-att-value="request.csrf_token()"
+                />
+                <!--<button
+                    name="create_new_fleet"
+                    type="action"
+                    class="btn btn-primary"
+                    style="float: right; margin-right: 0px; margin-top:5px;"
+                >New Fleet</button>-->
+            </form>
+        </xpath>
+    </template>
+    <template id="portal_my_fleets" name="My fleets">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <form method="POST" t-attf-action="/new/fleet">
+
+                <t t-call="portal.portal_searchbar"> </t>
+            <!--<button
+                        name="create_new_fleet"
+                        type="action"
+                        class="btn btn-primary"
+                        style="float: right; margin-right: 5px;"
+                    >Saisie Compteurs</button>-->
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    t-att-value="request.csrf_token()"
+                />
+            </form>
+            <t t-if="not fleets">
+                <p>There are no fleets in your account.</p>
+            </t>
+            <div t-if="fleets" class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th>N° de série</th>
+                                <th>N° de dossier</th>
+                                <th>Marque</th>
+                                <th>Modèle</th>
+                                <th>Lieu d'installation</th>
+                                <th>Etat</th>
+
+                            </tr>
+                        </thead>
+                        <t t-foreach="fleets" t-as="fleet">
+                            <tr>
+                          
+
+                                <td>
+                                    <a t-attf-href="/my/fleet/#{fleet.id}">
+                                        <t t-esc="fleet.fleet_serie" />
+                                    </a>
+                                </td>
+                                 <td>
+                                        <t t-esc="fleet.fleet_dossier_devis" />
+                                  
+                                </td>
+                                <td>
+                                    <span t-field="fleet.fleet_marque" />
+                                </td>
+
+                                <td>
+                                    <span t-field="fleet.fleet_Modele" />
+                                </td>
+
+                                <td>
+                                    <span t-field="fleet.fleet_installation" />
+                                </td>
+
+                                <td>
+                                    <t t-esc="fleet.state_id.name" />
+                                </td>
+
+
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager" />
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="portal_fleet_page" name="Fleet Portal Template">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>
+                                    <t t-call='portal.record_pager' />
+                                    <span t-field="fleet.fleet_serie" />
+                                </h4>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="mb8">
+                            <div>
+                                <div class="pull-left">
+
+                                    <strong>Date:</strong>
+                                    <span t-field="fleet.fleet_date_inst" />
+                                    <br />
+
+                                    <b>Stage:</b>
+                                    <t t-esc="fleet.state_id.name" />
+                                    <br />
+                                </div>
+
+                            </div>
+                            <br />
+<br/>
+                            <br/><br/>
+                        </div>
+                        <h4 class="page-header">History</h4>
+                        <!-- Options:fleet Chatter: user can reply -->
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="fleet" />
+                        </t>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure mb32" />
+        </t>
+    </template>
+    <template id="portal_create_fleet" name="Create fleet">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center">Send a new fleet</h1>
+                    </div>
+                </div>
+            </div>
+            <form
+                action="/submitted/fleet"
+                method="POST"
+                class="form-horizontal mt32"
+                enctype="multipart/form-data"
+            >
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    t-att-value="request.csrf_token()"
+                />
+
+                <div class="form-group">
+                    <label
+                        class="col-md-3 col-sm-4 control-label"
+                        for="subject"
+                    >Subject</label>
+                    <div class="col-md-7 col-sm-8">
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="subject"
+                            required="True"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label
+                        class="col-md-3 col-sm-4 control-label"
+                        for="attachment"
+                    >Add Attachments</label>
+                    <div class="col-md-7 col-sm-8">
+                        <div class="btn btn-default btn-file col-md-12">
+                            <input
+                                class="form-control o_website_form_input"
+                                name="attachment"
+                                id="attachment"
+                                type="file"
+                                multiple="multiple"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label
+                        class="col-md-3 col-dm-4 control-label"
+                        for="description"
+                    >Description</label>
+                    <div class="col-md-7 col-sm-8">
+                        <textarea
+                            class="form-control"
+                            name="description"
+                            style="min-height: 120px"
+                            required="True"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+                        <button class="btn btn-primary btn-lg">Submit Fleet</button>
+                    </div>
+                </div>
+            </form>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="compTeurNoirModel_list_view">
+      <field name="name">compTeurNoirModel list</field>
+      <field name="model">compteurnoirmodel</field>
+      <field name="arch" type="xml">
+        <tree editable ="top" default_order="create_date desc">
+          <field name="numero_serie"/>
+            <field name="compteur_Noir"/>
+            <field name="create_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="compTeurNoirModel_form_view">
+      <field name="name">compTeurNoirModel form</field>
+      <field name="model">compteurnoirmodel</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="numero_serie"/>
+            <field name="compteur_Noir"/>
+              <field name="create_date"/>
+          </group>
+        </form>
+      </field>
+    </record>
+</data>
+</odoo>

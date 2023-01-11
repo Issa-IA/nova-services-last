@@ -1,0 +1,93 @@
+<odoo>
+<data>
+
+    <record id="fleet_vehicle_model_inherit" model="ir.ui.view">
+        <field name="name">fleet_model_inherit</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_fuel_type']" position="attributes">
+                <attribute name="required">False</attribute>
+            </xpath>
+             <xpath expr="//field[@name='vehicle_type']" position="attributes">
+                <attribute name="required">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="required">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='brand_id']" position="attributes">
+                <attribute name="required">False</attribute>
+            </xpath>
+
+            <!-- Model Matériels
+            -->
+            <xpath expr="//form/sheet/div[2]" position="after">
+                <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. 2554ci"/>
+                        </h1>
+                        <label for="brand_id" string="Marque"/>
+                        <h2>
+                            <field name="brand_id" placeholder="e.g. KYOCERA"/>
+                        </h2>
+
+
+                    </div>
+            </xpath>
+
+            <xpath expr="//form/sheet/div[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/div[2]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//form/sheet/group[1]" position="after">
+                <group>
+                <group>
+                            <field name="active" invisible="1"/>
+                            <field name="type_materiels"/>
+                </group>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet/group[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <!-- notebook information -->
+            <xpath expr="//form/sheet/notebook[1]" position="after">
+                <notebook>
+                        <page string="Information" name="information1">
+                            <group>
+                                <group >
+                                    <field name="category_id"/>
+                                    <field name="model_format1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Docs Techniques" name="information2">
+                                <field name="model_attachment_ids" widget="many2many_binary"/>
+                        </page>
+                </notebook>
+
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+
+
+
+
+
+        </field>
+    </record>
+
+</data>
+</odoo>
+
+
+

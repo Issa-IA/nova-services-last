@@ -1,0 +1,214 @@
+<odoo>
+<data>
+    <!--
+    <record id="fleet.fleet_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Matériels</field>
+    </record>
+    -->
+
+
+    <record id="fleet_vehicle_inherit" model="ir.ui.view">
+        <field name="name">fleet_vehicle_inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='image_128']" position="after">
+                            <field name="image_materiel" widget="image" class="oe_avatar"/>
+            </xpath>
+            <xpath expr="//field[@name='image_128']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//form/sheet/div[2]" position="after">
+                      <div class="oe_title">
+
+                        <label for="fleet_dossier_devis"/>
+                        <h1>
+                            <field name="fleet_dossier_devis" placeholder="S256" attrs="{'readonly':[('fleet_artic_id','!=',False)]}"/>
+                            <field name="fleet_artic_id"  invisible="1"/>
+                        </h1>
+                        <label for="tag_ids"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                       <h5>
+                          <label for="fleet_user_id"/>
+                        <field name="fleet_user_id" />
+                        </h5>
+                          
+                  </div>
+
+            </xpath>
+
+           
+             <xpath expr="//form/sheet/div[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/div[2]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+          <!--
+            <xpath expr="//button[@name='return_action_to_open']" position="after" >
+                <button name="return_comp_coleur" type="object" class="oe_stat_button" icon="fa-tachometer" >
+                            <field name="comp_couleur" widget="statinfo" string="Copies couleur"/>
+                </button>
+            </xpath>
+             <xpath expr="//form/sheet/div[1]/button[]" position="after" >
+                <button name="return_comp_noir" type="object" class="oe_stat_button" icon="fa-tachometer" >
+                            <field name="comp_noir" widget="statinfo" string="Copies noir"/>
+                </button>
+            </xpath>
+            -->
+
+            <xpath expr="//form/sheet/group[1]/group[2]" position="after">
+                 <group string="infos MAINTENANCE">
+                         <field name="fleet_debut_contrat_date" />
+                         <field name="fleet_facturation" />
+                         <label for="fleet_cout_Couleur"/>
+                         <div>
+                            <field name="fleet_cout_Couleur"  class="oe_inline" />&#x2063;&#x2063; <field name="fleet_unit_HT_Copie" class="oe_inline"  nolabel="1"/>
+                          </div>
+                         <label for="fleet_forfait_couleur"/>
+                         <div>
+                            <field name="fleet_forfait_couleur" class="oe_inline"/>&#x2063;&#x2063; <field name="fleet_unit_Copie" class="oe_inline"  nolabel="1"/>
+                         </div>
+                         <label for="fleet_cout_nb"/>
+                         <div>
+                         <field name="fleet_cout_nb" class="oe_inline"/>&#x2063;&#x2063; <field name="fleet_unit_HT_Copie" class="oe_inline"  nolabel="1"/>
+                         </div>
+                         <label for="fleet_forfait_nb"/>
+                         <div>
+                         <field name="fleet_forfait_nb" class="oe_inline" />&#x2063;&#x2063; <field name="fleet_unit_Copie" class="oe_inline"  nolabel="1"/>
+                         </div>
+                        <field name="fleet_abonnement_service" />
+                         <field name="fleet_autre" />
+                    </group>
+                    <group string="infos FINANCIERES">
+                         <field name="fleet_partenariat" />
+                         <field name="fleet_date_fin_F" />
+                         <field name="fleet_solde_fois" />
+                         <field name="fleet_date_2_solde" />
+                         <field name="fleet_solde_Montant" />
+                    </group>
+             </xpath>
+
+            <xpath expr="//form/sheet/group[1]/group[2]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+            <xpath expr="//form/sheet/group[1]/group[1]" position="after">
+                <group string="infos MATÉRIELS">
+                    <field name="partner_id" />                     
+                     <field name="fleet_serie" />                    
+                     <field name="fleet_fournisseur" />
+                    <field name="fleet_marque" />
+                    <field name="fleet_Modele" />
+                     <field name="fleet_equipement" />
+                      <field name="fleet_type_1" />
+                    <field name="fleet_type_materiels_fin" />
+                     <field name="fleet_installation" />
+                     <field name="fleet_commentaires" />
+                    <field name="comp_couleur_depart" />
+                    <field name="comp_noir_depart" />
+                    <br></br>
+                 </group>
+                 <group string="infos CONTRATS">
+                     <field name="fleet_type" />
+                     <field name="fleet_periodicite" />
+                     <field name="fleet_prix_HT" />
+                     <label for="fleet_duree"/>
+                         <div>
+                            <field name="fleet_duree" class="oe_inline"/>&#x2063;&#x2063; <field name="fleet_trimestre_help" class="oe_inline"  nolabel="1"/>
+                         </div>
+                     <field name="fleet_date_inst" />
+                      <field name="fleet_expiration_date" />
+                     <field name="fleet_leaser" />
+                     <field name="fleet_accord" />
+                     <label for="fleet_duree_rest"/>
+                         <div>
+                            <field name="fleet_duree_rest" class="oe_inline"/>&#x2063;&#x2063; <field name="fleet_trimestre_help1" class="oe_inline"  nolabel="1"/>
+                         </div>
+                     <field name="fleet_solde_est" />
+                     <br></br>
+                 </group>
+
+             </xpath>
+
+            <xpath expr="//form/sheet/group[1]/group[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <!--
+            <xpath expr="//form/sheet/group[2]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+              -->
+            
+
+            <xpath expr="//form/sheet/notebook[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="view_fleet_vehicle_inherited" model="ir.ui.view">
+        <field name="name">fleet.vehicle.inherited</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[1]" position="after">
+                <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                           <div class="o_kanban_image" t-attf-style="background-image:url('#{kanban_image('fleet.vehicle', 'image_materiel', record.id.raw_value)}')"/>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        <strong class="o_kanban_record_title">
+                                            <!--
+                                             <t t-if="record.fleet_serie.raw_value"><field name="fleet_dossier_devis"/></t>
+                                             -->
+                                            <t t-if="record.fleet_dossier_devis.raw_value">Dossier N°: <field name="fleet_dossier_devis"/></t>
+
+                                        </strong>
+                                    </li>
+                                </ul>
+
+                                <ul>
+                                    <li>
+                                        <t t-if="record.fleet_serie.raw_value">N° serie: <field name="fleet_serie"/></t>
+                                    </li>
+                                    <li>
+                                        <t t-if="record.partner_id.raw_value">Client : <field name="partner_id"/></t>
+                                    </li>
+
+                                    <li>
+                                        <t t-if="record.fleet_serie.raw_value"><field name="fleet_serie" invisible="1"/></t>
+                                        <t t-if="record.fleet_marque.raw_value"><field name="fleet_marque"/>&#x2063;(<field name="fleet_Modele"/>)</t>
+                                    </li>
+
+                                    <li>
+                                        <t t-if="record.fleet_expiration_date.raw_value">Date de fin de contrat : <field name="fleet_expiration_date"/></t>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+
+            </xpath>
+            <xpath expr="//div[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+
+
+
+        </field>
+    </record>
+
+</data>
+</odoo>

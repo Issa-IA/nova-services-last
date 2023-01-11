@@ -1,0 +1,16 @@
+<odoo>
+<data>
+
+        <record id="sale_list_inherit" model="ir.ui.view">
+                <field name="name">sale.list.inherit</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+                <field name="arch" type="xml">
+                     <xpath expr="//field[@name='state']" position="after">
+                         <field optional="show" name="etiquette_maintenance" widget="badge" string="Etiquette" decoration-danger="etiquette_maintenance == 'maintenance'"/>
+                     </xpath>
+                </field>
+        </record>
+
+</data>
+</odoo>

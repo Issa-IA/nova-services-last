@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_excelfile,excelfile,model_excelfile,base.group_user,1,1,1,1
+access_compteurcoleurmodel,compteurcoleurmodel,model_compteurcoleurmodel,base.group_user,1,1,1,1
+access_compteurnoirmodel,compteurnoirmodel,model_compteurnoirmodel,base.group_user,1,1,1,1
+ccess_moycompteurnoircol,moycompteurnoircol,model_moycompteurnoircol,base.group_user,1,1,1,1

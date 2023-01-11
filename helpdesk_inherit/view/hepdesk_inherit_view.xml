@@ -1,0 +1,32 @@
+<odoo>
+<data>
+
+
+        <record id="helpdesk_form_inherits" model="ir.ui.view">
+                <field name="name">helpdesk.form.inherit</field>
+                <field name="model">helpdesk.ticket</field>
+                <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='partner_id']" position="after" >
+			     <field name="product_serie_id"/>
+
+                    </xpath>
+
+                </field>
+        </record>
+
+    <!-- view Kanban -->
+		<record model="ir.ui.view" id="helpdesk_kanban">
+			<field name="name">helpdesk_view_inherit.kanban</field>
+			<field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+			<field name="arch" type="xml">
+                   <xpath expr="//field[@name='commercial_partner_id']" position="after" >
+                           <br/> <field name="product_serie_id"/>
+                    </xpath>
+
+			</field>
+		</record>
+
+</data>
+</odoo>

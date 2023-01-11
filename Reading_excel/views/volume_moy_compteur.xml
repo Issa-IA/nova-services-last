@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="moycompteurnoircol_list_view">
+      <field name="name">moycompteurnoircol list</field>
+      <field name="model">moycompteurnoircol</field>
+      <field name="arch" type="xml">
+        <tree editable ="top" default_order="create_date desc">
+            <field name="anne_numero"/>
+            <field name="moy_compteur_Couleur"/>
+            <field name="moy_compteur_Noir"/>
+            <field name="numero_serie"/>
+            <field name="fleet_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="moycompteurnoircol_form_view">
+      <field name="name">moycompteurnoircol form</field>
+      <field name="model">moycompteurnoircol</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+             <field name="anne_numero"/>
+             <field name="moy_compteur_Couleur"/>
+             <field name="moy_compteur_Noir"/>
+             <field name="numero_serie"/>
+             <field name="fleet_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+</data>
+</odoo>

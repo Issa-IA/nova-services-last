@@ -1,0 +1,1 @@
+from . import inherit_list_sale

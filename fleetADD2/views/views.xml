@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="fleetserielarticle_list_view">
+      <field name="name">fleetserielarticle list</field>
+      <field name="model">fleetserielarticle</field>
+      <field name="arch" type="xml">
+        <tree editable ="bottom">
+            <field name="fleet_id"/>
+            <field name="client_id"/>
+            <field name="article_id"/>
+            <field name="num_serie"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="fleetserielarticle_form_view">
+      <field name="name">fleetserielarticle form</field>
+      <field name="model">fleetserielarticle</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+           <field name="fleet_id"/>
+            <field name="client_id"/>
+            <field name="article_id"/>
+            <field name="num_serie"/>
+          </group>
+        </form>
+      </field>
+    </record>
+</data>
+</odoo>
+
+
+

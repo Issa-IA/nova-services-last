@@ -1,0 +1,48 @@
+<odoo>
+<data>
+     <record id="fleet_vehicle_inherit_1" model="ir.ui.view">
+        <field name="name">fleet_vehicle_inherit_1</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//form/sheet/div[1]" position="after" >
+                <div class="oe_button_box" name="button_box_1">
+
+
+                              <button name="action_open_comp_noir" type="object" class="oe_stat_button" icon="fa-tachometer">
+                                <div class="o_stat_info">
+                                    <field name="count_comp_noir" class="o_stat_value"/>
+                                    <span class="o_stat_text">Compteur NB </span>
+                                </div>
+                             </button>
+                             <button name="action_open_comp_coleur" type="object" class="oe_stat_button" icon="fa-tachometer">
+                                <div class="o_stat_info">
+                                    <field name="count_comp_coleur" class="o_stat_value"/>
+                                    <span class="o_stat_text">Compteur C </span>
+                                </div>
+                             </button>
+                            <button name="action_open_comp_moyen" type="object" class="oe_stat_button" icon="fa-tachometer">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Volume moyen des compteurs</span>
+                                </div>
+                             </button>
+                         <button name="preview_art" type="object" class="oe_stat_button" icon="fa-globe icon">
+                            <div class="o_stat_info">
+                                    <span class="o_stat_text">Article </span>
+                            </div>
+                        </button>
+                        <button name="preview_devis" type="object" class="oe_stat_button" icon="fa-globe icon">
+                            <div class="o_stat_info">
+                                    <span class="o_stat_text">Devis</span>
+                            </div>
+                       </button>
+                 </div>
+
+            </xpath>
+
+      </field>
+    </record>
+</data>
+</odoo>

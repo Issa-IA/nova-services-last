@@ -1,0 +1,30 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="compTeurCouleurModel_list_view">
+      <field name="name">compTeurCouleurModel list</field>
+      <field name="model">compteurcoleurmodel</field>
+      <field name="arch" type="xml">
+        <tree editable ="top" default_order="create_date desc">
+            <field name="numero_serie"/>
+            <field name="compteur_Couleur"/>
+            <field name="create_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="compTeurCouleurModel_form_view">
+      <field name="name">compTeurCouleurModel form</field>
+      <field name="model">compteurcoleurmodel</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="numero_serie"/>
+            <field name="compteur_Couleur"/>
+            <field name="create_date"/>
+          </group>
+        </form>
+      </field>
+    </record>
+</data>
+</odoo>

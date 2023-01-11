@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="import_excelfile_form" model="ir.ui.view">
+            <field name="name">import_excelfile.form</field>
+            <field name="model">excelfile</field>
+            <field name="arch" type="xml">
+                <form >
+                    <group>
+                        <field name="matricule"/>
+                        <field name="Nb_pages_C"/>
+                        <field name="Nb_pages_N"/>
+                     </group>
+
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="import_excelfile_list_view">
+            <field name="name">import_excelfile.tree</field>
+            <field name="model">excelfile</field>
+            <field name="arch" type="xml">
+                <tree >
+                   <field name="matricule"/>
+                   <field name="Nb_pages_C"/>
+                    <field name="Nb_pages_N"/>
+                </tree>
+      </field>
+    </record>
+
+
+        <record id="import_excel_file_action" model="ir.actions.act_window">
+            <field name="name">Importer compteur</field>
+            <field name="res_model">excelfile</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem name="Importer compteur  "
+                  id="Importer_fichier_action"
+                  parent="fleet.fleet_vehicles"
+                  action="import_excel_file_action"
+                  />
+
+</odoo>
+
+
+

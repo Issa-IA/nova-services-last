@@ -8,10 +8,10 @@ class   Anneemodel(models.Model):
     _description = 'stat par an'
     annee = fields.Integer("Année",default=2023)
     mois = fields.One2many('moisvente', inverse_name='annee',string="Mois")
-    annee_comer = fields.Float(string="%Marge comercial total")
-    annee_chifre_aff = fields.Float(string="%Chiffre d'affaire total")
-    anee_contrat = fields.Float(string="%Nombre de contrats total")
-    annee_client = fields.Float(string="%Nombre de clients total")
+    annee_comer = fields.Float(string="%MC")
+    annee_chifre_aff = fields.Float(string="%CA")
+    anee_contrat = fields.Float(string="%NB CONTRAT")
+    annee_client = fields.Float(string="%NB NEW")
 
     def name_get(self):
         result = []
@@ -494,10 +494,10 @@ class Moismodel(models.Model):
     mois         = fields.Char('Mois', default='Janvier', compute="convert_mois")
     mois_int     = fields.Integer("Numéro", default=1)
     annee        = fields.Many2one( "anneevente",string='Année')
-    moi_comer = fields.Float(string="%Marge comercial total")
-    moi_chifre_aff = fields.Float(string="%Chiffre d'affaire total")
-    moi_contrat = fields.Float(string="%Nombre de contrats total")
-    moi_client = fields.Float(string="%Nombre de clients total")
+    moi_comer = fields.Float(string="%MC")
+    moi_chifre_aff = fields.Float(string="%CA")
+    moi_contrat = fields.Float(string="%NB CONTRAT")
+    moi_client = fields.Float(string="%NB NEW")
 
     @api.depends('mois_int')
     def convert_mois(self):

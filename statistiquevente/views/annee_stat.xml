@@ -8,8 +8,8 @@
       <field name="arch" type="xml">
         <tree default_order='annee desc'>
           <field name="annee"/>
-          <field name="annee_comer"/>
           <field name="annee_chifre_aff"/>
+          <field name="annee_comer"/>          
           <field name="anee_contrat"/>
           <field name="annee_client"/>
         </tree>

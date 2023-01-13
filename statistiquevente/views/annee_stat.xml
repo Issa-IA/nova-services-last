@@ -8,12 +8,19 @@
       <field name="arch" type="xml">
         <tree default_order='annee desc'>
           <field name="annee"/>
+          <field name="annee_chifre_ob"/>
           <field name="annee_chifre_aff"/>
-          <field name="annee_comer"/>    
+           <field name="annee_comer_ob"/>  
+          <field name="annee_comer"/> 
+          <field name="annee_reel_ob"/> 
           <field name="annee_reel"/> 
+          <field name="annee_livraison_ob"/> 
           <field name="annee_livraison"/> 
+          <field name="anee_contrat_ob"/>
           <field name="anee_contrat"/>
+          <field name="annee_client_ob"/>
           <field name="annee_client"/>
+          <field name="annee_materiels_ob"/> 
           <field name="annee_materiels"/> 
         </tree>
       </field>

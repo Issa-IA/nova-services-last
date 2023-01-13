@@ -7,7 +7,7 @@ class   Anneemodel(models.Model):
     _name = "anneevente"
     _description = 'stat par an'
     annee = fields.Integer("Année",default=2023)
-    mois = fields.One2many('moisvente', inverse_name='annee',string="Mois", readonly=True)
+    mois = fields.One2many('moisvente', inverse_name='annee',string="Mois")
     annee_comer = fields.Float(string="%Marge comercial total")
     annee_chifre_aff = fields.Float(string="%Chiffre d'affaire total")
     anee_contrat = fields.Float(string="%Nombre de contrats total")

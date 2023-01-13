@@ -39,9 +39,11 @@
                 <field name="annee"/>
               </group>
               <group>
-
-                 <field name="mois"  nolabel="1"  widget="one2many"/>
-
+               <group>
+                   <group>
+                    <field name="mois"  nolabel="1"  widget="one2many"/>
+                   </group>
+               </group>
               </group>
           </sheet>
         </form>

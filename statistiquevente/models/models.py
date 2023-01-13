@@ -8,10 +8,13 @@ class   Anneemodel(models.Model):
     _description = 'stat par an'
     annee = fields.Integer("Année",default=2023)
     mois = fields.One2many('moisvente', inverse_name='annee',string="Mois")
-    annee_comer = fields.Float(string="%MC")
     annee_chifre_aff = fields.Float(string="%CA")
+    annee_comer = fields.Float(string="%MC")    
+    annee_reel = fields.Float(string="%MR")
+    annee_livraison = fields.Float(string="%FL")
     anee_contrat = fields.Float(string="%NB CONTRAT")
     annee_client = fields.Float(string="%NB NEW")
+    annee_materiels = fields.Float(string="%NB MATERIELS")
 
     def name_get(self):
         result = []
@@ -494,10 +497,13 @@ class Moismodel(models.Model):
     mois         = fields.Char('Mois', default='Janvier', compute="convert_mois")
     mois_int     = fields.Integer("Numéro", default=1)
     annee        = fields.Many2one( "anneevente",string='Année')
-    moi_comer = fields.Float(string="%MC")
     moi_chifre_aff = fields.Float(string="%CA")
+    moi_comer = fields.Float(string="%MC")   
+    moi_reel = fields.Float(string="%MR") 
+    moi_livraison = fields.Float(string="%FL") 
     moi_contrat = fields.Float(string="%NB CONTRAT")
     moi_client = fields.Float(string="%NB NEW")
+    moi_materiels = fields.Float(string="%NB MATERIELS")
 
     @api.depends('mois_int')
     def convert_mois(self):

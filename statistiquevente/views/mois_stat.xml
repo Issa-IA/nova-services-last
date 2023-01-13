@@ -9,10 +9,14 @@
           <tree default_order='mois_int desc'>
               <field name="mois_int"/>
               <field name="mois"/>
+            
               <field name="moi_chifre_aff"/>
-              <field name="moi_comer"/>              
+              <field name="moi_comer"/>    
+              <field name="moi_reel"/>  
+              <field name="moi_livraison"/>  
               <field name="moi_contrat"/>
               <field name="moi_client"/>
+              <field name="moi_materiels"/>
           </tree>
       </field>
     </record>
@@ -26,9 +30,12 @@
               <field name="mois_int"/>
               <field name="mois"/>
               <field name="moi_chifre_aff"/>
-              <field name="moi_comer"/>              
+              <field name="moi_comer"/>    
+              <field name="moi_reel"/>  
+              <field name="moi_livraison"/>  
               <field name="moi_contrat"/>
               <field name="moi_client"/>
+              <field name="moi_materiels"/>
           </group>
         </form>
       </field>

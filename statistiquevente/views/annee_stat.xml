@@ -9,9 +9,12 @@
         <tree default_order='annee desc'>
           <field name="annee"/>
           <field name="annee_chifre_aff"/>
-          <field name="annee_comer"/>          
+          <field name="annee_comer"/>    
+          <field name="annee_reel"/> 
+          <field name="annee_livraison"/> 
           <field name="anee_contrat"/>
           <field name="annee_client"/>
+          <field name="annee_materiels"/> 
         </tree>
       </field>
     </record>

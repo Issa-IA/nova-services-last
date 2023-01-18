@@ -341,7 +341,7 @@ class SaleOrderHerit(models.Model):
             else:
                 rec.sale_marge = rec.sale_finance - rec.sale_frais_livraison_new- rec.sale_total_rachat-rec.sale_montatnt_IR + rec.sale_frais -rec.sale_total_vente- rec.sale_frais_restitution -rec.sale_vr_client-rec.sale_ir_prospects-rec.sale_vr_client_2-rec.sale_rachat_matriel-rec.sale_Gratuite-rec.sale_partenariat-rec.sale_solde_2_fois
             
-    @api.onchange("sale_frais_livraison_new","sale_total_rachat","sale_montatnt_IR","sale_total_achat", "sale_finance", "sale_frais", "sale_frais_restitution", "sale_vr_client",
+    @api.onchange("sale_total_rachat","sale_montatnt_IR","sale_total_achat", "sale_finance", "sale_frais","sale_vr_client",
                   "sale_ir_prospects", "sale_vr_client_2", "sale_rachat_matriel", "sale_Gratuite", "sale_partenariat",
                   "sale_solde_2_fois")
     def sale_marge_reel_fuc(self):
@@ -349,7 +349,7 @@ class SaleOrderHerit(models.Model):
             if rec.sale_maintnance:
                 rec.sale_marge_reel =0
             else:
-                rec.sale_marge_reel = rec.sale_finance -rec.sale_frais_livraison_new-rec.sale_total_rachat-rec.sale_montatnt_IR + rec.sale_frais - rec.sale_total_achat - rec.sale_frais_restitution - rec.sale_vr_client - rec.sale_ir_prospects - rec.sale_vr_client_2 - rec.sale_rachat_matriel - rec.sale_Gratuite - rec.sale_partenariat - rec.sale_solde_2_fois
+                rec.sale_marge_reel = rec.sale_finance -rec.sale_total_rachat-rec.sale_montatnt_IR + rec.sale_frais - rec.sale_total_achat - rec.sale_vr_client - rec.sale_ir_prospects - rec.sale_vr_client_2 - rec.sale_rachat_matriel - rec.sale_Gratuite - rec.sale_partenariat - rec.sale_solde_2_fois
 
     @api.depends("order_line")
     def sale_total_vente_func(self):

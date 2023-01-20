@@ -65,6 +65,9 @@ class SaleOrderfacture(models.Model):
                                         'product_uom_id': ligne.bonretour_article.uom_id.id,
                                         'date': date.today(),
                                         'account_id': rec.partner_id.property_account_payable_id.id,
+                                        'tax_ids': ligne.bonretour_article.supplier_taxes_id.ids,
+                                        #'tax_ids': ligne.bonretour_article.taxes_id.ids,                                       
+                                        #'account_id':468,
 
                                     })
                 else:
@@ -76,6 +79,7 @@ class SaleOrderfacture(models.Model):
                                     'ref': rec.client_order_ref,
                                     'move_type': 'in_invoice',
                                     'invoice_origin': rec.name,
+                                    'invoice_date': date.today(),
                                     'invoice_user_id': rec.user_id.id,
                                     'partner_id': rec.partner_id.id,
                                     'acount_retour': True,

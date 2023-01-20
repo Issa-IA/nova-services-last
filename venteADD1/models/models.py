@@ -6,6 +6,23 @@ class PartnerModelHeritt(models.Model):
     _inherit = 'res.partner'
 
     partner_parc_ids = fields.One2many('fleet.vehicle', inverse_name='partner_id',string="Matériels")
+    type_print = fields.Boolean(string="Type de matériel Print",default=False)
+    type_sauvegarde = fields.Boolean(string="Type de matériel Sauvegarde",default=False)
+    type_solution = fields.Boolean(string="Type de matériel Solution",default=False)
+    type_ecran = fields.Boolean(string="Type de matériel Ecran", default=False)
+    
+    @api.onchange('partner_parc_ids')
+    def search_type_materiel(self):
+        for rec in self:
+            for parc in rec.partner_parc_ids:
+                if parc.fleet_type_materiels_fin == "print":
+                    rec.type_print = True
+                if parc.fleet_type_materiels_fin == "sauvegarde":
+                    rec.type_sauvegarde = True
+                if parc.fleet_type_materiels_fin == "solution":
+                    rec.type_solution = True
+                if parc.fleet_type_materiels_fin == "ecran":
+                    rec.type_ecran = True
 
 
 class SaleOrderLineHerit(models.Model):

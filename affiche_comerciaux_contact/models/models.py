@@ -18,6 +18,20 @@ class Aficherlalistecontacts(models.Model):
     @api.onchange("comercial_contact_affiche")
     def onchange_affiche(self):
         print("bonjour tout le monde")
+        ############
+        sale = self.env['res.partner'].search([]) 
+        for rec in sale:
+            for parc in rec.partner_parc_ids:
+                if parc.fleet_type_materiels_fin == "print":
+                    rec.type_print = True
+                if parc.fleet_type_materiels_fin == "sauvegarde":
+                    rec.type_sauvegarde = True
+                if parc.fleet_type_materiels_fin == "solution":
+                    rec.type_solution = True
+                if parc.fleet_type_materiels_fin == "ecran":
+                    rec.type_ecran = True
+        ############
+        
         your_group_1 = self.env.ref('fleet.fleet_group_manager')
         your_group = self.env.ref('affiche_comerciaux_contact.acces_contact_user')
         users = self.env['res.users'].search([])
@@ -45,16 +59,16 @@ class Aficherlalistecontacts(models.Model):
     def onchange_retirer(self):           
         print("bonjour tout le monde")  
         ############
-        sale = self.env['sale.order'].search([]) 
-        for rec in sale:
-            team_vente = False
-            for record in rec.user_id.crm_team_ids:
-                id = 1
-                if record.id == 1:
-                    team_vente = record
-            if team_vente:
-                if  team_vente.crm_team_comer > 0:
-                    rec.x_studio_marge_comer_tot_fin= rec.x_studio_marge_commerciale / team_vente.crm_team_comer
+        #sale = self.env['sale.order'].search([]) 
+        #for rec in sale:
+        #    team_vente = False
+        #    for record in rec.user_id.crm_team_ids:
+        #        id = 1
+        #        if record.id == 1:
+        #            team_vente = record
+        #    if team_vente:
+        #        if  team_vente.crm_team_comer > 0:
+        #            rec.x_studio_marge_comer_tot_fin= rec.x_studio_marge_commerciale / team_vente.crm_team_comer
         ########
         
         your_group_1 = self.env.ref('fleet.fleet_group_manager')

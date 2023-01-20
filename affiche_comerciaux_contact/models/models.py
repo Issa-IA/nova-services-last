@@ -16,21 +16,7 @@ class Aficherlalistecontacts(models.Model):
         return result
 
     @api.onchange("comercial_contact_affiche")
-    def onchange_affiche(self):
-        print("bonjour tout le monde")
-        ############
-        sale = self.env['res.partner'].search([]) 
-        for rec in sale:
-            for parc in rec.partner_parc_ids:
-                if parc.fleet_type_materiels_fin == "print":
-                    rec.type_print = True
-                if parc.fleet_type_materiels_fin == "sauvegarde":
-                    rec.type_sauvegarde = True
-                if parc.fleet_type_materiels_fin == "solution":
-                    rec.type_solution = True
-                if parc.fleet_type_materiels_fin == "ecran":
-                    rec.type_ecran = True
-        ############
+    def onchange_affiche(self):             
         
         your_group_1 = self.env.ref('fleet.fleet_group_manager')
         your_group = self.env.ref('affiche_comerciaux_contact.acces_contact_user')

@@ -23,7 +23,10 @@
                 <filter name="partner_parc_ids" string="Durée de contrat >= 3" domain="[('partner_parc_ids.fleet_duree','>=',3)]"/>
                 <filter name="partner_parc_ids" string="Durée restante >= 3" domain="[('partner_parc_ids.fleet_duree_rest','>=',3)]"/>
                     
-                <filter name="type_print" string="Type de matériel Print"  domain="[('type_print','=',True)]"/>      
+                <filter name="type_print" string="Type de matériel Print"  domain="[('type_print','=',True)]"/> 
+                <filter name="type_sauvegarde" string="Type de matériel Sauvegarde"  domain="[('type_sauvegarde','=',True)]"/>  
+                <filter name="type_solution" string="Type de matériel Solution"  domain="[('type_solution','=',True)]"/>  
+                <filter name="type_ecran" string="Type de matériel Ecran"  domain="[('type_ecran','=',True)]"/>  
             </xpath>
         </field>
 </record>

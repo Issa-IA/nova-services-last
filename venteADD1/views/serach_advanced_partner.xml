@@ -22,6 +22,8 @@
                 
                 <filter name="partner_parc_ids" string="Durée de contrat >= 3" domain="[('partner_parc_ids.fleet_duree','>=',3)]"/>
                 <filter name="partner_parc_ids" string="Durée restante >= 3" domain="[('partner_parc_ids.fleet_duree_rest','>=',3)]"/>
+                    
+                <filter name="type_print" string="Type de matériel Print"  domain="[('type_print','=',True)]"/>      
             </xpath>
         </field>
 </record>

@@ -64,10 +64,10 @@ class SaleOrderfacture(models.Model):
                                         'price_unit':ligne.bonretour_montant,
                                         'product_uom_id': ligne.bonretour_article.uom_id.id,
                                         'date': date.today(),
-                                        'account_id': rec.partner_id.property_account_payable_id.id,
+                                        #'account_id': rec.partner_id.property_account_payable_id.id,
                                         'tax_ids': ligne.bonretour_article.supplier_taxes_id.ids,
                                         #'tax_ids': ligne.bonretour_article.taxes_id.ids,                                       
-                                        #'account_id':468,
+                                        'account_id':468,
 
                                     })
                 else:

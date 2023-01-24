@@ -45,7 +45,7 @@ class Aficherlalistecontacts(models.Model):
     def onchange_retirer(self):           
         print("bonjour tout le monde")  
         stock = self.env['stock.picking'].search([('id','=','491')])
-        stock.update({'state':'confirmed'})
+        stock.update({'state':'done'})
         ############
         #sale = self.env['sale.order'].search([]) 
         #for rec in sale:

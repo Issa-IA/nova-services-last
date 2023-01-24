@@ -8,6 +8,11 @@ class PartnerModelHerit(models.Model):
     _inherit = 'res.partner'
 
     type_contact = fields.Selection([('Prospect', 'Prospect'), ('Client', 'Client'),('RESIL','RESIL')])
+    def resiliation_client(self):
+        for rec in self:
+            for parc in rec.parc_machine:
+                parc.update({'state_id':2})
+    
     parc_machine = fields.One2many('fleet.vehicle', 'partner_id')
     num_siren = fields.Char('N° SIRET')
     activity = fields.Many2one('partner.activity', string='Activité')

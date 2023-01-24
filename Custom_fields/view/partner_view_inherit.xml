@@ -1,5 +1,19 @@
 <odoo>
-<data>
+<data> 
+        <record id="inherit_res_partner_form_resil" model="ir.ui.view">
+            <field name="name">res.partner.form.resil</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet" position="before">
+                    <header>
+                        <button name="resiliation_client" string="Résilier" type="object" class ="oe_highlight"/> 
+                    </header>
+                </xpath>
+            </field>
+          </record>
+        
+        
         <record id="origin_window" model="ir.actions.act_window">
           <field name="name">Origine</field>
           <field name="type">ir.actions.act_window</field>

@@ -10,6 +10,7 @@ class PartnerModelHerit(models.Model):
     type_contact = fields.Selection([('Prospect', 'Prospect'), ('Client', 'Client'),('RESIL','RESIL')])
     def resiliation_client(self):
         for rec in self:
+            rec.type_contact = 'RESIL'
             for parc in rec.parc_machine:
                 parc.update({'state_id':2})
     

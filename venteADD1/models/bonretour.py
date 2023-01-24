@@ -48,7 +48,9 @@ class SaleOrderfacture(models.Model):
                 sp_stock = self.env['account.move'].search([('move_sale_order', '=', rec.id)])
                 if sp_stock:
                     liste_article =[]
+                    id_move = False
                     for record in  sp_stock:
+                        id_move = record.id
                         if record.invoice_line_ids:
                             for article in record.invoice_line_ids:
                                 liste_article.append(article.product_id.id)
@@ -59,7 +61,7 @@ class SaleOrderfacture(models.Model):
                                         'partner_id': rec.partner_id.id,
                                         'name': rec.partner_id.name,
                                         'product_id': ligne.bonretour_article.id,
-                                        'move_id': sp_stock.id,
+                                        'move_id': id_move,
                                         'quantity': 1,
                                         'price_unit':ligne.bonretour_montant,
                                         'product_uom_id': ligne.bonretour_article.uom_id.id,

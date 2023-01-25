@@ -9,12 +9,15 @@
                 <page string="Objectif" name="crm_page_TOlls">
                   <group name="crm_group_TOlls">
                     <group name="crm_group_TOlls_left">
-                      <field name="crm_team_comer" string="Marge"/>
-                      <field name="crm_team_chif" string="Chiffre d'affaire"/>
+                      <field name="crm_team_comer" />
+                      <field name="crm_team_chif" />
+                      <field name="crm_team_reel" />
+                      <field name="crm_team_livraison" />
                     </group>
                     <group name="crm_group_TOlls_right">
-                      <field name="crm_team_N_client" string="Nombre de clients"/>
-                      <field name="crm_team_N_contrat" string="Nombre de contrats"/>
+                      <field name="crm_team_N_client" />
+                      <field name="crm_team_N_contrat" />
+                      <field name="crm_team_N_materiel" />
                     </group>
                   </group>
                 </page>

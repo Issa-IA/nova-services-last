@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form//sheet" position="before">
                     <header>
-                        <button name="resiliation_client" string="Résilier" type="object" class ="oe_highlight"/> 
+                        <button name="resiliation_client" string="Résilier" type="object" class ="oe_highlight" groups="studio_customization.contact_administrate_d69236b8-7968-4c59-8b7e-3cdfee8fa082"/> 
                     </header>
                 </xpath>
             </field>

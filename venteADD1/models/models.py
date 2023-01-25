@@ -347,7 +347,7 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             rec.sale_forfait_actuel_signe_col = rec.sale_forfait_signe_col - rec.sale_forfait_actuel_col
     # group 3
-    sale_abonnement_service = fields.Monetary(string="Abonnement Service")
+    sale_abonnement_service = fields.Monetary(string="Abonnement Service Signé")
     sale_abonnement_service_actuel = fields.Monetary(string="Abonnement Service Actuel")
     sale_abonnement_actuel_signe = fields.Monetary(string="Ecart Actuel/Signél")
     

@@ -35,6 +35,33 @@ class   Crmteamoinhertit(models.Model):
 
 class SaleOrderHeritcomerce(models.Model):
     _inherit    = 'sale.order'
+    
+    ### statistique
+    sale_crm_team_comer = fields.Monetary("MARGE COMMERCIALE")
+    sale_crm_team_chif = fields.Monetary("CHIFFRE D'AFFAIRE")
+    sale_crm_team_reel = fields.Monetary("MARGE REELLE")
+    sale_crm_team_livraison = fields.Monetary("FRAIS DE LIVRAISON")
+    sale_crm_team_N_client = fields.Integer("NB NEW")
+    sale_crm_team_N_contrat= fields.Integer("NB CONTRAT")
+    sale_crm_team_N_materiel= fields.Integer("NB MATERIELS")
+    
+    ########
+    @api.onchange("user_id")
+    def equipe_comercial_stat(self):
+        for rec in self:
+            team_vente = False
+            for record in rec.user_id.crm_team_ids:
+                id = 1
+                if record.id == 1:
+                    team_vente = record
+            if team_vente:
+                rec.sale_crm_team_comer = team_vente.crm_team_comer
+                rec.sale_crm_team_chif  = team_vente.crm_team_chif
+                rec.sale_crm_team_reel  = team_vente.crm_team_reel
+                rec.sale_crm_team_livraison = team_vente.crm_team_livraison
+                rec.sale_crm_team_N_client = team_vente.crm_team_N_client
+                rec.sale_crm_team_N_contrat = team_vente.crm_team_N_contrat
+                rec.sale_crm_team_N_materiel = team_vente.crm_team_N_materiel
 
     ########## objectif_total_equipe comerciale
     sale_N_contrat = fields.Float(string="%Nombre de contrats total")

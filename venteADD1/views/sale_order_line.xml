@@ -305,6 +305,10 @@
 
                                  <group >
                                             <field name="sale_abonnement_service" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                                            <field name="sale_abonnement_service_actuel" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                                            <field name="sale_abonnement_actuel_signe" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                                  </group>
+                                  <group >
                                             <field name="sale_autre_frais" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
                                  </group>
 

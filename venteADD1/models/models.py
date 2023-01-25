@@ -350,10 +350,11 @@ class SaleOrderHerit(models.Model):
     sale_abonnement_service = fields.Monetary(string="Abonnement Service Signé")
     sale_abonnement_service_actuel = fields.Monetary(string="Abonnement Service Actuel")
     sale_abonnement_actuel_signe = fields.Monetary(string="Ecart Actuel/Signél")
+    
     @api.onchange("sale_abonnement_service", "sale_abonnement_service_actuel")
     def ecart_abonnement_actuel_signe_col(self):
         for rec in self:
-            rec.sale_abonnement_actuel_signe = rec.sale_abonnement_service - rec.sale_abonnement_actuel_signe
+            rec.sale_abonnement_actuel_signe = rec.sale_abonnement_service - rec.sale_abonnement_service_actuel
     
     sale_autre_frais        = fields.Monetary(string="Autre frais")
     ##########

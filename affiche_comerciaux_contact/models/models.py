@@ -17,7 +17,21 @@ class Aficherlalistecontacts(models.Model):
 
     @api.onchange("comercial_contact_affiche")
     def onchange_affiche(self):             
-        
+        sale = self.env['sale.order'].search([]) 
+        for rec in sale:
+            team_vente = False
+            for record in rec.user_id.crm_team_ids:
+                id = 1
+                if record.id == 1:
+                    team_vente = record
+            if team_vente:
+                rec.sale_crm_team_comer = team_vente.crm_team_comer
+                rec.sale_crm_team_chif  = team_vente.crm_team_chif
+                rec.sale_crm_team_reel  = team_vente.crm_team_reel
+                rec.sale_crm_team_livraison = team_vente.crm_team_livraison
+                rec.sale_crm_team_N_client = team_vente.crm_team_N_client
+                rec.sale_crm_team_N_contrat = team_vente.crm_team_N_contrat
+                rec.sale_crm_team_N_materiel = team_vente.crm_team_N_materiel
         your_group_1 = self.env.ref('fleet.fleet_group_manager')
         your_group = self.env.ref('affiche_comerciaux_contact.acces_contact_user')
         users = self.env['res.users'].search([])

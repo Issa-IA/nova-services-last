@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_anneevente,anneevente,model_anneevente,sales_team.group_sale_manager,1,1,1,1
+access_anneevente_c,anneevente,model_anneevente,droits_d_acces.group_Technicien_contact,1,1,0,0
+access_moisvente,moisvente,model_moisvente,sales_team.group_sale_manager,1,1,1,1
+access_moisvente1,moisvente,model_moisvente,droits_d_acces.group_Technicien_contact,1,1,0,0

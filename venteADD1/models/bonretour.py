@@ -167,61 +167,7 @@ class Stockpikingretour(models.Model):
     stock_compteur_retour_C = fields.Char(string="Compteur de retour Couleur")
     ################
     
-    def button_validate(self):       
-
-        res = super(Stockpikingretour, self).button_validate()   
-        for rec in self:
-                    if rec.picking_type_id.id == 8:
-                        vals = {'name': 'Reprise' + ' de ' + str(rec.name),
-                                'partner_id': rec.partner_id.id,
-                                'move_type': rec.move_type,
-                                'location_id': 5,
-                                'location_dest_id': 8,
-                                'origin':rec.name,
-                                'state': 'assigned',
-                                'picking_type_id': 6,
-                                'backorder_id': rec.id,
-                                'stock_type': 'retour',
-                                }
-                        new_reception = self.env['stock.picking'].create(vals)  
-                        for ligne in rec.move_line_ids_without_package:
-                            
-                            if len(ligne.lot_id):
-                                move_ne = self.env['stock.move'].create(
-                                            {'company_id': ligne.company_id.id,
-                                             'date': date.today(),
-                                             'location_dest_id': 8,
-                                             'location_id': 5,
-                                             'name': 'new',
-                                             'procure_method': 'make_to_stock',
-                                             'product_id': ligne.product_id.id,
-                                             'product_uom': ligne.product_id.uom_id.id,
-                                             'product_uom_qty': ligne.qty_done,
-                                             'picking_id': new_reception.id,
-                                             'acount_retour_serie': ligne.lot_id.name,                                                                                       
-
-                                             })
-                            else:
-                                move_ne = self.env['stock.move'].create(
-                                            {'company_id': ligne.company_id.id,
-                                             'date': date.today(),
-                                             'location_dest_id': 8,
-                                             'location_id': 5,
-                                             'name': 'new',
-                                             'procure_method': 'make_to_stock',
-                                             'product_id': ligne.product_id.id,
-                                             'product_uom': ligne.product_id.uom_id.id,
-                                             'product_uom_qty': ligne.qty_done,
-                                             'picking_id': new_reception.id,                                           
-                                        
-                                             })
-                                
-                                
-                            
-                        new_reception.update({'state':'assigned'})
-                      
-
-        return res
+   
 
 
 class SaleOrderbonretour(models.Model):

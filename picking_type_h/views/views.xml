@@ -1,0 +1,66 @@
+<odoo>
+<data>
+<record id="view_stock_type_kanban_inherited" model="ir.ui.view">
+        <field name="name">stock_type.kanban.inherited</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+        <field name="arch" type="xml">
+
+            <field name="color" position="after">
+                <field name="id"/>
+
+            </field>
+          <!--
+            <xpath expr="//field[@name='lst_price']" position="after">
+
+                        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <button type="object" class="btn btn-primary btn-sm" name="remove_to_pos" >-</button>
+                        <field name="qte_product"/> Units
+                        <button type="object" class="btn btn-primary btn-sm" name="add_to_pos" >+</button>
+
+                   </xpath>
+                   -->
+
+
+            <xpath expr="//div[1]/div[2]/div[3]" position="after">
+                 <div t-if="record.id.raw_value &gt; 7 and record.id.raw_value &lt; 9 " class="row">
+
+                          <div t-if="record.count_picking_done.raw_value &gt; 0" class="row">
+                                  <div class="col-12">
+                                          <a name="open_action_fact" type="object">
+                                               <field name="count_picking_done"/>
+                                                          Les Prêts
+                                          </a>
+                                  </div>
+
+                      </div>
+                </div>
+             </xpath>
+                     <!--
+                    <div t-if="installed" class="text-muted float-left">Installed</div>
+                            <button states="to remove" type="object" class="btn btn-sm btn-primary" name="button_uninstall_cancel">Cancel Uninstall</button>
+                            <button states="to install" type="object" class="btn btn-sm btn-primary" name="button_install_cancel">Cancel Install</button>
+                     -->
+
+
+
+        </field>
+    </record>
+<record id="stock_picking_form_inherit2" model="ir.ui.view">
+        <field name="name">stock.picking.form2</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position ="after">
+                 <field name="id_type_fait" invisible="1" />
+            </xpath>
+
+        </field>
+    </record>
+
+
+</data>
+</odoo>
+
+
+

@@ -112,6 +112,15 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
+                                        if sale_bon_commande.sale_loyer_fact:
+                                            res = {
+                                                'order_id': purchase_id,
+                                                'product_id': sale_bon_commande.Frais_loyer.id,
+                                                'name': sale_bon_commande.Frais_loyer.name,
+                                                'price_unit': sale_bon_commande.sale_loyer_fact,
+                                                'product_uom_qty': '1',
+                                            }
+                                            self.env['sale.order.line'].sudo().create(res)
                         if sale_bon_commande.sale_periode == 3:
                             if sale_bon_commande.sale_date_Facture + relativedelta(months=3) <= date.today()+relativedelta(days=1) and sale_bon_commande.sale_date_Facture <=sale_bon_commande.sale_date_de_fin_contrat:
                                 if sale_bon_commande.devis_a_cree_commande == True:
@@ -210,6 +219,15 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_id': sale_bon_commande.services.id,
                                                 'name': sale_bon_commande.services.name,
                                                 'price_unit': sale_bon_commande.sale_autre_frais,
+                                                'product_uom_qty': '1',
+                                            }
+                                            self.env['sale.order.line'].sudo().create(res)
+                                        if sale_bon_commande.sale_loyer_fact:
+                                            res = {
+                                                'order_id': purchase_id,
+                                                'product_id': sale_bon_commande.Frais_loyer.id,
+                                                'name': sale_bon_commande.Frais_loyer.name,
+                                                'price_unit': sale_bon_commande.sale_loyer_fact,
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)

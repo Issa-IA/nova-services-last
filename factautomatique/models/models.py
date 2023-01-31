@@ -186,6 +186,15 @@ class factAuto(models.Model):
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res)
+                    if j[0].sale_loyer_fact:
+                        res = {
+                            'order_id': purchase_id,
+                            'product_id': j[0].Frais_loyer.id,
+                            'name': j[0].Frais_loyer.name,
+                            'price_unit': j[0].Frais_loyer,
+                            'product_uom_qty': '1',
+                        }
+                        self.env['sale.order.line'].sudo().create(res) 
 
         #################### tout dossier
         for i in list_client_tout_dossier.items():
@@ -323,6 +332,15 @@ class factAuto(models.Model):
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res)
+                    if j[0].sale_loyer_fact:
+                        res = {
+                            'order_id': purchase_id,
+                            'product_id': j[0].Frais_loyer.id,
+                            'name': j[0].Frais_loyer.name,
+                            'price_unit': j[0].Frais_loyer,
+                            'product_uom_qty': '1',
+                        }
+                        self.env['sale.order.line'].sudo().create(res) 
 
 
 

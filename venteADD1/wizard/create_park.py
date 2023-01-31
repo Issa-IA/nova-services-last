@@ -119,6 +119,15 @@ class CreatParkWizard(models.Model):
                         'product_uom_qty': '1',
                     }
                     self.env['sale.order.line'].sudo().create(res)
+                if self.devis_dossier.sale_loyer_fact:
+                    res = {
+                        'order_id': purchase_id,
+                        'product_id': self.devis_dossier.Frais_loyer.id,
+                        'name': self.devis_dossier.Frais_loyer.name,
+                        'price_unit': self.devis_dossier.sale_loyer_fact,
+                        'product_uom_qty': '1',
+                    }
+                    self.env['sale.order.line'].sudo().create(res)
               
         if self.devis_dossier.order_line:
             if self.devis_dossier.sale_periodicite == 'mens':

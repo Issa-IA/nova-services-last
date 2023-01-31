@@ -356,7 +356,8 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             rec.sale_abonnement_actuel_signe = rec.sale_abonnement_service - rec.sale_abonnement_service_actuel
     
-    sale_autre_frais        = fields.Monetary(string="Autre frais")
+    sale_autre_frais        = fields.Monetary(string="Autre frais")*
+    sale_loyer_fact   = fields.Monetary(string="Loyer")
     ##########
 
     @api.onchange("sale_frais_livraison_new", "sale_montatnt_IR","sale_total_vente","sale_finance","sale_frais","sale_frais_restitution","sale_vr_client","sale_ir_prospects","sale_vr_client_2","sale_rachat_matriel","sale_Gratuite","sale_partenariat","sale_solde_2_fois")

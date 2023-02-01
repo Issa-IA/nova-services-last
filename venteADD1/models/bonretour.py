@@ -81,7 +81,7 @@ class SaleOrderfacture(models.Model):
                                     'ref': rec.client_order_ref,
                                     'move_type': 'in_invoice',
                                     'invoice_origin': rec.name,
-                                    'invoice_date': date.today(),
+                                    #'invoice_date': date.today(),
                                     'invoice_user_id': rec.user_id.id,
                                     'partner_id': rec.partner_id.id,
                                     'acount_retour': True,

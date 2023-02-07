@@ -63,6 +63,6 @@
       <field name="view_mode">tree,form</field>
   </record>
   <menuitem name="Rapports commerciaux" id="affiche_stat_action" parent="sale.sale_menu_root" 
-              action="stat_annee_window" sequence="200"/>
+             groups="studio_customization.contact_administrate_d69236b8-7968-4c59-8b7e-3cdfee8fa082" action="stat_annee_window" sequence="200"/>
 </data>
 </odoo>

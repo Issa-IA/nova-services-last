@@ -29,7 +29,7 @@
                                   <div class="col-12">
                                           <a name="open_action_fact" type="object">
                                                <field name="count_picking_done"/>
-                                                          Les Prêts
+                                                          Prêts en cours
                                           </a>
                                   </div>
 

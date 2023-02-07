@@ -306,7 +306,11 @@
                                  <group >
                                             <field name="sale_abonnement_service" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
                                             <field name="sale_abonnement_service_actuel" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                                            <field name="sale_abonnement_actuel_signe" style="color:Red;" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&gt;', -0.000000000000000000000000001)]}"/><field name="sale_abonnement_actuel_signe"  attrs="{'invisible':[('sale_abonnement_actuel_signe', '&lt;', 0)]}"/> 
+                                            <label for="sale_abonnement_actuel_signe" />
+                                                 <div>
+                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&gt;', -0.000000000000000000000000001)]}"/>&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" style="color:Red;" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&gt;', -0.000000000000000000000000001)]}"/>
+                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&lt;', 0)]}"/>&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&lt;', 0)]}"/>                                         
+                                                </div>
                                   </group>
                                   <group >
                                             <field name="sale_autre_frais" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />

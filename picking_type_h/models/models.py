@@ -61,7 +61,7 @@ class Stocktypeinherit(models.Model):
     def open_action_fact(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Les Prêts',
+            'name': 'Prêts en cours',
             'res_model': 'stock.picking',
             'view_type': 'form',
             'domain': [ ('id_type_fait', '=',1),('picking_type_id', '=',8)],

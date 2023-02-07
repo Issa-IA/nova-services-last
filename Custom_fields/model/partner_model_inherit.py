@@ -7,7 +7,7 @@ from datetime import datetime
 class PartnerModelHerit(models.Model):
     _inherit = 'res.partner'
 
-    type_contact = fields.Selection([('Prospect', 'Prospect'), ('Client', 'Client'),('RESIL','RESIL')])
+    type_contact = fields.Selection([('Prospect', 'Prospect'), ('Client', 'Client'),('RESIL',"Résiliation en cours")])
     def resiliation_client(self):
         for rec in self:
             rec.type_contact = 'RESIL'

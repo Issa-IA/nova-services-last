@@ -349,7 +349,7 @@ class SaleOrderHerit(models.Model):
     # group 3
     sale_abonnement_service = fields.Monetary(string="Abonnement Service Signé")
     sale_abonnement_service_actuel = fields.Monetary(string="Abonnement Service Actuel")
-    sale_abonnement_actuel_signe = fields.Monetary(string="Ecart Actuel/Signél")
+    sale_abonnement_actuel_signe = fields.Monetary(string="Ecart Actuel/Signé")
     
     @api.onchange("sale_abonnement_service", "sale_abonnement_service_actuel")
     def ecart_abonnement_actuel_signe_col(self):
@@ -357,7 +357,7 @@ class SaleOrderHerit(models.Model):
             rec.sale_abonnement_actuel_signe = rec.sale_abonnement_service - rec.sale_abonnement_service_actuel
     
     sale_autre_frais        = fields.Monetary(string="Autre frais")
-    sale_loyer_fact   = fields.Monetary(string="Loyer")
+    sale_loyer_fact   = fields.Monetary(string="Loyer interne")
     ##########
 
     @api.onchange("sale_frais_livraison_new", "sale_montatnt_IR","sale_total_vente","sale_finance","sale_frais","sale_frais_restitution","sale_vr_client","sale_ir_prospects","sale_vr_client_2","sale_rachat_matriel","sale_Gratuite","sale_partenariat","sale_solde_2_fois")

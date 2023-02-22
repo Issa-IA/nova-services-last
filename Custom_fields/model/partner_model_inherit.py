@@ -57,7 +57,7 @@ class PartnerModelHerit(models.Model):
             
     
     montant_tot_partenariat_1 = fields.Monetary('Montant total du partenariat')  
-    @api.onchange('montant_tot_partenariat')
+    @api.depends('montant_tot_partenariat')
     def compute_montant_partenariat1(self):
         for rec in self:
             rec.montant_tot_partenariat_1 = rec.montant_tot_partenariat

@@ -1,0 +1,1 @@
+from . import sale_state_inherit_model

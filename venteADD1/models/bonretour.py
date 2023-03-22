@@ -36,61 +36,50 @@ class SaleOrderfacture(models.Model):
             'target': 'current',
 
         }
+    
     ##############################################
-    def write(self, values):
-        res = super(SaleOrderfacture, self).write(values)
-        # here you can do accordingly
-        return self.create_stock_move()
-
-    def create_stock_move(self):
-
+    def action_confirm(self):
+        res = super(SaleOrderfacture, self).action_confirm()
         for rec in self:
-                sp_stock = self.env['account.move'].search([('move_sale_order', '=', rec.id)])
-                if sp_stock:
-                    liste_article =[]
-                    id_move = False
-                    for record in  sp_stock:
-                        id_move = record.id
-                        if record.invoice_line_ids:
-                            for article in record.invoice_line_ids:
-                                liste_article.append(article.product_id.id)
-                    for ligne in rec.sale_bonretour:
-                            if ligne.bonretour_montant > 0:
-                                if ligne.bonretour_article.id not in liste_article:
-                                    move=self.env['account.move.line'].sudo().with_context(check_move_validity=False).create({
-                                        'partner_id': rec.partner_id.id,
-                                        'name': rec.partner_id.name,
-                                        'product_id': ligne.bonretour_article.id,
-                                        'move_id': id_move,
-                                        'quantity': 1,
-                                        'price_unit':ligne.bonretour_montant,
-                                        'product_uom_id': ligne.bonretour_article.uom_id.id,
-                                        'date': date.today(),
-                                        #'account_id': rec.partner_id.property_account_payable_id.id,
-                                        'tax_ids': ligne.bonretour_article.supplier_taxes_id.ids,
-                                        #'tax_ids': ligne.bonretour_article.taxes_id.ids,                                       
-                                        'account_id':468,
-
-                                    })
-                else:
-                    if rec.sale_bonretour:
-                        new_account_move_id = 0
-                        for retour in rec.sale_bonretour:
-                            if retour.bonretour_montant > 0:
+            facture_with_ligne = dict()
+            for rec in self:
+                for retour in rec.sale_bonretour:
+                    if retour.bonretour_montant > 0:
+                        if retour.bonretour_leaser.partner_id:
+                            if retour.bonretour_leaser.partner_id.id not in facture_with_ligne.keys():
                                 new_account_move = self.env['account.move'].sudo().create({
                                     'ref': rec.client_order_ref,
                                     'move_type': 'in_invoice',
                                     'invoice_origin': rec.name,
-                                    #'invoice_date': date.today(),
+                                    # 'invoice_date': date.today(),
                                     'invoice_user_id': rec.user_id.id,
-                                    'partner_id': rec.partner_id.id,
+                                    'partner_id': retour.bonretour_leaser.partner_id.id,
                                     'acount_retour': True,
                                     'move_sale_order': rec.id
                                 })
-                                new_account_move_id = new_account_move.id
-                                print('new_account_move', new_account_move)
-                                break
+                                id = retour.bonretour_leaser.partner_id.id
+                                facture_with_ligne[id] = new_account_move
+                for retour in rec.sale_bonretour:
+                    if retour.bonretour_montant > 0:
+                        if retour.bonretour_leaser.partner_id:
+                            move = self.env['account.move.line'].sudo().with_context(check_move_validity=False).create({
+                                'partner_id': retour.bonretour_leaser.partner_id.id,
+                                'name': retour.bonretour_leaser.partner_id.name,
+                                'product_id': retour.bonretour_article.id,
+                                'move_id': facture_with_ligne[retour.bonretour_leaser.partner_id.id].id,
+                                'quantity': 1,
+                                'move_line_serie': retour.bonretour_serie,
+                                'price_unit': retour.bonretour_montant,
+                                'product_uom_id': retour.bonretour_article.uom_id.id,
+                                'date': date.today(),
+                                # 'account_id': rec.partner_id.property_account_payable_id.id,
+                                'tax_ids': retour.bonretour_article.supplier_taxes_id.ids,
+                                # 'tax_ids': retour.bonretour_article.taxes_id.ids,                                       
+                                'account_id': 468,
 
+                            })
+
+        return res
 
 class Bonretourtable(models.Model):
     _name = 'bonretour'

@@ -136,6 +136,21 @@ class StockmoveHeritretour(models.Model):
 
 class Stockpikingretour(models.Model):
     _inherit    = 'stock.picking'
+    
+    stock_retour_ok = fields.Boolean(default=False)
+    stock_reception_ok = fields.Boolean(default=False)
+    
+    def button_validate(self):
+        res = super(Stockpikingretour, self).button_validate()        
+        return    self.add_refrence_serie()
+    def add_refrence_serie(self):        
+        for rec in self:
+            if rec.stock_retour_ok or rec.stock_reception_ok:
+                for ligne in rec.move_ids_without_package:            
+                    lot_id = self.env['stock.production.lot'].search([("name", "=", ligne.acount_retour_serie)])
+                    lot_id.update({'ref': 'Reprise'+ ' '+ rec.partner_id.name})
+    
+    
     stock_sale = fields.Many2one('sale.order', string="Bon de commande de retour")
     stock_bonretour = fields.One2many('bonretour', string="Bon de retour", inverse_name='bonretour_stock_piking')
     stock_type = fields.Selection([('reception', 'reception'), ('retour', 'retour')])
@@ -254,6 +269,7 @@ class SaleOrderbonretour(models.Model):
                         if len(rec.sale_bonretour) > len(list1):
 
                             vals = {'name': 'Recep'+' '+ str(rec.name),
+                                    'stock_reception_ok':True,
                                     'partner_id': rec.partner_id.id,
                                     'move_type': rec.move_type,
                                     'location_id': 5,
@@ -339,6 +355,7 @@ class SaleOrderbonretour(models.Model):
                         if list1:
 
                             vals = {'name': 'Retour'+' '+str(rec.name),
+                                    'stock_retour_ok':True,
                                     'partner_id': rec.partner_id.id,
                                     'move_type': rec.move_type,
                                     'location_id': 5,

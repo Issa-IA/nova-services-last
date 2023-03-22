@@ -41,6 +41,7 @@ class TypeLeaser(models.Model):
     _name        = 'typeleaser'
     _description = 'Type de leaser infos CONTRATS'
     name         = fields.Char('Leaser')
+    partner_id   = fields.Many2one('res.partner', 'Client')
 
 #add field periodicité
 class FleetContINHERIT(models.Model):

@@ -98,6 +98,7 @@ class Bonretourtable(models.Model):
 
     ##########new
     bonretour_stock_move = fields.Many2one('stock.move', string="stock move")
+    bonretour_recep_ok = fields.Boolean(default=False)
 
 class StockmoveLineHeritretour(models.Model):
     _inherit = 'stock.move.line'
@@ -227,6 +228,7 @@ class SaleOrderbonretour(models.Model):
                              ("name", "=", retour.bonretour_serie)])
                         if not lot_id:
                             if retour not in sp_stock.stock_bonretour:
+                                retour.bonretour_recep_ok = True
                                 move = self.env['stock.move'].create(
                                     {'company_id': rec.company_id.id,
                                      'date': date.today(),
@@ -301,6 +303,7 @@ class SaleOrderbonretour(models.Model):
 
                                     retour.bonretour_stock_move = move_ne.id
                                     retour.bonretour_stock_piking = new_reception.id
+                                    retour.bonretour_recep_ok = True
                                 # new_reception.update({'state': 'assigned', })
         for rec in self:
             if len(stock_type) > 1:
@@ -311,7 +314,7 @@ class SaleOrderbonretour(models.Model):
                         lot_id = self.env['stock.production.lot'].search(
                             [("product_id", "=", retour.bonretour_article.id),
                              ("name", "=", retour.bonretour_serie)])
-                        if  lot_id:
+                        if  lot_id and not  retour.bonretour_recep_ok:
                             if retour not in sp_stock.stock_bonretour:
                                 move = self.env['stock.move'].create(
                                     {'company_id': rec.company_id.id,
@@ -339,7 +342,7 @@ class SaleOrderbonretour(models.Model):
                             lot_id = self.env['stock.production.lot'].search(
                                 [("product_id", "=", retour.bonretour_article.id),
                                  ("name", "=", retour.bonretour_serie)])
-                            if lot_id:
+                            if lot_id and not  retour.bonretour_recep_ok:
                                 list1.append(lot_id)
                         if list1:
 
@@ -366,7 +369,7 @@ class SaleOrderbonretour(models.Model):
                                 lot_id = self.env['stock.production.lot'].search(
                                     [("product_id", "=", retour.bonretour_article.id),
                                      ("name", "=", retour.bonretour_serie)])
-                                if  lot_id:
+                                if  lot_id and not  retour.bonretour_recep_ok:
                                     # product_uom = \
                                     # self.env['product.template'].search_read([('id', '=', retour.bonretour_article.id)])[0]['uom_id'][0]
                                     move_ne = self.env['stock.move'].create(

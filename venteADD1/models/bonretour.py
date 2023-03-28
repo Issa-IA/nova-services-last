@@ -64,7 +64,7 @@ class SaleOrderfacture(models.Model):
                         if retour.bonretour_leaser.partner_id:
                             move = self.env['account.move.line'].sudo().with_context(check_move_validity=False).create({
                                 'partner_id': retour.bonretour_leaser.partner_id.id,
-                                'name': retour.bonretour_leaser.partner_id.name,
+                                'name': retour.bonretour_article.name,
                                 'product_id': retour.bonretour_article.id,
                                 'move_id': facture_with_ligne[retour.bonretour_leaser.partner_id.id].id,
                                 'quantity': 1,

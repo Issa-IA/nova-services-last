@@ -12,22 +12,23 @@ class StockHeritpicking(models.Model):
         return self.update_numero_serie()
 
     def update_numero_serie(self):
-        if self.state == 'done':
-            if self.sale_id:
-                for record in self.move_line_ids_without_package:
-                    list_fleet = self.env['fleet.vehicle'].search([("fleet_devis_id", "=", self.sale_id.id),("fleet_artic_id","=",record.product_id.id)])
-                    list_fleet_numero_serie = []
-                    for fleet in list_fleet:
-                        if fleet.fleet_serie != "False":
-                            list_fleet_numero_serie.append(fleet.fleet_serie)
-                    for fleet in list_fleet:
-                        if fleet.fleet_serie == "False" and (record.lot_id.name not in list_fleet_numero_serie):
-                            fleet.fleet_serie = record.lot_id.name
-                            break
-                    for line in self.sale_id.order_line:
-                        if line.product_id.id == record.product_id.id and line.product_uom_qty == 1:
-                            line.order_line_serie = record.lot_id.name 
-                            break
+        for stock in self:
+            if stock.state == 'done':
+                if stock.sale_id:
+                    for record in stock.move_line_ids_without_package:
+                        list_fleet = self.env['fleet.vehicle'].search([("fleet_devis_id", "=", stock.sale_id.id),("fleet_artic_id","=",record.product_id.id)])
+                        list_fleet_numero_serie = []
+                        for fleet in list_fleet:
+                            if fleet.fleet_serie != "False":
+                                list_fleet_numero_serie.append(fleet.fleet_serie)
+                        for fleet in list_fleet:
+                            if fleet.fleet_serie == "False" and (record.lot_id.name not in list_fleet_numero_serie):
+                                fleet.fleet_serie = record.lot_id.name
+                                break
+                        for line in self.sale_id.order_line:
+                            if line.product_id.id == record.product_id.id and line.product_uom_qty == 1:
+                                line.order_line_serie = record.lot_id.name 
+                                break
 
 
 

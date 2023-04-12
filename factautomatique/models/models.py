@@ -378,6 +378,9 @@ class SaleOrderHeritage(models.Model):
                                   default=lambda self: self.env['product.product'].search([('id', '=', 4855)]))
 
     sale_commande_fleet_ids = fields.One2many('listboncommandefleet', inverse_name='devis_id', string="Matériels bon de commande")
+    
+    pfr_fournisseur = fields.Many2one('product.product', string="PFR",
+                                  default=lambda self: self.env['product.product'].search([('id', '=', 4926)]))
 
 
 

@@ -358,6 +358,13 @@ class SaleOrderHerit(models.Model):
     
     sale_autre_frais        = fields.Monetary(string="Autre frais")
     sale_loyer_fact   = fields.Monetary(string="Loyer interne")
+    
+    sale_pfr_fournissuer   = fields.Monetary(string="PFR", compute="compute_pfr_fournisseur")    
+    def compute_pfr_fournisseur(self):
+        for rec in self:
+            if rec.partner_id:
+                rec.sale_pfr_fournissuer = rec.partner_id.pfr
+    
     ##########
 
     @api.onchange("sale_frais_livraison_new", "sale_montatnt_IR","sale_total_vente","sale_finance","sale_frais","sale_frais_restitution","sale_vr_client","sale_ir_prospects","sale_vr_client_2","sale_rachat_matriel","sale_Gratuite","sale_partenariat","sale_solde_2_fois")

@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 class MoveLineHerit(models.Model):
     _inherit = "account.move.line"
     ############ if one serie number
-    move_line_serie = fields.Char(string="N° serie")
+    move_line_serie = fields.Char(string="N° serie", readonly=False)
     ############
 
 

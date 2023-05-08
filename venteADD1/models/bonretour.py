@@ -130,6 +130,15 @@ class Stockpikingretour(models.Model):
     stock_retour_ok = fields.Boolean(default=False)
     stock_reception_ok = fields.Boolean(default=False)
     
+    def button_validate(self):
+        res = super(Stockpikingretour, self).button_validate()
+        for rec in self:
+            if rec.stock_retour_ok or rec.stock_reception_ok:
+                for ligne in rec.move_ids_without_package:            
+                    lot_id = self.env['stock.production.lot'].search([("name", "=", ligne.acount_retour_serie)])
+                    lot_id.update({'ref': 'Reprise'+ ' '+ rec.partner_id.name})
+        return    res
+    
     #def button_validate(self):
     #    res = super(Stockpikingretour, self).button_validate()        
     #    return    self.add_refrence_serie()

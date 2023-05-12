@@ -452,8 +452,16 @@ class SaleOrderHerit(models.Model):
         if self.partner_id:
             self.partner_id.type_contact = "Client"
         return self.createParck()
+    
+    ####################### nombre d'accord et nom de client
+    contact_accord_count = fields.Integer(string="Nmbre d'accord", compute="update_contact_accord")
 
-    ####################### pop up
+    @api.depends("invoice_count")
+    def update_contact_accord(self):
+        for rec in self:
+            rec.contact_accord_count = rec.invoice_count
+            for id in rec.invoice_ids:
+                    pass
 
 
 

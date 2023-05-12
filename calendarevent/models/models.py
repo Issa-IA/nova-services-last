@@ -7,7 +7,7 @@ class   Calendarinherit(models.Model):
     def action_open_composer(self): 
         partner_ids = self.partner_ids
         if len(self.partner_ids) > 1:
-                    x_id = self.partner_ids[0].id
+                    x_id = self.partner_ids[1].id
                     self.partner_ids = [(3, x_id)]
         result = super(Calendarinherit, self).action_open_composer()   
         self.partner_ids = partner_ids

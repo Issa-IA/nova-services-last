@@ -11,7 +11,11 @@ class MoveLineHerit(models.Model):
 
 class AcountMoveHerit(models.Model):
     _inherit = 'account.move'
-    date_de_prelevement  = fields.Date(compute="_compute_date_prelev",string="Date de prélèvement")
+    
+    partner_id_organisme = fields.Many2one('res.partner', 'Contact')
+    move_accord  = fields.Char(string="N° d'accord")
+    
+    date_de_prelevement  = fields.Date(compute="_compute_date_prelev",string="Date de prélèvement")    
 
     @api.depends('invoice_date')
     def _compute_date_prelev(self):

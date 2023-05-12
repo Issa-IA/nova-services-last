@@ -23,6 +23,12 @@
                 <label for="sale_dossier"/>
                      <field name="sale_dossier"/>
             </xpath>
+                
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <label for="contact_accord_count"/>
+                     <field name="contact_accord_count" invisible="1"/>
+            </xpath>    
+                
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>    

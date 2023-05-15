@@ -461,7 +461,9 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             rec.contact_accord_count = rec.invoice_count
             for id in rec.invoice_ids:
-                    pass
+                id.move_accord = rec.sale_accord
+                if rec.partner_id.id != rec.partner_invoice_id.id:
+                    id.partner_id_organisme = rec.partner_id
 
 
 

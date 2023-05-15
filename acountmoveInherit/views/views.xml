@@ -13,8 +13,8 @@
             </xpath>
             <xpath expr="//field[@name='payment_reference']"
                        position="after">
-                <field name="partner_id_organisme" invisible="1"/>
-                <field name="move_accord" invisible="1"/>
+                <field name="partner_id_organisme" />
+                <field name="move_accord" />
                 
             </xpath>
         </field>

@@ -464,6 +464,8 @@ class SaleOrderHerit(models.Model):
                 id.move_accord = rec.sale_accord
                 if rec.partner_id.id != rec.partner_invoice_id.id:
                     id.partner_id_organisme = rec.partner_id
+                else:
+                    id.partner_id_organisme = rec.partner_id
 
 
 

@@ -4,14 +4,14 @@ from odoo import models, fields, api
 class   Calendarinherit(models.Model):
     _inherit = "calendar.event"
     
-    def action_open_composer(self): 
-        partner_ids = self.partner_ids
-        if len(self.partner_ids) > 1:
-                    x_id = self.partner_ids[1].id
-                    self.partner_ids = [(3, x_id)]
-        result = super(Calendarinherit, self).action_open_composer()   
-        self.partner_ids = partner_ids
-        return result
+    #def action_open_composer(self): 
+    #    partner_ids = self.partner_ids
+    #    if len(self.partner_ids) > 1:
+    #                x_id = self.partner_ids[1].id
+    #                self.partner_ids = [(3, x_id)]
+    #    result = super(Calendarinherit, self).action_open_composer()   
+    #    self.partner_ids = partner_ids
+    #    return result
 
     @api.onchange("partner_ids")
     def update_location(self):

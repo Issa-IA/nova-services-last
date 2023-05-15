@@ -15,6 +15,7 @@
                        position="after">
                 <field name="partner_id_organisme" invisible="1"/>
                 <field name="move_accord" invisible="1"/>
+                <field name="affiche_partner_id" invisible="1"/>
             </xpath>
         </field>
     </record>

@@ -14,6 +14,7 @@ class AcountMoveHerit(models.Model):
     
     partner_id_organisme = fields.Many2one('res.partner', 'Contact')
     move_accord  = fields.Char(string="N° d'accord")
+    affiche_partner_id = fields.Integer(string="Compteur de départ NB", default=0)
     
     date_de_prelevement  = fields.Date(compute="_compute_date_prelev",string="Date de prélèvement")    
 

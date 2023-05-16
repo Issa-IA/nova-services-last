@@ -3,6 +3,18 @@ from odoo import models, fields, api
 
 class   Calendarinherit(models.Model):
     _inherit = "calendar.event"
+    def write(self, vals):
+        #mail_notrack = True
+        #self = self.with_context(trackin_disabel=True)
+        res = super(Calendarinherit, self.with_context(mail_notrack=True)).write(vals)
+        return res
+    
+    def create(self, vals):
+        #mail_notrack = True
+        #super(Task, self.with_context(mail_notrack=True)).create(vals)
+        #self = self.with_context(trackin_disabel=True)
+        res = super(Calendarinherit, self.with_context(mail_notrack=True)).create(vals)
+        return res
     
     #def action_open_composer(self): 
     #    partner_ids = self.partner_ids

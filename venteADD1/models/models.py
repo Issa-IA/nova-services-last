@@ -124,6 +124,8 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             if rec.sale_type_client1 == 'nouveau_client':
                 rec.sale_new_contact = 1
+            else:
+                rec.sale_new_contact = 0
     
     #stat dashbooard
     sale_objectif_marge = fields.Float(string="% Marge", compute="sale_objectif_marge_compute",digits=(16, 4))

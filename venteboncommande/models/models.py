@@ -71,22 +71,25 @@ class SaleMoveHeritbondecommande(models.Model):
                                         self.env['sale.order.line'].sudo().create(res)
 
                                     if check ==  False:
+                                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
                                                 'name': sale_bon_commande.cout_copie_coleurs_sup.name,
-                                                'price_unit': cout_copie_coluer,
+                                                'price_unit': cout_copie_coluer_sup,
                                                 'product_uom_qty': 0,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
+                                        
+                                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*sale_bon_commande.sale_cout_sup_pourcent
 
 
                                         res = {
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_noires_sup.id,
                                                 'name': sale_bon_commande.cout_copie_noires_sup.name,
-                                                'price_unit': cout_copie_noir,
+                                                'price_unit': cout_copie_noir_sup,
                                                 'product_uom_qty': 0,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
@@ -192,22 +195,24 @@ class SaleMoveHeritbondecommande(models.Model):
                                         self.env['sale.order.line'].sudo().create(res)
 
                                     if check ==  False:
+                                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
                                                 'name': sale_bon_commande.cout_copie_coleurs_sup.name,
-                                                'price_unit': cout_copie_coluer,
+                                                'price_unit': cout_copie_coluer_sup,
                                                 'product_uom_qty': 0,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
-
+                                        
+                                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_noires_sup.id,
                                                 'name': sale_bon_commande.cout_copie_noires_sup.name,
-                                                'price_unit': cout_copie_noir,
+                                                'price_unit': cout_copie_noir_sup,
                                                 'product_uom_qty': 0,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)

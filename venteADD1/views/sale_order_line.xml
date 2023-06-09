@@ -322,6 +322,7 @@
                                             <field name="sale_autre_frais" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
                                            <field name="sale_loyer_fact" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
                                           <field name="sale_pfr_fournissuer" invisible="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"  />
+                                          <field name="sale_cout_sup_pourcent" invisible="1" />
                                  </group>
 
                  </group>

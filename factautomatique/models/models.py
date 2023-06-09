@@ -148,16 +148,18 @@ class factAuto(models.Model):
                         self.env['sale.order.line'].sudo().create(res)
 
                     if qte_by_dossier_sup_coleur:
+                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*j[0].sale_cout_sup_pourcent
                         res = {
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_coleurs_sup.id,
                             'name': j[0].cout_copie_coleurs_sup.name,
-                            'price_unit': cout_copie_coluer,
+                            'price_unit': cout_copie_coluer_sup,
                             'product_uom_qty': qte_by_dossier_sup_coleur,
                         }
                         self.env['sale.order.line'].sudo().create(res)
 
                     if qte_by_dossier_sup_noir:
+                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*j[0].sale_cout_sup_pourcent
                         res = {
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_noires_sup.id,
@@ -294,6 +296,7 @@ class factAuto(models.Model):
                         self.env['sale.order.line'].sudo().create(res)
 
                     if qte_by_dossier_sup_coleur:
+                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*j[0].sale_cout_sup_pourcent
                         res = {
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_coleurs_sup.id,
@@ -304,6 +307,7 @@ class factAuto(models.Model):
                         self.env['sale.order.line'].sudo().create(res)
 
                     if qte_by_dossier_sup_noir:
+                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*j[0].sale_cout_sup_pourcent
                         res = {
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_noires_sup.id,

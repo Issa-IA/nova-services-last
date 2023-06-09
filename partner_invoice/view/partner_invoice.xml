@@ -35,6 +35,7 @@
                                     <field name="goup_commerc_ok"  invisible="1"></field>                                        
                                     <field  name="x_studio_type_facture"/>
                                     <field  name="type_facture" invisible="1"/>
+                                    <field name="cout_sup_pourcent"></field>
                                     <field name="pfr"></field>
                                     <field name="code_service"></field>
                                      <field name="augmentation_sav_bool"></field>

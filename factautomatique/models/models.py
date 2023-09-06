@@ -359,7 +359,13 @@ class factAuto(models.Model):
 
 class SaleOrderHeritage(models.Model):
     _inherit = 'sale.order'
+    
+    copie_noires_sans_f = fields.Many2one('product.product', string="Copies noires sans forfait",
+                                        default=lambda self: self.env['product.product'].search([('id', '=', 5034)]))
+    copie_coleurs_sans_f = fields.Many2one('product.product', string="Copies couleurs sans forfait",
+                                         default=lambda self: self.env['product.product'].search([('id', '=', 5035)]))
 
+    ########""
     devis_a_cree_commande = fields.Boolean(default=False)
 
     sale_maintnance = fields.Boolean(string="Maintenance", default=False)

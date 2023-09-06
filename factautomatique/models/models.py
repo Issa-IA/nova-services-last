@@ -187,7 +187,7 @@ class factAuto(models.Model):
                             'price_unit': cout_copie_noir,
                             'product_uom_qty': qte_by_dossier_sup_noir ,
                             }
-                           self.env['sale.order.line'].sudo().create(res) 
+                            self.env['sale.order.line'].sudo().create(res) 
 
                     if j[0].sale_abonnement_service:
                         res = {

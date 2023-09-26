@@ -11,6 +11,25 @@ class MoveLineHerit(models.Model):
 
 class AcountMoveHerit(models.Model):
     _inherit = 'account.move'
+
+    #new change adress
+    street_client_move = fields.Char(compute="compute_adresse_client")
+    zip_client_move = fields.Char(compute="compute_adresse_client")
+    city_client_move = fields.Char(compute="compute_adresse_client")
+    
+    @api.depends("partner_id")
+    def compute_adresse_client(self):
+        for rec in self:
+            if rec.partner_id:
+                rec.city_client_move = rec.partner_id.city
+                rec.zip_client_move = rec.partner_id.zip
+                rec.street_client_move = rec.partner_id.street
+            else:
+                rec.city_client_move = False
+                rec.zip_client_move = False
+                rec.street_client_move = False
+    
+    #######
     
     fact_anne_ = fields.Integer(string="Année de facturation", compute="_compute_anne_facturation")
     @api.depends('create_date')

@@ -11,6 +11,10 @@
                        position="after">
                 <field name="date_de_prelevement"/>
             </xpath>
+            <xpath expr="//field[@name='invoice_date']"
+                       position="after">
+                <field name="date_de_prelevement"/>
+            </xpath> 
             <xpath expr="//field[@name='payment_reference']"
                        position="after">
                 <field name="partner_id_organisme" />

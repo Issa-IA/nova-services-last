@@ -35,6 +35,46 @@
             </xpath>
         </field>
  </record>
+ <record id="account_move_form_inherit_change_street" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.add</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+             
+            <xpath expr="//form/sheet/group[1]/group[1]" position="after">
+
+                   <group id="header_left_group_1">
+                                <div class="o_td_label">
+                                    <label for="partner_id" string="Customer" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                                    <label for="partner_id" string="Vendor" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+                                </div>
+                                <field name="partner_id" widget="res_partner_many2one" nolabel="1" context="{'res_partner_search_mode': (context.get('default_move_type', 'entry') in ('out_invoice', 'out_refund', 'out_receipt') and 'customer') or (context.get('default_move_type', 'entry') in ('in_invoice', 'in_refund', 'in_receipt') and 'supplier') or False,'default_is_company': True, 'show_vat': True}" domain="[('type', '!=', 'private'), ('company_id', 'in', (False, company_id))]" options="{&quot;always_reload&quot;: True, &quot;no_quick_create&quot;: True}" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+                                 <label for="street_client_move" string="adress" style="color:white;"/>
+                                          <div>
+                                                <field name="street_client_move" nolabel="1" /><br/>
+                                                <field name="zip_client_move" nolabel="1"  />&#x2063;&#x2063; <field name="city_client_move" class="oe_inline"  nolabel="1"/>
+                                          </div>
+                                 <label for="ref" string="Bill Reference" attrs="{'invisible':[('move_type', 'not in', ('in_invoice', 'in_receipt', 'in_refund'))]}"/>
+                                <field name="ref" nolabel="1" attrs="{'invisible':[('move_type', 'not in', ('in_invoice', 'in_receipt', 'in_refund'))]}"/>
+                                <field name="ref" attrs="{'invisible':[('move_type', 'in', ('in_invoice', 'in_receipt', 'in_refund', 'out_invoice', 'out_refund'))]}"/>
+                                <field name="tax_cash_basis_origin_move_id" attrs="{'invisible': [('tax_cash_basis_origin_move_id', '=', False)]}"/>
+                                <field name="payment_reference" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))], 'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="partner_bank_id" context="{'default_partner_id': bank_partner_id}" domain="[('partner_id', '=', bank_partner_id)]" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))], 'readonly': [('state', '!=', 'draft')]}"/>
+                                <label name="invoice_vendor_bill_id_label" for="invoice_vendor_bill_id" string="Auto-Complete" class="oe_edit_only" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice')]}"/>
+                                <field name="invoice_vendor_bill_id" nolabel="1" class="oe_edit_only" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice')]}" domain="[('company_id', '=', company_id), ('partner_id','child_of', [partner_id]), ('move_type','=','in_invoice')]" placeholder="Select an old vendor bill" options="{'no_create': True}" context="{'show_total_amount': True}"/>
+                    </group>                   
+                  
+                   
+            </xpath>  
+           
+            
+            <xpath expr="//form/sheet/group[1]/group[1]" position="attributes">
+                  <attribute name="invisible">True</attribute>
+            </xpath>
+            
+                           
+        </field>
+ </record>       
         
  <record id="account_move_form_inherit_line_12" model="ir.ui.view">
         <field name="name">account.move.form.inherit.line_1</field>

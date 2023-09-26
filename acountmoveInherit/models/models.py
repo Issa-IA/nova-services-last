@@ -12,6 +12,15 @@ class MoveLineHerit(models.Model):
 class AcountMoveHerit(models.Model):
     _inherit = 'account.move'
     
+    fact_anne_ = fields.Integer(string="Année de facturation", compute="_compute_anne_facturation")
+    @api.depends('create_date')
+    def _compute_anne_facturation(self):
+        for rec in self:
+            if rec.create_date:
+                rec.fact_anne_ = rec.create_date.year
+            else:
+                rec.fact_anne_ = False
+    
     partner_id_organisme = fields.Many2one('res.partner', 'Contact')
     move_accord  = fields.Char(string="N° d'accord")
     affiche_partner_id = fields.Integer(string="Afficher Client", default=0)

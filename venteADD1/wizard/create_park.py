@@ -138,7 +138,46 @@ class CreatParkWizard(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
-              
+                    
+                if self.devis_dossier.sale_pfr_fournissuer:
+                                            res = {
+                                                'order_id': purchase_id,
+                                                'product_id': self.devis_dossier.pfr_fournisseur.id,
+                                                'name': self.devis_dossier.pfr_fournisseur.name,
+                                                'price_unit': self.devis_dossier.sale_pfr_fournissuer,
+                                                'product_uom_qty': '1',
+                                            }
+                                            self.env['sale.order.line'].sudo().create(res)
+                sale_orders = self.env['sale.order'].search([('id', '=', purchase_id)])
+                invoice_lines = []
+                for sale in sale_orders:                            
+                                    for line in sale.order_line:
+                                        if line.display_type:
+                                            vals = {
+                                                'name': line.name,
+                                                'display_type': line.display_type,
+                                            }
+                                            invoice_lines.append((0, 0, vals))
+                                        else:
+                                            vals = {
+                                                'name': line.name,
+                                                'price_unit': line.price_unit,
+                                                'quantity': line.product_uom_qty,
+                                                'product_id': line.product_id.id,
+                                                'product_uom_id': line.product_uom.id,
+                                                'sale_line_ids': [(6, 0, [line.id])],
+                                            }
+                                            invoice_lines.append((0, 0, vals))
+                                    self.env['account.move'].create({
+                                        'ref': sale.client_order_ref,
+                                        'move_type': 'out_invoice',
+                                        'invoice_origin': sale.name,
+                                        'invoice_user_id': sale.user_id.id,
+                                        'partner_id': sale.partner_id.id,
+                                        'invoice_line_ids': invoice_lines,
+                                        'acount_maintnance': True,
+                                    })
+                                    sale.invoice_status = 'invoiced'  
         if self.devis_dossier.order_line:
             if self.devis_dossier.sale_periodicite == 'mens':
                 if self.devis_dossier.sale_duree:

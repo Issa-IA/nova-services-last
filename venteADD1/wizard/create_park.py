@@ -137,17 +137,8 @@ class CreatParkWizard(models.Model):
                                                 'price_unit': self.devis_dossier.sale_pfr_fournissuer,
                                                 'product_uom_qty': '1',
                                             }
-                                            self.env['sale.order.line'].sudo().create(res)
-                    
-                if self.devis_dossier.sale_pfr_fournissuer:
-                                            res = {
-                                                'order_id': purchase_id,
-                                                'product_id': self.devis_dossier.pfr_fournisseur.id,
-                                                'name': self.devis_dossier.pfr_fournisseur.name,
-                                                'price_unit': self.devis_dossier.sale_pfr_fournissuer,
-                                                'product_uom_qty': '1',
-                                            }
-                                            self.env['sale.order.line'].sudo().create(res)
+                                            self.env['sale.order.line'].sudo().create(res)                    
+                
                 sale_orders = self.env['sale.order'].search([('id', '=', purchase_id)])
                 invoice_lines = []
                 for sale in sale_orders:                            

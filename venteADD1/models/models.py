@@ -366,6 +366,8 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             if rec.partner_id:
                 rec.sale_pfr_fournissuer = rec.partner_id.pfr
+            else:
+                rec.sale_pfr_fournissuer = False
     
     ##########
     sale_cout_sup_pourcent = fields.Monetary(string="Cout des copies supplémentaires", compute="compute_sup_pourcent")

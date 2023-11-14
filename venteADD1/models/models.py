@@ -375,6 +375,8 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             if rec.partner_id:
                 rec.sale_cout_sup_pourcent = rec.partner_id.cout_sup_pourcent
+            else:
+                rec.sale_cout_sup_pourcent = False
     #########            
 
     @api.onchange("sale_frais_livraison_new", "sale_montatnt_IR","sale_total_vente","sale_finance","sale_frais","sale_frais_restitution","sale_vr_client","sale_ir_prospects","sale_vr_client_2","sale_rachat_matriel","sale_Gratuite","sale_partenariat","sale_solde_2_fois")

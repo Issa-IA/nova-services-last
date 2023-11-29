@@ -51,6 +51,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                     if sale_bon_commande.sale_forfait_signe_col:
                                         check = True
                                         res = {
+                                            'tax_id':sale_bon_commande.cout_copie_coleurs.taxes_id,
                                             'order_id': purchase_id,
                                             'product_id': sale_bon_commande.cout_copie_coleurs.id,
                                             'name': sale_bon_commande.cout_copie_coleurs.name,
@@ -62,6 +63,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                     if sale_bon_commande.sale_forfait_signe_nb:
                                         check = True
                                         res = {
+                                            'tax_id':sale_bon_commande.cout_copie_noires.taxes_id,
                                             'order_id': purchase_id,
                                             'product_id': sale_bon_commande.cout_copie_noires.id,
                                             'name': sale_bon_commande.cout_copie_noires.name,
@@ -74,6 +76,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
+                                                'tax_id':sale_bon_commande.cout_copie_coleurs_sup.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
                                                 'name': sale_bon_commande.cout_copie_coleurs_sup.name,
@@ -86,6 +89,7 @@ class SaleMoveHeritbondecommande(models.Model):
 
 
                                         res = {
+                                                'tax_id':sale_bon_commande.cout_copie_noires_sup.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_noires_sup.id,
                                                 'name': sale_bon_commande.cout_copie_noires_sup.name,
@@ -98,6 +102,7 @@ class SaleMoveHeritbondecommande(models.Model):
 
                                         if sale_bon_commande.sale_abonnement_service:
                                             res = {
+                                                'tax_id':sale_bon_commande.abonnements.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.abonnements.id,
                                                 'name': sale_bon_commande.abonnements.name,
@@ -108,6 +113,7 @@ class SaleMoveHeritbondecommande(models.Model):
 
                                         if sale_bon_commande.sale_autre_frais:
                                             res = {
+                                                'tax_id':sale_bon_commande.services.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.services.id,
                                                 'name': sale_bon_commande.services.name,
@@ -117,6 +123,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             self.env['sale.order.line'].sudo().create(res)
                                         if sale_bon_commande.sale_loyer_fact:
                                             res = {
+                                                'tax_id':sale_bon_commande.Frais_loyer.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.Frais_loyer.id,
                                                 'name': sale_bon_commande.Frais_loyer.name,
@@ -126,6 +133,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             self.env['sale.order.line'].sudo().create(res)
                                         if sale_bon_commande.sale_pfr_fournissuer:
                                             res = {
+                                                'tax_id':sale_bon_commande.pfr_fournisseur.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.pfr_fournisseur.id,
                                                 'name': sale_bon_commande.pfr_fournisseur.name,
@@ -175,6 +183,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                     if sale_bon_commande.sale_forfait_signe_col:
                                         check = True
                                         res = {
+                                            'tax_id':sale_bon_commande.cout_copie_coleurs.taxes_id,
                                             'order_id': purchase_id,
                                             'product_id': sale_bon_commande.cout_copie_coleurs.id,
                                             'name': sale_bon_commande.cout_copie_coleurs.name,
@@ -186,6 +195,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                     if sale_bon_commande.sale_forfait_signe_nb:
                                         check = True
                                         res = {
+                                            'tax_id':sale_bon_commande.cout_copie_noires.taxes_id,
                                             'order_id': purchase_id,
                                             'product_id': sale_bon_commande.cout_copie_noires.id,
                                             'name': sale_bon_commande.cout_copie_noires.name,
@@ -198,6 +208,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
+                                                'tax_id':sale_bon_commande.cout_copie_coleurs_sup.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
                                                 'name': sale_bon_commande.cout_copie_coleurs_sup.name,
@@ -209,6 +220,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*sale_bon_commande.sale_cout_sup_pourcent
 
                                         res = {
+                                                'tax_id':sale_bon_commande.cout_copie_noires_sup.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.cout_copie_noires_sup.id,
                                                 'name': sale_bon_commande.cout_copie_noires_sup.name,
@@ -220,6 +232,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                     if check:
                                         if sale_bon_commande.sale_abonnement_service:
                                             res = {
+                                                'tax_id':sale_bon_commande.abonnements.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.abonnements.id,
                                                 'name': sale_bon_commande.abonnements.name,
@@ -230,6 +243,7 @@ class SaleMoveHeritbondecommande(models.Model):
 
                                         if sale_bon_commande.sale_autre_frais:
                                             res = {
+                                                'tax_id':sale_bon_commande.services.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.services.id,
                                                 'name': sale_bon_commande.services.name,
@@ -239,6 +253,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             self.env['sale.order.line'].sudo().create(res)
                                         if sale_bon_commande.sale_loyer_fact:
                                             res = {
+                                                'tax_id':sale_bon_commande.Frais_loyer.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.Frais_loyer.id,
                                                 'name': sale_bon_commande.Frais_loyer.name,
@@ -249,6 +264,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             
                                         if sale_bon_commande.sale_pfr_fournissuer:
                                             res = {
+                                                'tax_id':sale_bon_commande.pfr_fournisseur.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.pfr_fournisseur.id,
                                                 'name': sale_bon_commande.pfr_fournisseur.name,

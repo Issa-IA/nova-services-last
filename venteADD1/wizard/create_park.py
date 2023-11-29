@@ -75,6 +75,7 @@ class CreatParkWizard(models.Model):
                 self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_forfait_signe_col:
                     res = {
+                        'tax_id':self.devis_dossier.cout_copie_coleurs.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.cout_copie_coleurs.id,
                         'name': self.devis_dossier.cout_copie_coleurs.name,
@@ -85,6 +86,7 @@ class CreatParkWizard(models.Model):
 
                 if self.devis_dossier.sale_forfait_signe_nb:
                     res = {
+                        'tax_id':self.devis_dossier.cout_copie_noires.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.cout_copie_noires.id,
                         'name': self.devis_dossier.cout_copie_noires.name,
@@ -94,6 +96,7 @@ class CreatParkWizard(models.Model):
                     self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_abonnement_service:
                     res = {
+                        'tax_id':self.devis_dossier.abonnements.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.abonnements.id,
                         'name': self.devis_dossier.abonnements.name,
@@ -104,6 +107,7 @@ class CreatParkWizard(models.Model):
 
                 if self.devis_dossier.sale_autre_frais:
                     res = {
+                        'tax_id':self.devis_dossier.services.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.services.id,
                         'name': self.devis_dossier.services.name,
@@ -113,6 +117,7 @@ class CreatParkWizard(models.Model):
                     self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_frais:
                     res = {
+                        'tax_id':self.devis_dossier.Frais_livraison.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.Frais_livraison.id,
                         'name': self.devis_dossier.Frais_livraison.name,
@@ -122,6 +127,7 @@ class CreatParkWizard(models.Model):
                     self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_loyer_fact:
                     res = {
+                        'tax_id':self.devis_dossier.Frais_loyer.taxes_id,
                         'order_id': purchase_id,
                         'product_id': self.devis_dossier.Frais_loyer.id,
                         'name': self.devis_dossier.Frais_loyer.name,
@@ -131,6 +137,7 @@ class CreatParkWizard(models.Model):
                     self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_pfr_fournissuer:
                                             res = {
+                                                'tax_id':self.devis_dossier.pfr_fournisseur.taxes_id,
                                                 'order_id': purchase_id,
                                                 'product_id': self.devis_dossier.pfr_fournisseur.id,
                                                 'name': self.devis_dossier.pfr_fournisseur.name,
@@ -151,6 +158,7 @@ class CreatParkWizard(models.Model):
                                             invoice_lines.append((0, 0, vals))
                                         else:
                                             vals = {
+                                                'tax_ids':line.tax_id,
                                                 'name': line.name,
                                                 'price_unit': line.price_unit,
                                                 'quantity': line.product_uom_qty,

@@ -33,6 +33,7 @@ class SaleMoveHeritfacture(models.Model):
                                                     invoice_lines.append((0, 0, vals))
                                                 else:
                                                     vals = {
+                                                        'tax_ids':line.tax_id,
                                                         'name': line.name,
                                                         'price_unit': line.price_unit,
                                                         'quantity': line.product_uom_qty,
@@ -71,6 +72,7 @@ class SaleMoveHeritfacture(models.Model):
                                                 invoice_lines.append((0, 0, vals))
                                             else:
                                                 vals = {
+                                                    'tax_ids':line.tax_id,
                                                     'name': line.name,
                                                     'price_unit': line.price_unit,
                                                     'quantity': line.product_uom_qty,

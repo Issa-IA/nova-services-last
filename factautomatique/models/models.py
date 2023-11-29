@@ -129,6 +129,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_forfait_signe_col:
                         res = {
+                            'tax_id':j[0].cout_copie_coleurs.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_coleurs.id,
                             'name': j[0].cout_copie_coleurs.name,
@@ -139,6 +140,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_forfait_signe_nb:
                         res = {
+                            'tax_id':j[0].cout_copie_noires.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_noires.id,
                             'name': j[0].cout_copie_noires.name,
@@ -151,6 +153,7 @@ class factAuto(models.Model):
                         if j[0].sale_forfait_signe_col:
                             cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*j[0].sale_cout_sup_pourcent
                             res = {
+                                'tax_id':j[0].cout_copie_coleurs_sup.taxes_id,
                                 'order_id': purchase_id,
                                 'product_id': j[0].cout_copie_coleurs_sup.id,
                                 'name': j[0].cout_copie_coleurs_sup.name,
@@ -160,6 +163,7 @@ class factAuto(models.Model):
                             self.env['sale.order.line'].sudo().create(res)
                         else:
                             res = {
+                            'tax_id':j[0].copie_coleurs_sans_f.taxes_id,    
                             'order_id': purchase_id,
                             'product_id': j[0].copie_coleurs_sans_f.id,
                             'name': j[0].copie_coleurs_sans_f.name,
@@ -172,6 +176,7 @@ class factAuto(models.Model):
                         if j[0].sale_forfait_signe_nb:
                             cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*j[0].sale_cout_sup_pourcent
                             res = {
+                                'tax_id':j[0].cout_copie_noires_sup.taxes_id,
                                 'order_id': purchase_id,
                                 'product_id': j[0].cout_copie_noires_sup.id,
                                 'name': j[0].cout_copie_noires_sup.name,
@@ -181,6 +186,7 @@ class factAuto(models.Model):
                             self.env['sale.order.line'].sudo().create(res)
                         else:
                             res = {
+                            'tax_id':j[0].copie_noires_sans_f.taxes_id,    
                             'order_id': purchase_id,
                             'product_id': j[0].copie_noires_sans_f.id,
                             'name': j[0].copie_noires_sans_f.name,
@@ -191,6 +197,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_abonnement_service:
                         res = {
+                            'tax_id':j[0].abonnements.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].abonnements.id,
                             'name': j[0].abonnements.name,
@@ -201,6 +208,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_autre_frais:
                         res = {
+                            'tax_id':j[0].services.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].services.id,
                             'name': j[0].services.name,
@@ -210,6 +218,7 @@ class factAuto(models.Model):
                         self.env['sale.order.line'].sudo().create(res)
                     if j[0].sale_loyer_fact:
                         res = {
+                            'tax_id':j[0].Frais_loyer.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].Frais_loyer.id,
                             'name': j[0].Frais_loyer.name,
@@ -297,6 +306,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_forfait_signe_col:
                         res = {
+                            'tax_id':j[0].cout_copie_coleurs.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_coleurs.id,
                             'name': j[0].cout_copie_coleurs.name,
@@ -307,6 +317,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_forfait_signe_nb:
                         res = {
+                            'tax_id':j[0].cout_copie_noires.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].cout_copie_noires.id,
                             'name': j[0].cout_copie_noires.name,
@@ -319,6 +330,7 @@ class factAuto(models.Model):
                         if j[0].sale_forfait_signe_col:
                             cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*j[0].sale_cout_sup_pourcent
                             res = {
+                                'tax_id':j[0].cout_copie_coleurs_sup.taxes_id,
                                 'order_id': purchase_id,
                                 'product_id': j[0].cout_copie_coleurs_sup.id,
                                 'name': j[0].cout_copie_coleurs_sup.name,
@@ -328,6 +340,7 @@ class factAuto(models.Model):
                             self.env['sale.order.line'].sudo().create(res)
                         else:
                             res = {
+                            'tax_id':j[0].copie_coleurs_sans_f.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].copie_coleurs_sans_f.id,
                             'name': j[0].copie_coleurs_sans_f.name,
@@ -340,6 +353,7 @@ class factAuto(models.Model):
                         if j[0].sale_forfait_signe_nb:
                             cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*j[0].sale_cout_sup_pourcent
                             res = {
+                                'tax_id':j[0].cout_copie_noires_sup.taxes_id,
                                 'order_id': purchase_id,
                                 'product_id': j[0].cout_copie_noires_sup.id,
                                 'name': j[0].cout_copie_noires_sup.name,
@@ -349,6 +363,7 @@ class factAuto(models.Model):
                             self.env['sale.order.line'].sudo().create(res)
                         else:
                             res = {
+                            'tax_id':j[0].copie_noires_sans_f.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].copie_noires_sans_f.id,
                             'name': j[0].copie_noires_sans_f.name,
@@ -359,6 +374,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_abonnement_service:
                         res = {
+                            'tax_id':j[0].abonnements.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].abonnements.id,
                             'name': j[0].abonnements.name,
@@ -369,6 +385,7 @@ class factAuto(models.Model):
 
                     if j[0].sale_autre_frais:
                         res = {
+                            'tax_id':j[0].services.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].services.id,
                             'name': j[0].services.name,
@@ -378,6 +395,7 @@ class factAuto(models.Model):
                         self.env['sale.order.line'].sudo().create(res)
                     if j[0].sale_loyer_fact:
                         res = {
+                            'tax_id':j[0].Frais_loyer.taxes_id,
                             'order_id': purchase_id,
                             'product_id': j[0].Frais_loyer.id,
                             'name': j[0].Frais_loyer.name,

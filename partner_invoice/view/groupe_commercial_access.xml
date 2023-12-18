@@ -56,7 +56,6 @@
                 </field>
                 
             </field>
-  <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
 </record>  
             -->              
 </data>

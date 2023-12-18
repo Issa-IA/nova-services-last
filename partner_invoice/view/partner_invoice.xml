@@ -46,6 +46,8 @@
                                         <field name="siret"></field>
                                         <field name="goup_commerc_ok_1"  invisible="1"></field>
                                         <field name="x_studio_kdfm"></field>
+                                        <field name="x_studio_statut_de_compte"></field>
+                                        <field name="x_studio_plus_que_pro"></field>
                                 </group>
                             </group>
 

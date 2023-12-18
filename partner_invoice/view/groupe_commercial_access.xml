@@ -43,7 +43,9 @@
             </field>
   <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
 </record>
-<!-- <record id="contact_form_view_form3" model="ir.ui.view">
+
+<!-- 
+            <record id="contact_form_view_form3" model="ir.ui.view">
            <field name="name">contact.form.inherit3</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="studio_customization.odoo_studio_res_part_a277ba32-48de-47cb-9207-278e2b1963be" />
@@ -55,7 +57,8 @@
                 
             </field>
   <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
-</record>  -->              
+</record>  
+            -->              
 </data>
 </odoo>
 

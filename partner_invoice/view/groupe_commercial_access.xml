@@ -24,6 +24,12 @@
                 <field name="x_studio_kdfm" position="attributes">
                    <attribute name="invisible">True</attribute>
                 </field>
+                <field name="x_studio_plus_que_pro" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
+                <field name="x_studio_statut_de_compte" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
                  <field name="goup_commerc_ok" position="attributes">
                    <attribute name="invisible">0</attribute>
                 </field>    
@@ -37,7 +43,7 @@
             </field>
   <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
 </record>
-<record id="contact_form_view_form3" model="ir.ui.view">
+<!--<record id="contact_form_view_form3" model="ir.ui.view">
             <field name="name">contact.form.inherit3</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="studio_customization.odoo_studio_res_part_a277ba32-48de-47cb-9207-278e2b1963be" />
@@ -49,7 +55,7 @@
                 
             </field>
   <!--  <field name="test_field" groups="external_id_of_group"/>  visible que à ce groupe -->
-</record>                
+</record>  -->              
 </data>
 </odoo>
 

@@ -30,6 +30,9 @@
                 <field name="x_studio_statut_de_compte" position="attributes">
                    <attribute name="readonly">1</attribute>
                 </field>
+                <field name="cout_sup_pourcent" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                </field>
                  <field name="goup_commerc_ok" position="attributes">
                    <attribute name="invisible">0</attribute>
                 </field>    

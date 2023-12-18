@@ -94,6 +94,7 @@ class BudgetPartenariat(models.Model):
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', related='company_id.currency_id', string="Company Currency", readonly=True,
         help='Utility field to express amount currency')
+    dossier_num = fields.Char(string='N° Dossier')
     annee = fields.Char(string='Annee')
     statut = fields.Selection([('A régler', 'A régler'), ('Réglé', 'Réglé'), ('En attente de facture', 'En attente de facture')])
     montant_a_regler = fields.Monetary('Montant a regler')

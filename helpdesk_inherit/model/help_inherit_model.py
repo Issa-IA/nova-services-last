@@ -6,4 +6,5 @@ class HelpdeskModelHerit(models.Model):
 
   
     product_serie_id = fields.Many2one('fleetserielarticle', string='Article',domain="[('client_id', '=', partner_id)]")
+    signature_helpdesk = fields.Binary(string='Signature', attachment=True, help='Signature image')
 

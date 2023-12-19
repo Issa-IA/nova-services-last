@@ -11,6 +11,9 @@
 			     <field name="product_serie_id"/>
 
                     </xpath>
+			<xpath expr="//field[@name='description']" position="after">
+			<field widget="signature" name="signature_helpdesk" string="Signature" attrs="{&quot;invisible&quot;: [[&quot;team_id&quot;,&quot;!=&quot;,2]]}"/>
+  		</xpath>
 
                 </field>
         </record>

@@ -119,9 +119,11 @@ class factAuto(models.Model):
                     if i[0].augmentation_sav_bool == True:
                         number_of_days = (date.today() - j[1][0].fleet_date_inst).days
                         augmentation = int(number_of_days / 365)
-                        taut_augmantation = augmentation * i[0].augmentation_sav
-                        cout_copie_coluer = j[0].sale_cout_signe_col + j[0].sale_cout_signe_col * taut_augmantation
-                        cout_copie_noir = j[0].sale_cout_signe_nb + j[0].sale_cout_signe_nb * taut_augmantation
+                        #taut_augmantation = augmentation * i[0].augmentation_sav
+                        #cout_copie_coluer = j[0].sale_cout_signe_col + j[0].sale_cout_signe_col * taut_augmantation
+                        #cout_copie_noir = j[0].sale_cout_signe_nb + j[0].sale_cout_signe_nb * taut_augmantation
+                        cout_copie_coluer = j[0].sale_cout_signe_col*(1 + i[0].augmentation_sav)**augmentation
+                        cout_copie_noir = j[0].sale_cout_signe_nb*(1 + i[0].augmentation_sav)**augmentation
                     else:
                         cout_copie_coluer = j[0].sale_cout_signe_col
                         cout_copie_noir = j[0].sale_cout_signe_nb
@@ -296,9 +298,11 @@ class factAuto(models.Model):
                     if i[0].augmentation_sav_bool == True:
                         number_of_days = (date.today() - j[1][0].fleet_date_inst).days
                         augmentation = int(number_of_days/365)
-                        taut_augmantation = augmentation* i[0].augmentation_sav
-                        cout_copie_coluer = j[0].sale_cout_signe_col + j[0].sale_cout_signe_col*taut_augmantation
-                        cout_copie_noir = j[0].sale_cout_signe_nb + j[0].sale_cout_signe_nb*taut_augmantation
+                        #taut_augmantation = augmentation* i[0].augmentation_sav
+                        #cout_copie_coluer = j[0].sale_cout_signe_col + j[0].sale_cout_signe_col*taut_augmantation
+                        #cout_copie_noir = j[0].sale_cout_signe_nb + j[0].sale_cout_signe_nb*taut_augmantation
+                        cout_copie_coluer = j[0].sale_cout_signe_col*(1 + i[0].augmentation_sav)**augmentation
+                        cout_copie_noir = j[0].sale_cout_signe_nb*(1 + i[0].augmentation_sav)**augmentation
                     else:
                         cout_copie_coluer = j[0].sale_cout_signe_col
                         cout_copie_noir = j[0].sale_cout_signe_nb

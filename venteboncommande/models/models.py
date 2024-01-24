@@ -41,9 +41,11 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 date_inst = fleet.fleet_date_inst
                                         number_of_days = (date.today() - date_inst).days
                                         augmentation = int(number_of_days / 365)
-                                        taut_augmantation = augmentation * sale_bon_commande.partner_id.augmentation_sav
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col + sale_bon_commande.sale_cout_signe_col * taut_augmantation
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb + sale_bon_commande.sale_cout_signe_nb * taut_augmantation
+                                        #taut_augmantation = augmentation * sale_bon_commande.partner_id.augmentation_sav
+                                        #cout_copie_coluer = sale_bon_commande.sale_cout_signe_col + sale_bon_commande.sale_cout_signe_col * taut_augmantation
+                                        #cout_copie_noir = sale_bon_commande.sale_cout_signe_nb + sale_bon_commande.sale_cout_signe_nb * taut_augmantation
+                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col*(1+sale_bon_commande.partner_id.augmentation_sav)**augmentation
+                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb*(1+  sale_bon_commande.partner_id.augmentation_sav)**augmentation
                                     else:
                                         cout_copie_coluer = sale_bon_commande.sale_cout_signe_col
                                         cout_copie_noir = sale_bon_commande.sale_cout_signe_nb
@@ -173,9 +175,11 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 date_inst = fleet.fleet_date_inst
                                         number_of_days = (date.today() - date_inst).days
                                         augmentation = int(number_of_days / 365)
-                                        taut_augmantation = augmentation * sale_bon_commande.partner_id.augmentation_sav
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col + sale_bon_commande.sale_cout_signe_col * taut_augmantation
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb + sale_bon_commande.sale_cout_signe_nb * taut_augmantation
+                                        #taut_augmantation = augmentation * sale_bon_commande.partner_id.augmentation_sav
+                                        #cout_copie_coluer = sale_bon_commande.sale_cout_signe_col + sale_bon_commande.sale_cout_signe_col * taut_augmantation
+                                        #cout_copie_noir = sale_bon_commande.sale_cout_signe_nb + sale_bon_commande.sale_cout_signe_nb * taut_augmantation
+                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col*(1+sale_bon_commande.partner_id.augmentation_sav)**augmentation
+                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb*(1+sale_bon_commande.partner_id.augmentation_sav)**augmentation
                                     else:
                                         cout_copie_coluer = sale_bon_commande.sale_cout_signe_col
                                         cout_copie_noir = sale_bon_commande.sale_cout_signe_nb

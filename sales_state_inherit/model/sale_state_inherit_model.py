@@ -7,12 +7,12 @@ class SaleStateHerit(models.Model):
     state = fields.Selection(selection_add=[('invoiced', 'Facturé')])
 
     def write(self, vals):
-        
-        if self.invoice_count > 0 :
-            if self.state == 'done':
-                vals.update({'state':'invoiced'})   
-        else:
-            if self.state == 'invoiced':
-                vals.update({'state':'done'})
+        for rec in self:  
+            if rec.invoice_count > 0 :
+                if rec.state == 'done':
+                    vals.update({'state':'invoiced'})   
+            else:
+                if rec.state == 'invoiced':
+                    vals.update({'state':'done'})
         res=super(SaleStateHerit, self).write(vals)
         return res

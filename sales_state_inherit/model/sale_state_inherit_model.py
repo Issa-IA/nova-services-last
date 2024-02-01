@@ -20,7 +20,7 @@ class SaleStateHerit(models.Model):
                 if rec.invoice_count > 0 :                
                         vals.update({'state':'invoiced'})   
             if rec.state == 'invoiced':
-                 if rec.invoice_count = 0 :
+                 if rec.invoice_count == 0 :
                         vals.update({'state':'done'})
         res=super(SaleStateHerit, self).write(vals)
         return res

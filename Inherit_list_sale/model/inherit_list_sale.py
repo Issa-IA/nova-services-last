@@ -4,7 +4,8 @@ from odoo import models, fields, api
 class StockHerit(models.Model):
     _inherit = 'sale.order'
 
-    etiquette_maintenance = fields.Selection([('maintenance', 'Maintenance'),('import CVI', 'import'), ('autres', 'Autres'),('cvi','CVI')], compute='_maintenance_etiquette', store=True)
+    etiquette_maintenance = fields.Selection([('maintenance', 'Maintenance'),('import CVI', 'import'), ('autres', 'Autres'),('cvi','CVI')], compute='_maintenance_etiquette', inverse='_inverse_etiquette_maintenance', 
+store=True)
     sale_new_contrat = fields.Integer(string="CONTRAT",default=0)
 
     @api.depends('sale_maintnance','sale_dossier')
@@ -17,4 +18,6 @@ class StockHerit(models.Model):
                 rec.sale_new_contrat = 1
             else:
                 rec.etiquette_maintenance = False
-
+    
+    def _inverse_etiquette_maintenance(self):
+        pass

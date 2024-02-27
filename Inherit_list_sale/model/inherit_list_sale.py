@@ -4,7 +4,7 @@ from odoo import models, fields, api
 class StockHerit(models.Model):
     _inherit = 'sale.order'
 
-    etiquette_maintenance = fields.Selection([('maintenance', 'Maintenance'), ('autres', 'Autres'),('cvi','CVI')], compute='_maintenance_etiquette', store=True)
+    etiquette_maintenance = fields.Selection([('maintenance', 'Maintenance'),('import CVI', 'import'), ('autres', 'Autres'),('cvi','CVI')], compute='_maintenance_etiquette', store=True)
     sale_new_contrat = fields.Integer(string="CONTRAT",default=0)
 
     @api.depends('sale_maintnance','sale_dossier')

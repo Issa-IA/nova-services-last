@@ -243,28 +243,28 @@
             </form>
         </t>
     </template>
- <template id="portal_my_home" name="Portal My Home : fleet entries" inherit_id="portal.portal_my_home" priority="40">
+   <template id="portal_my_home" name="Portal My Home : document entries" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-if="fleet_count">
+            <t t-if="document_count">
                 <div class="o_portal_docs_entry">
-                    <div class="o_portal_docs_entry_title">Parc Matériels</div>
+                    <div class="o_portal_docs_entry_title">Mes Documents</div>
                     <div class="o_portal_docs_entry_count">
-                        <a t-att-href="'/my/fleets'">Voir le parc matériel</a>
-                        <span t-field="fleet_count"/>
+                        <a t-att-href="'/my/documents'">Voir mes documents</a>
+                        <span><t t-esc="document_count"/></span>
                     </div>
                 </div>
             </t>
-            <form method="POST" t-attf-action="/new/fleet">
+            <form method="POST" t-attf-action="/new/document">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                <!-- Votre formulaire pour créer un nouveau parc matériel -->
+                <!-- Votre formulaire pour créer un nouveau document -->
             </form>
         </xpath>
     </template>
 
-    <template id="portal_my_fleets" name="My fleets">
+    <template id="portal_my_documents" name="Mes documents">
         <t t-call="portal.portal_layout">
             <div class="container">
-                <!-- Votre contenu pour afficher la liste des parcs matériels -->
+                <!-- Votre contenu pour afficher la liste des documents -->
             </div>
         </t>
     </template>

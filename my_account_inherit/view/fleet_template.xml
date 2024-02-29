@@ -243,7 +243,7 @@
             </form>
         </t>
     </template>
-   <template id="client_portal_my_contracts" name="Portal My Home : document entries" inherit_id="portal.portal_my_home" priority="40">
+ <template id="client_portal_my_documents" name="Portal My Home : document entries" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-if="document_count">
                 <div class="o_portal_docs_entry">
@@ -259,14 +259,6 @@
                 <!-- Votre formulaire pour créer un nouveau document -->
             </form>
         </xpath>
-    </template>
-
-    <template id="portal_my_documents" name="Mes documents">
-        <t t-call="portal.portal_layout">
-            <div class="container">
-                <!-- Votre contenu pour afficher la liste des documents -->
-            </div>
-        </t>
     </template>
 
 

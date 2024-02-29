@@ -74,4 +74,3 @@ class FleetController(http.Controller):
                         }
                     )
         return werkzeug.utils.redirect("/my/fleets")
-

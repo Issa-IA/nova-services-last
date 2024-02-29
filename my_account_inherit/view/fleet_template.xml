@@ -244,7 +244,7 @@
         </t>
     </template>
     <template id="client_portal_my_documents" inherit_id="portal.portal_my_home">
-            <xpath expr="//ol[contains(@class,'o_portal_submenu')]" position="inside">
+                <xpath expr="//div[contains(@class,'o_portal_submenu')]" position="inside">
                 <li t-if="page_name == 'documents' or documents" t-att-class="breadcrumb-item #{'active ' if not documents else ''}">
                     <a t-if="documents" t-att-href="'/my/documents?' + keep_query()">Documents</a>
                     <t t-else="">Documents</t>

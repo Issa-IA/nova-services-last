@@ -268,7 +268,7 @@
                             <th>Download</th>
                         </tr>
                     </thead>
-                    <t t-foreach="documents" t-as="document">
+                    <t t-foreach="contracts" t-as="document">
                         <tr>
                             <td>
                                 <t t-esc="document.name" />

@@ -243,15 +243,48 @@
             </form>
         </t>
     </template>
-    <template id="client_portal_my_documents" inherit_id="portal.portal_my_home">
-<xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">         
-    <li t-if="page_name == 'documents' or documents" t-att-class="breadcrumb-item #{'active ' if not documents else ''}">
-                    <a t-if="documents" t-att-href="'/my/documents?' + keep_query()">Documents</a>
-                    <t t-else="">Documents</t>
-                </li>
-                <li t-if="documents" class="breadcrumb-item active">
-                    <t t-esc="documents.name"/>
-                </li>
-            </xpath>
-        </template>
+   <template id="portal_my_documents" name="My documents">
+    <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True" />
+        <form method="POST" t-attf-action="/new/document">
+
+            <t t-call="portal.portal_searchbar"> </t>
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                t-att-value="request.csrf_token()"
+            />
+        </form>
+        <t t-if="not documents">
+            <p>There are no documents in your account.</p>
+        </t>
+        <div t-if="documents" class="panel panel-default">
+            <div class="table-responsive">
+                <table class="table table-hover o_portal_my_doc_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Name</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="documents" t-as="document">
+                        <tr>
+                            <td>
+                                <t t-esc="document.name" />
+                            </td>
+                            <td>
+                                <a t-att-href="'/my/document/' + document.id + '/download'">Download</a>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </div>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="portal.pager" />
+            </div>
+        </div>
+    </t>
+</template>
+
 </odoo>

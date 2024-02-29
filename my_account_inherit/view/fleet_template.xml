@@ -245,7 +245,7 @@
         </t>
     </template>
     <template id="client_portal_my_documents" inherit_id="portal.portal_my_home">
-        <xpath expr="//div[@class='oe_portal_content']" position="inside">
+        <xpath  expr="//div[hasclass('o_portal_docs')]" position="inside">
             <div class="row mt16">
                 <div class="col-lg-12">
                     <div class="o_portal_container">

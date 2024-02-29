@@ -27,12 +27,14 @@ class FleetController(http.Controller):
         fleet.state_id = values.get("state_id")
 
         return werkzeug.utils.redirect("/my/fleets/" + str(fleet.id))
+
     @http.route('/my/documents', type='http', auth="user", website=True)
     def my_documents(self, **kw):
         # Récupérer les contrats associés à l'utilisateur connecté
         contracts = request.env['documents.document'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)])
         # Rendre la vue avec les contrats
-        return request.render('your_module.portal_my_documents', {'contracts': contracts})
+        return request.render('my_account_inherit.client_portal_my_documents', {'contracts': contracts})
+        
     @http.route("/new/ticket", type="http", auth="user", website=True)
     def create_new_ticket(self, **kw):
         categories = http.request.env["fleet.vehicle"].search(

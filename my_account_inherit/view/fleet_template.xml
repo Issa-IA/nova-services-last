@@ -244,6 +244,7 @@
             </form>
         </t>
     </template>
+    <template>
    <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
     <li
         t-if="page_name == 'documents' or documents"
@@ -259,5 +260,5 @@
         <t t-esc="documents.name" />
     </li>
 </xpath>
-
+    </template>
 </odoo>

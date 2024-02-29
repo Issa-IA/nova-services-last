@@ -112,4 +112,3 @@ class CustomerPortalFleet(CustomerPortal):
             "fleet": fleet,
         }
         return values
-

@@ -16,7 +16,12 @@ class CustomerPortalFleet(CustomerPortal):
         )
         values["fleet_count"] = fleet_count
         return values
-
+        
+    @http.route('/my/contracts', type='http', auth="user", website=True)
+    def my_contracts(self, **kw):
+        contracts = request.env['documents.document'].sudo().search([('partner_id', '=', request.env.user.partner_id.id)])
+        return request.render('your_module.client_portal_my_contracts', {'contracts': contracts})
+        
     @http.route(
         ["/my/fleets", "/my/fleets/page/<int:page>"],
         type="http",

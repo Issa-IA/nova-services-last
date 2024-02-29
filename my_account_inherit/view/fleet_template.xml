@@ -4,8 +4,7 @@
         id="portal_layout"
         name="Portal layout: fleet menu entry"
         inherit_id="portal.portal_breadcrumbs"
-        priority="50"
-    >
+        priority="50">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li
                 t-if="page_name == 'fleet' or fleet"

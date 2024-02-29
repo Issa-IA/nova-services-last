@@ -244,21 +244,24 @@
             </form>
         </t>
     </template>
-    <template>
-   <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-    <li
-        t-if="page_name == 'documents' or documents"
-        t-attf-class="breadcrumb-item #{'active ' if not documents else ''}"
-    >
-        <a
-            t-if="documents"
-            t-attf-href="/my/documents?{{ keep_query() }}"
-        >Documents</a>
-        <t t-else="">Documents</t>
-    </li>
-    <li t-if="documents" class="breadcrumb-item active">
-        <t t-esc="documents.name" />
-    </li>
-</xpath>
-    </template>
+        <template id="client_portal_my_documents" inherit_id="portal.portal_my_home">
+            <xpath expr="//div[@class='oe_portal_content']" position="inside">
+                <div class="row mt16">
+                    <div class="col-lg-12">
+                        <div class="o_portal_container">
+                            <h2>Mes Documents</h2>
+                            <ul>
+                                <t t-foreach="documents" t-as="document">
+                                    <li>
+                                        <a t-att-href="'/web/content/' + document.id + '?download=true'">
+                                            <t t-esc="document.name"/>
+                                        </a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
 </odoo>

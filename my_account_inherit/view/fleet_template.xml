@@ -4,7 +4,8 @@
         id="portal_layout"
         name="Portal layout: fleet menu entry"
         inherit_id="portal.portal_breadcrumbs"
-        priority="50">
+        priority="50"
+    >
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li
                 t-if="page_name == 'fleet' or fleet"
@@ -243,23 +244,4 @@
             </form>
         </t>
     </template>
- <template id="client_portal_my_documents" name="Portal My Home : document entries" inherit_id="portal.portal_my_home" priority="40">
-        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-if="document_count">
-                <div class="o_portal_docs_entry">
-                    <div class="o_portal_docs_entry_title">Mes Documents</div>
-                    <div class="o_portal_docs_entry_count">
-                        <a t-att-href="'/my/documents'">Voir mes documents</a>
-                        <span><t t-esc="document_count"/></span>
-                    </div>
-                </div>
-            </t>
-            <form method="POST" t-attf-action="/new/document">
-                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                <!-- Votre formulaire pour créer un nouveau document -->
-            </form>
-        </xpath>
-    </template>
-
-
 </odoo>

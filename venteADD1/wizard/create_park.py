@@ -226,8 +226,8 @@ class CreatParkWizard(models.Model):
                      print("list_lot_id", list_lot_id)
                      print("list_record", list_record)           
                  print(list_numer_serie)
-                
-
+                 self.devis_dossier.date_instalation_park = date.today()
+                 self.devis_dossier.date_last_cout_update_vrai = date.today()               
                  if rec.product_id.parc_ok:
                      self.devis_dossier.date_instalation_park = date.today()
                      

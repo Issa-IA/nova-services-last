@@ -229,6 +229,8 @@ class CreatParkWizard(models.Model):
                 
 
                  if rec.product_id.parc_ok:
+                     self.devis_dossier.date_instalation_park = date.today()
+                     
                      if self.devis_dossier.sale_leaser:
                          sale_leaser = self.devis_dossier.sale_leaser.id
                      else:

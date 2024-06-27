@@ -321,6 +321,13 @@ class SaleOrderHerit(models.Model):
     def set_actuel_signe_nb(self):
         for rec in self:
             rec.sale_cout_actuel_nb = rec.sale_cout_signe_nb
+            sale_a_cree_bon_commande=self.env['sale.order'].search([('sale_park','=',True)])
+            for sale in sale_a_cree_bon_commande:
+                sale.sale_cout_actuel_nb = sale.sale_cout_signe_nb
+                sale.sale_cout_actuel_col = sale.sale_cout_signe_col
+                sale.sale_forfait_actuel_nb = sale.sale_forfait_signe_nb
+                sale.sale_forfait_actuel_col = sale.sale_forfait_signe_col
+                sale.sale_abonnement_service_actuel = sale.sale_abonnement_service
 
     @api.onchange("sale_cout_signe_nb","sale_cout_actuel_nb")
     def ecart_actuel_signe_nb(self):

@@ -311,6 +311,8 @@ class SaleOrderHerit(models.Model):
 
     #########  Maintenance page
     # group 1
+    date_last_cout_update_vrai   = fields.Date("Date de dernier mise à jour des couts",default=date.today())
+    date_instalation_park   = fields.Date("Date d'instalation du Park",default=date.today())
     sale_cout_signe_nb = fields.Float(string="Cout copie Signé ",digits=(16, 4))
     sale_cout_actuel_nb = fields.Float(string="Cout copie Actuel ",digits=(16, 4))
     sale_cout_actuel_signe_nb = fields.Float(compute="ecart_actuel_signe_nb",string="Ecart Actuel/Signé",digits=(16, 4))

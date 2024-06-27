@@ -70,6 +70,8 @@
 
                         </group>
                         <group name="order_details_1">
+                            <field name="date_last_cout_update_vrai" invisible="1" /> 
+                            <field name="date_instalation_park" invisible="1"/>     
                             <field name="sale_date_traitement" />                               
                             <field name="partner_invoice_id" string="Organisme de facturation" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}" options="{&quot;always_reload&quot;: True}"/>
                             <label for="street_client" string="adress" style="color:white;"/>

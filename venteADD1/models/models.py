@@ -316,44 +316,69 @@ class SaleOrderHerit(models.Model):
     sale_cout_signe_nb = fields.Float(string="Cout copie Signé ",digits=(16, 4))
     sale_cout_actuel_nb = fields.Float(string="Cout copie Actuel ",digits=(16, 4))
     sale_cout_actuel_signe_nb = fields.Float(compute="ecart_actuel_signe_nb",string="Ecart Actuel/Signé",digits=(16, 4))
+    
+    @api.onchange("sale_cout_signe_nb")
+    def set_actuel_signe_nb(self):
+        for rec in self:
+            rec.sale_cout_actuel_nb = rec.sale_cout_signe_nb
 
     @api.onchange("sale_cout_signe_nb","sale_cout_actuel_nb")
     def ecart_actuel_signe_nb(self):
         for rec in self:
-            rec.sale_cout_actuel_signe_nb = rec.sale_cout_signe_nb-rec.sale_cout_actuel_nb
+            rec.sale_cout_actuel_signe_nb = rec.sale_cout_actuel_nb-rec.sale_cout_signe_nb
 
     sale_cout_signe_col = fields.Float(string="Coleur: ",digits=(16, 4))
     sale_cout_actuel_col = fields.Float(string="Coleur: ",digits=(16, 4))
     sale_cout_actuel_signe_col = fields.Float(compute="ecart_actuel_signe_col",string="Coleur: ",digits=(16, 4))
+    
+    @api.onchange("sale_cout_signe_col")
+    def set_actuel_signe_col(self):
+        for rec in self:
+            rec.sale_cout_actuel_col = rec.sale_cout_signe_col
 
     @api.onchange("sale_cout_signe_col", "sale_cout_actuel_col")
     def ecart_actuel_signe_col(self):
         for rec in self:
-            rec.sale_cout_actuel_signe_col = rec.sale_cout_signe_col - rec.sale_cout_actuel_col
+            rec.sale_cout_actuel_signe_col =  rec.sale_cout_actuel_col-rec.sale_cout_signe_col 
     # group 2
     sale_forfait_signe_nb = fields.Integer(string="Forfait copie Signé")
     sale_forfait_actuel_nb = fields.Integer(string="Forfait copie Actuel")
     sale_forfait_actuel_signe_nb = fields.Integer(compute="ecart_forfait_actuel_signe_nb",string="Ecart Actuel/Signé")
     sale_char = fields.Char(default="€", readonly=True)
 
+    @api.onchange("sale_forfait_signe_nb")
+    def set_actuel_forfait_signe_nb(self):
+        for rec in self:
+            rec.sale_forfait_actuel_nb = rec.sale_forfait_signe_nb
+
 
     @api.onchange("sale_forfait_signe_nb", "sale_forfait_actuel_nb")
     def ecart_forfait_actuel_signe_nb(self):
         for rec in self:
-            rec.sale_forfait_actuel_signe_nb = rec.sale_forfait_signe_nb - rec.sale_forfait_actuel_nb
+            rec.sale_forfait_actuel_signe_nb = rec.sale_forfait_actuel_nb-rec.sale_forfait_signe_nb 
 
     sale_forfait_signe_col = fields.Integer(string="Couleur: ")
     sale_forfait_actuel_col = fields.Integer(string="Couleur: ")
     sale_forfait_actuel_signe_col = fields.Integer(compute="ecart_forfait_actuel_signe_col",string="Couleur: ")
 
+    @api.onchange("sale_forfait_signe_col")
+    def set_actuel_forfait_signe_col(self):
+        for rec in self:
+            rec.sale_forfait_actuel_col = rec.sale_forfait_signe_col
+
     @api.onchange("sale_forfait_signe_col", "sale_forfait_actuel_col")
     def ecart_forfait_actuel_signe_col(self):
         for rec in self:
-            rec.sale_forfait_actuel_signe_col = rec.sale_forfait_signe_col - rec.sale_forfait_actuel_col
+            rec.sale_forfait_actuel_signe_col =  rec.sale_forfait_actuel_col-rec.sale_forfait_signe_col
     # group 3
     sale_abonnement_service = fields.Monetary(string="Abonnement Service Signé")
     sale_abonnement_service_actuel = fields.Monetary(string="Abonnement Service Actuel")
     sale_abonnement_actuel_signe = fields.Float(string="Ecart Actuel/Signé", compute="ecart_abonnement_actuel_signe_col")
+
+    @api.onchange("sale_abonnement_service")
+    def set_actuel_abonnement_service_actuel(self):
+        for rec in self:
+            rec.sale_abonnement_service_actuel = rec.sale_abonnement_service
     
     @api.onchange("sale_abonnement_service", "sale_abonnement_service_actuel")
     def ecart_abonnement_actuel_signe_col(self):

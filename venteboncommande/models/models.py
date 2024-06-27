@@ -6,6 +6,13 @@ class SaleMoveHeritbondecommande(models.Model):
     _inherit = 'sale.order'
     def curboncommande(self):
         sale_a_cree_bon_commande =  self.env['sale.order'].search([('sale_park','=',True)])
+
+        for sale_bon_commande in sale_a_cree_bon_commande:
+            if sale_bon_commande.partner_id.augmentation_sav_bool == True:
+                if sale_bon_commande.date_last_cout_update_vrai + relativedelta(years=1) <= date.today()+relativedelta(days=1):
+                    sale_bon_commande.sale_cout_actuel_nb = sale_bon_commande.sale_cout_actuel_nb + sale_bon_commande.sale_cout_actuel_nb*sale_bon_commande.partner_id.augmentation_sav
+                    sale_bon_commande.sale_cout_actuel_col = sale_bon_commande.sale_cout_signe_col + sale_bon_commande.sale_cout_signe_col*sale_bon_commande.partner_id.augmentation_sav
+                    sale_bon_commande.date_last_cout_update_vrai = sale_bon_commande.date_last_cout_update_vrai + relativedelta(years=1)
         for sale_bon_commande in sale_a_cree_bon_commande:
             if sale_bon_commande.sale_date_de_fin_contrat:
                 if sale_bon_commande.sale_date_Facture:

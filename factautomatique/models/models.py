@@ -127,7 +127,7 @@ class factAuto(models.Model):
                             'product_id': j[0].cout_copie_coleurs.id,
                             'name': j[0].cout_copie_coleurs.name,
                             'price_unit': cout_copie_coluer,
-                            'product_uom_qty': j[0].sale_forfait_signe_col,
+                            'product_uom_qty': j[0].sale_forfait_actuel_col,
                         }
                         self.env['sale.order.line'].sudo().create(res)
 
@@ -138,7 +138,7 @@ class factAuto(models.Model):
                             'product_id': j[0].cout_copie_noires.id,
                             'name': j[0].cout_copie_noires.name,
                             'price_unit': cout_copie_noir,
-                            'product_uom_qty':j[0].sale_forfait_signe_nb ,
+                            'product_uom_qty':j[0].sale_forfait_actuel_nb ,
                         }
                         self.env['sale.order.line'].sudo().create(res)
 
@@ -307,7 +307,7 @@ class factAuto(models.Model):
                             'product_id': j[0].cout_copie_coleurs.id,
                             'name': j[0].cout_copie_coleurs.name,
                             'price_unit': cout_copie_coluer,
-                            'product_uom_qty': j[0].sale_forfait_signe_col,
+                            'product_uom_qty': j[0].sale_forfait_actuel_col,
                         }
                         self.env['sale.order.line'].sudo().create(res)
 
@@ -318,7 +318,7 @@ class factAuto(models.Model):
                             'product_id': j[0].cout_copie_noires.id,
                             'name': j[0].cout_copie_noires.name,
                             'price_unit': cout_copie_noir,
-                            'product_uom_qty': j[0].sale_forfait_signe_nb,
+                            'product_uom_qty': j[0].sale_forfait_actuel_nb,
                         }
                         self.env['sale.order.line'].sudo().create(res)
 

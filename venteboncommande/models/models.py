@@ -41,18 +41,8 @@ class SaleMoveHeritbondecommande(models.Model):
                                         'name': "Dossier N°" + str(sale_bon_commande.sale_dossier),
                                     }
                                     self.env['sale.order.line'].sudo().create(res)
-                                    if sale_bon_commande.partner_id.augmentation_sav_bool == True:
-                                        date_inst = date.today()
-                                        for fleet in sale_bon_commande.sale_parc_ids:
-                                            if fleet.fleet_date_inst:
-                                                date_inst = fleet.fleet_date_inst
-                                        number_of_days = (date.today() - date_inst).days
-                                        augmentation = int(number_of_days / 365)
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col*(1+sale_bon_commande.partner_id.augmentation_sav)**augmentation
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb*(1+  sale_bon_commande.partner_id.augmentation_sav)**augmentation
-                                    else:
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb
+                                    cout_copie_coluer = sale_bon_commande.sale_cout_actuel_col
+                                    cout_copie_noir = sale_bon_commande.sale_cout_actuel_nb
                                     check = False
                                     if sale_bon_commande.sale_forfait_signe_col:
                                         check = True
@@ -172,18 +162,8 @@ class SaleMoveHeritbondecommande(models.Model):
                                         'name': "Dossier N°" + str(sale_bon_commande.sale_dossier),
                                     }
                                     self.env['sale.order.line'].sudo().create(res)
-                                    if sale_bon_commande.partner_id.augmentation_sav_bool == True:
-                                        date_inst = date.today()
-                                        for fleet in sale_bon_commande.sale_parc_ids:
-                                            if fleet.fleet_date_inst:
-                                                date_inst = fleet.fleet_date_inst
-                                        number_of_days = (date.today() - date_inst).days
-                                        augmentation = int(number_of_days / 365)
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col*(1+sale_bon_commande.partner_id.augmentation_sav)**augmentation
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb*(1+  sale_bon_commande.partner_id.augmentation_sav)**augmentation
-                                    else:
-                                        cout_copie_coluer = sale_bon_commande.sale_cout_signe_col
-                                        cout_copie_noir = sale_bon_commande.sale_cout_signe_nb
+                                    cout_copie_coluer = sale_bon_commande.sale_cout_actuel_col
+                                    cout_copie_noir = sale_bon_commande.sale_cout_actuel_nb
                                     check = False
                                     if sale_bon_commande.sale_forfait_signe_col:
                                         check = True

@@ -116,14 +116,8 @@ class factAuto(models.Model):
 
 
                 if purchase_id:
-                    if i[0].augmentation_sav_bool == True:
-                        number_of_days = (date.today() - j[1][0].fleet_date_inst).days
-                        augmentation = int(number_of_days / 365)
-                        cout_copie_coluer = j[0].sale_cout_signe_col*(1 + i[0].augmentation_sav)**augmentation
-                        cout_copie_noir = j[0].sale_cout_signe_nb*(1 + i[0].augmentation_sav)**augmentation
-                    else:
-                        cout_copie_coluer = j[0].sale_cout_signe_col
-                        cout_copie_noir = j[0].sale_cout_signe_nb
+                    cout_copie_coluer = j[0].sale_cout_actuel_col
+                    cout_copie_noir = j[0].sale_cout_actuel_nb
 
 
                     if j[0].sale_forfait_signe_col:
@@ -221,7 +215,7 @@ class factAuto(models.Model):
                             'order_id': purchase_id,
                             'product_id': j[0].Frais_loyer.id,
                             'name': j[0].Frais_loyer.name,
-                            'price_unit': j[0].Frais_loyer,
+                            'price_unit': j[0].sale_loyer_fact,
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res) 
@@ -302,14 +296,8 @@ class factAuto(models.Model):
 
 
                 if purchase_id:
-                    if i[0].augmentation_sav_bool == True:
-                        number_of_days = (date.today() - j[1][0].fleet_date_inst).days
-                        augmentation = int(number_of_days/365)
-                        cout_copie_coluer = j[0].sale_cout_signe_col*(1 + i[0].augmentation_sav)**augmentation
-                        cout_copie_noir = j[0].sale_cout_signe_nb*(1 + i[0].augmentation_sav)**augmentation
-                    else:
-                        cout_copie_coluer = j[0].sale_cout_signe_col
-                        cout_copie_noir = j[0].sale_cout_signe_nb
+                    cout_copie_coluer = j[0].sale_cout_actuel_col
+                    cout_copie_noir = j[0].sale_cout_actuel_nb
 
 
                     if j[0].sale_forfait_signe_col:
@@ -407,7 +395,7 @@ class factAuto(models.Model):
                             'order_id': purchase_id,
                             'product_id': j[0].Frais_loyer.id,
                             'name': j[0].Frais_loyer.name,
-                            'price_unit': j[0].Frais_loyer,
+                            'price_unit': j[0].sale_loyer_fact,
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res) 

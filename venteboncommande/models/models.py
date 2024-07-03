@@ -52,7 +52,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             'product_id': sale_bon_commande.cout_copie_coleurs.id,
                                             'name': sale_bon_commande.cout_copie_coleurs.name,
                                             'price_unit': cout_copie_coluer,
-                                            'product_uom_qty': sale_bon_commande.sale_forfait_signe_col,
+                                            'product_uom_qty': sale_bon_commande.sale_forfait_actuel_col,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
@@ -64,7 +64,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             'product_id': sale_bon_commande.cout_copie_noires.id,
                                             'name': sale_bon_commande.cout_copie_noires.name,
                                             'price_unit': cout_copie_noir,
-                                            'product_uom_qty': sale_bon_commande.sale_forfait_signe_nb,
+                                            'product_uom_qty': sale_bon_commande.sale_forfait_actuel_nb,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
@@ -173,7 +173,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             'product_id': sale_bon_commande.cout_copie_coleurs.id,
                                             'name': sale_bon_commande.cout_copie_coleurs.name,
                                             'price_unit': cout_copie_coluer,
-                                            'product_uom_qty': sale_bon_commande.sale_forfait_signe_col,
+                                            'product_uom_qty': sale_bon_commande.sale_forfait_actuel_col,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
@@ -185,7 +185,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             'product_id': sale_bon_commande.cout_copie_noires.id,
                                             'name': sale_bon_commande.cout_copie_noires.name,
                                             'price_unit': cout_copie_noir,
-                                            'product_uom_qty': sale_bon_commande.sale_forfait_signe_nb,
+                                            'product_uom_qty': sale_bon_commande.sale_forfait_actuel_nb,
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 

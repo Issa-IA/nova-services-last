@@ -320,16 +320,13 @@ class SaleOrderHerit(models.Model):
     @api.onchange("sale_cout_signe_nb")
     def set_actuel_signe_nb(self):
         for rec in self:
-            rec.sale_cout_actuel_nb = rec.sale_cout_signe_nb
+            rec.sale_cout_actuel_nb = rec.sale_cout_signe_nb          
             
 
-    @api.onchange("sale_forfait_signe_nb", "sale_forfait_actuel_nb")
-    def ecart_forfait_actuel_signe_nb(self):
+    @api.onchange("sale_cout_signe_nb","sale_cout_actuel_nb")
+    def ecart_actuel_signe_nb(self):
         for rec in self:
-            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
-            rec.sale_forfait_actuel_signe_nb = rec.sale_forfait_actuel_nb-rec.sale_forfait_signe_nb 
-            for par in order_count:
-                par.fleet_forfait_nb = rec.sale_forfait_actuel_nb
+            rec.sale_cout_actuel_signe_nb = rec.sale_cout_actuel_nb-rec.sale_cout_signe_nb
 
     sale_cout_signe_col = fields.Float(string="Coleur: ",digits=(16, 4))
     sale_cout_actuel_col = fields.Float(string="Coleur: ",digits=(16, 4))
@@ -340,13 +337,10 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             rec.sale_cout_actuel_col = rec.sale_cout_signe_col
 
-    @api.onchange("sale_forfait_signe_col", "sale_forfait_actuel_col")
-    def ecart_forfait_actuel_signe_col(self):        
+    @api.onchange("sale_cout_signe_col", "sale_cout_actuel_col")
+    def ecart_actuel_signe_col(self):
         for rec in self:
-            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
-            rec.sale_forfait_actuel_signe_col =  rec.sale_forfait_actuel_col-rec.sale_forfait_signe_col
-            for par in order_count:
-                par.fleet_forfait_couleur = rec.sale_forfait_actuel_col 
+            rec.sale_cout_actuel_signe_col =  rec.sale_cout_actuel_col-rec.sale_cout_signe_col  
     # group 2
     sale_forfait_signe_nb = fields.Integer(string="Forfait copie Signé")
     sale_forfait_actuel_nb = fields.Integer(string="Forfait copie Actuel")
@@ -356,13 +350,16 @@ class SaleOrderHerit(models.Model):
     @api.onchange("sale_forfait_signe_nb")
     def set_actuel_forfait_signe_nb(self):
         for rec in self:
-            rec.sale_forfait_actuel_nb = rec.sale_forfait_signe_nb
+            rec.sale_forfait_actuel_nb = rec.sale_forfait_signe_nb  
 
 
     @api.onchange("sale_forfait_signe_nb", "sale_forfait_actuel_nb")
     def ecart_forfait_actuel_signe_nb(self):
         for rec in self:
+            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
             rec.sale_forfait_actuel_signe_nb = rec.sale_forfait_actuel_nb-rec.sale_forfait_signe_nb 
+            for par in order_count:
+                par.fleet_forfait_nb = rec.sale_forfait_actuel_nb 
 
     sale_forfait_signe_col = fields.Integer(string="Couleur: ")
     sale_forfait_actuel_col = fields.Integer(string="Couleur: ")
@@ -374,9 +371,12 @@ class SaleOrderHerit(models.Model):
             rec.sale_forfait_actuel_col = rec.sale_forfait_signe_col
 
     @api.onchange("sale_forfait_signe_col", "sale_forfait_actuel_col")
-    def ecart_forfait_actuel_signe_col(self):
+    def ecart_forfait_actuel_signe_col(self):        
         for rec in self:
+            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
             rec.sale_forfait_actuel_signe_col =  rec.sale_forfait_actuel_col-rec.sale_forfait_signe_col
+            for par in order_count:
+                par.fleet_forfait_couleur = rec.sale_forfait_actuel_col
     # group 3
     sale_abonnement_service = fields.Monetary(string="Abonnement Service Signé")
     sale_abonnement_service_actuel = fields.Monetary(string="Abonnement Service Actuel")

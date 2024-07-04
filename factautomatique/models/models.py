@@ -194,7 +194,7 @@ class factAuto(models.Model):
                             'order_id': purchase_id,
                             'product_id': j[0].abonnements.id,
                             'name': j[0].abonnements.name,
-                            'price_unit': j[0].sale_abonnement_service,
+                            'price_unit': j[0].sale_abonnement_service_actuel,
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res)
@@ -374,7 +374,7 @@ class factAuto(models.Model):
                             'order_id': purchase_id,
                             'product_id': j[0].abonnements.id,
                             'name': j[0].abonnements.name,
-                            'price_unit': j[0].sale_abonnement_service,
+                            'price_unit': j[0].sale_abonnement_service_actuel,
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res)

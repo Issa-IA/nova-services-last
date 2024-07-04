@@ -390,9 +390,21 @@ class SaleOrderHerit(models.Model):
     @api.onchange("sale_abonnement_service", "sale_abonnement_service_actuel")
     def ecart_abonnement_actuel_signe_col(self):
         for rec in self:
-            rec.sale_abonnement_actuel_signe = rec.sale_abonnement_service - rec.sale_abonnement_service_actuel
+            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
+            rec.sale_abonnement_actuel_signe =  rec.sale_abonnement_service_actuel-rec.sale_abonnement_service 
+            for par in order_count:
+                par.fleet_abonnement_service = rec.sale_abonnement_service_actuel
     
     sale_autre_frais        = fields.Monetary(string="Autre frais")
+    @api.onchange("sale_autre_frais")
+    def set_sale_autre_frai_(self):
+        for rec in self:
+            order_count = self.env['fleet.vehicle'].search([('fleet_devis_id', '=', rec.id)])
+            for par in order_count:
+                par.fleet_autre = rec.sale_autre_frais
+            
+
+    
     sale_loyer_fact   = fields.Monetary(string="Loyer interne")
     
     sale_pfr_fournissuer   = fields.Monetary(string="PFR", compute="compute_pfr_fournisseur")    

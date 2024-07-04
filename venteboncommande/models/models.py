@@ -102,7 +102,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.abonnements.id,
                                                 'name': sale_bon_commande.abonnements.name,
-                                                'price_unit': sale_bon_commande.sale_abonnement_service,
+                                                'price_unit': sale_bon_commande.sale_abonnement_service_actuel,
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
@@ -221,7 +221,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'order_id': purchase_id,
                                                 'product_id': sale_bon_commande.abonnements.id,
                                                 'name': sale_bon_commande.abonnements.name,
-                                                'price_unit': sale_bon_commande.sale_abonnement_service,
+                                                'price_unit': sale_bon_commande.sale_abonnement_service_actuel,
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)

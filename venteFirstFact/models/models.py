@@ -39,7 +39,7 @@ class SaleMoveHeritfacturation(models.Model):
                                         'move_type': 'out_invoice',
                                         'invoice_origin': sale.name,
                                         'invoice_user_id': sale.user_id.id,
-                                        'partner_id': sale.partner_invoice_id.id,
+                                        'partner_id': sale.partner_id.id,
                                         'invoice_line_ids': invoice_lines,
                                         'acount_maintnance': True,
                                     })

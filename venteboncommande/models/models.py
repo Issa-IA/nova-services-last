@@ -43,9 +43,9 @@ class SaleMoveHeritbondecommande(models.Model):
                                     self.env['sale.order.line'].sudo().create(res)
                                     cout_copie_coluer = sale_bon_commande.sale_cout_actuel_col
                                     cout_copie_noir = sale_bon_commande.sale_cout_actuel_nb
-                                    check = False
-                                    if sale_bon_commande.sale_forfait_signe_col:
-                                        check = True
+                                    
+                                    if sale_bon_commande.sale_forfait_actuel_col:
+                                        
                                         res = {
                                             'tax_id':sale_bon_commande.cout_copie_coleurs.taxes_id,
                                             'order_id': purchase_id,
@@ -56,8 +56,8 @@ class SaleMoveHeritbondecommande(models.Model):
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
-                                    if sale_bon_commande.sale_forfait_signe_nb:
-                                        check = True
+                                    if sale_bon_commande.sale_forfait_actuel_nb:
+                                        
                                         res = {
                                             'tax_id':sale_bon_commande.cout_copie_noires.taxes_id,
                                             'order_id': purchase_id,
@@ -68,35 +68,10 @@ class SaleMoveHeritbondecommande(models.Model):
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
-                                    if check ==  False:
-                                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
+                                    
+                                    
 
-                                        res = {
-                                                'tax_id':sale_bon_commande.cout_copie_coleurs_sup.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
-                                                'name': sale_bon_commande.cout_copie_coleurs_sup.name,
-                                                'price_unit': cout_copie_coluer_sup,
-                                                'product_uom_qty': 0,
-                                        }
-                                        self.env['sale.order.line'].sudo().create(res)
-                                        
-                                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*sale_bon_commande.sale_cout_sup_pourcent
-
-
-                                        res = {
-                                                'tax_id':sale_bon_commande.cout_copie_noires_sup.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': sale_bon_commande.cout_copie_noires_sup.id,
-                                                'name': sale_bon_commande.cout_copie_noires_sup.name,
-                                                'price_unit': cout_copie_noir_sup,
-                                                'product_uom_qty': 0,
-                                        }
-                                        self.env['sale.order.line'].sudo().create(res)
-
-                                    if check:
-
-                                        if sale_bon_commande.sale_abonnement_service:
+                                    if sale_bon_commande.sale_abonnement_service:
                                             res = {
                                                 'tax_id':sale_bon_commande.abonnements.taxes_id,
                                                 'order_id': purchase_id,
@@ -107,7 +82,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
 
-                                        if sale_bon_commande.sale_autre_frais:
+                                    if sale_bon_commande.sale_autre_frais:
                                             res = {
                                                 'tax_id':sale_bon_commande.services.taxes_id,
                                                 'order_id': purchase_id,
@@ -117,7 +92,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
-                                        if sale_bon_commande.sale_loyer_fact:
+                                    if sale_bon_commande.sale_loyer_fact:
                                             res = {
                                                 'tax_id':sale_bon_commande.Frais_loyer.taxes_id,
                                                 'order_id': purchase_id,
@@ -127,7 +102,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
-                                        if sale_bon_commande.sale_pfr_fournissuer:
+                                    if sale_bon_commande.sale_pfr_fournissuer:
                                             res = {
                                                 'tax_id':sale_bon_commande.pfr_fournisseur.taxes_id,
                                                 'order_id': purchase_id,
@@ -164,9 +139,9 @@ class SaleMoveHeritbondecommande(models.Model):
                                     self.env['sale.order.line'].sudo().create(res)
                                     cout_copie_coluer = sale_bon_commande.sale_cout_actuel_col
                                     cout_copie_noir = sale_bon_commande.sale_cout_actuel_nb
-                                    check = False
-                                    if sale_bon_commande.sale_forfait_signe_col:
-                                        check = True
+                                    
+                                    if sale_bon_commande.sale_forfait_actuel_col:
+                                        
                                         res = {
                                             'tax_id':sale_bon_commande.cout_copie_coleurs.taxes_id,
                                             'order_id': purchase_id,
@@ -177,8 +152,8 @@ class SaleMoveHeritbondecommande(models.Model):
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
-                                    if sale_bon_commande.sale_forfait_signe_nb:
-                                        check = True
+                                    if sale_bon_commande.sale_forfait_actuel_nb:
+                                        
                                         res = {
                                             'tax_id':sale_bon_commande.cout_copie_noires.taxes_id,
                                             'order_id': purchase_id,
@@ -189,33 +164,10 @@ class SaleMoveHeritbondecommande(models.Model):
                                         }
                                         self.env['sale.order.line'].sudo().create(res)
 
-                                    if check ==  False:
-                                        cout_copie_coluer_sup = cout_copie_coluer +   cout_copie_coluer*sale_bon_commande.sale_cout_sup_pourcent
+                                    
 
-                                        res = {
-                                                'tax_id':sale_bon_commande.cout_copie_coleurs_sup.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': sale_bon_commande.cout_copie_coleurs_sup.id,
-                                                'name': sale_bon_commande.cout_copie_coleurs_sup.name,
-                                                'price_unit': cout_copie_coluer_sup,
-                                                'product_uom_qty': 0,
-                                        }
-                                        self.env['sale.order.line'].sudo().create(res)
-                                        
-                                        cout_copie_noir_sup = cout_copie_noir +   cout_copie_noir*sale_bon_commande.sale_cout_sup_pourcent
-
-                                        res = {
-                                                'tax_id':sale_bon_commande.cout_copie_noires_sup.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': sale_bon_commande.cout_copie_noires_sup.id,
-                                                'name': sale_bon_commande.cout_copie_noires_sup.name,
-                                                'price_unit': cout_copie_noir_sup,
-                                                'product_uom_qty': 0,
-                                        }
-                                        self.env['sale.order.line'].sudo().create(res)
-
-                                    if check:
-                                        if sale_bon_commande.sale_abonnement_service:
+                                    
+                                    if sale_bon_commande.sale_abonnement_service:
                                             res = {
                                                 'tax_id':sale_bon_commande.abonnements.taxes_id,
                                                 'order_id': purchase_id,
@@ -226,7 +178,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
 
-                                        if sale_bon_commande.sale_autre_frais:
+                                    if sale_bon_commande.sale_autre_frais:
                                             res = {
                                                 'tax_id':sale_bon_commande.services.taxes_id,
                                                 'order_id': purchase_id,
@@ -236,7 +188,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
-                                        if sale_bon_commande.sale_loyer_fact:
+                                    if sale_bon_commande.sale_loyer_fact:
                                             res = {
                                                 'tax_id':sale_bon_commande.Frais_loyer.taxes_id,
                                                 'order_id': purchase_id,
@@ -247,7 +199,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
                                             
-                                        if sale_bon_commande.sale_pfr_fournissuer:
+                                    if sale_bon_commande.sale_pfr_fournissuer:
                                             res = {
                                                 'tax_id':sale_bon_commande.pfr_fournisseur.taxes_id,
                                                 'order_id': purchase_id,

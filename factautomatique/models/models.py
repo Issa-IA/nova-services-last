@@ -28,12 +28,13 @@ class factAuto(models.Model):
                             if fleet.state_id.id != id and fleet.fleet_date_inst <= date.today() <= fleet.fleet_expiration_date+ relativedelta(days=1) :
                                 list_fleet_non_active.append(fleet)
 
-                if list_fleet != []:
-                    list_vente[vente] = list_fleet
-                    vente.devis_a_cree_commande = False
                 if list_fleet_non_active != []:
                     vente.devis_a_cree_commande = True
                     list_vente_non_active[vente] = list_fleet_non_active
+                if list_fleet != []:
+                    list_vente[vente] = list_fleet
+                    vente.devis_a_cree_commande = False
+                
 
 
 

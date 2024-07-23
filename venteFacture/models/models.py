@@ -8,8 +8,7 @@ class SaleMoveHeritfacture(models.Model):
     def curDate(self):
         sale_facture_date= self.env['sale.order'].search([('sale_park','=',True)])
         print(sale_facture_date)
-        for sale_fact in sale_facture_date:
-            if sale_fact.partner_id.type_facture == 'par_dossier':
+        for sale_fact in sale_facture_date:            
                 if sale_fact.sale_date_Facture:
                     if sale_fact.sale_periode:
                         if sale_fact.sale_periode ==1:

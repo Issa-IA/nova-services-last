@@ -32,6 +32,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         'state': 'sale',
                                         'sale_maintnance': True,
                                         'sale_not_update_bon_commande': True,
+                                        'sale_connect':sale_bon_commande.id,
                                     }
                                     purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
                                     purchase_id = purchase_id1.id
@@ -112,6 +113,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
+                                    sale_bon_commande.devis_a_cree_commande = False
                                         
                         if sale_bon_commande.sale_periode == 3:
                             if sale_bon_commande.sale_date_Facture + relativedelta(months=3)-relativedelta(days=1) <= date.today() and sale_bon_commande.sale_date_Facture <=sale_bon_commande.sale_date_de_fin_contrat:
@@ -128,6 +130,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         'state': 'sale',
                                         'sale_maintnance': True,
                                         'sale_not_update_bon_commande': True,
+                                        'sale_connect':sale_bon_commande.id,
                                     }
                                     purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
                                     purchase_id = purchase_id1.id
@@ -209,6 +212,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                                 'product_uom_qty': '1',
                                             }
                                             self.env['sale.order.line'].sudo().create(res)
+                                    sale_bon_commande.devis_a_cree_commande = False
 
 
 

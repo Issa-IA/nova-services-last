@@ -16,6 +16,7 @@ class factAuto(models.Model):
             for vente in rec.sale_order_ids:
                 list_fleet = []
                 list_fleet_non_active = []
+                vente.devis_a_cree_commande = False
                 for fleet in vente.sale_parc_ids:
                     id = self.env['fleet.vehicle.state'].search([('name', '=', "Inactif")])[0].id
                     if fleet.etat_serie == 'a_jour':

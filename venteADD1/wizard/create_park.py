@@ -38,9 +38,10 @@ class CreatParkWizard(models.Model):
     devis_dossier = fields.Many2one( "sale.order",string='Numéro de dossier')
 
     def create_parck(self):
-        if self.devis_dossier:
-            self.devis_dossier.sale_date_Facture = date.today()
+        if self.devis_dossier:            
             self.devis_dossier.sale_park = True
+            if not self.devis_dossier.sale_date_Facture:
+                self.devis_dossier.sale_date_Facture = date.today()
             if self.devis_dossier.sale_periodicite == 'mens':
                 self.devis_dossier.sale_periode = 1
             if self.devis_dossier.sale_periodicite == 'trim':
@@ -168,6 +169,7 @@ class CreatParkWizard(models.Model):
                                             }
                                             invoice_lines.append((0, 0, vals))
                                     self.env['account.move'].create({
+                                        'invoice_date': self.devis_dossier.sale_date_Facture,
                                         'ref': sale.client_order_ref,
                                         'move_type': 'out_invoice',
                                         'invoice_origin': sale.name,

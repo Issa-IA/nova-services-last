@@ -95,6 +95,8 @@ class factAuto(models.Model):
                 qte_by_dossier_sup_noir = 0
                 qte_by_dossier_abonnement_service = 0
                 qte_by_dossier_autre = 0
+                qte_by_dossier_diff_col = 0
+                qte_by_dossier_diff_noir = 0
 
 
                 for k in j[1]:
@@ -113,8 +115,19 @@ class factAuto(models.Model):
                     qte_by_dossier_forfait_noir += k.fleet_forfait_nb
                     qte_by_dossier_abonnement_service += k.fleet_abonnement_service
                     qte_by_dossier_autre += k.fleet_autre
-                    qte_by_dossier_sup_coleur += k.couleur_supp
-                    qte_by_dossier_sup_noir += k.noir_supp
+                    #qte_by_dossier_sup_coleur += k.couleur_supp
+                    #qte_by_dossier_sup_noir += k.noir_supp
+                    qte_by_dossier_diff_col += k.comp_couleur_diff
+                    qte_by_dossier_diff_noir += k.comp_noir_diff
+                    
+                if qte_by_dossier_diff_col-j[0].sale_forfait_actuel_col > 0:
+                    qte_by_dossier_sup_coleur =  qte_by_dossier_diff_col-j[0].sale_forfait_actuel_col
+                else:
+                    qte_by_dossier_sup_coleur = 0
+                if qte_by_dossier_diff_noir - j[0].sale_forfait_actuel_nb >0:
+                    qte_by_dossier_sup_noir = qte_by_dossier_diff_noir - j[0].sale_forfait_actuel_nb
+                else:
+                    qte_by_dossier_sup_noir = 0
 
 
 
@@ -266,6 +279,8 @@ class factAuto(models.Model):
                 qte_by_dossier_sup_noir = 0
                 qte_by_dossier_abonnement_service = 0
                 qte_by_dossier_autre = 0
+                qte_by_dossier_diff_col = 0
+                qte_by_dossier_diff_noir = 0
 
 
                 for k in j[1]:
@@ -285,8 +300,19 @@ class factAuto(models.Model):
                     qte_by_dossier_forfait_noir += k.fleet_forfait_nb
                     qte_by_dossier_abonnement_service += k.fleet_abonnement_service
                     qte_by_dossier_autre += k.fleet_autre
-                    qte_by_dossier_sup_coleur += k.couleur_supp
-                    qte_by_dossier_sup_noir += k.noir_supp
+                    #qte_by_dossier_sup_coleur += k.couleur_supp
+                    #qte_by_dossier_sup_noir += k.noir_supp
+                    qte_by_dossier_diff_col += k.comp_couleur_diff
+                    qte_by_dossier_diff_noir += k.comp_noir_diff
+                    
+                if qte_by_dossier_diff_col-j[0].sale_forfait_actuel_col > 0:
+                    qte_by_dossier_sup_coleur =  qte_by_dossier_diff_col-j[0].sale_forfait_actuel_col
+                else:
+                    qte_by_dossier_sup_coleur = 0
+                if qte_by_dossier_diff_noir - j[0].sale_forfait_actuel_nb >0:
+                    qte_by_dossier_sup_noir = qte_by_dossier_diff_noir - j[0].sale_forfait_actuel_nb
+                else:
+                    qte_by_dossier_sup_noir = 0
 
 
 

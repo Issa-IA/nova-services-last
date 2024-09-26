@@ -34,10 +34,10 @@ class PartnerModelHerit(models.Model):
         return {}
 
 
-    @api.onchange('partenariat_ids')
-    def addline(self):
-        if len(self.partenariat_ids) > 10:
-            raise  ValidationError('Vous avez dépassé la limite de 10 lignes')
+    #@api.onchange('partenariat_ids')
+    #def addline(self):
+     #  if len(self.partenariat_ids) > 10:
+      #      raise  ValidationError('Vous avez dépassé la limite de 10 lignes')
 
 
     @api.model

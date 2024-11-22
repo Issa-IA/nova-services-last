@@ -17,8 +17,9 @@ class SaleMoveHeritfacture(models.Model):
                                 
                                 sale_orders = self.env['sale.order'].search([('sale_maintnance', '=', True), ('invoice_status', '=', 'to invoice')])
 
-                                invoice_lines = []
+                                
                                 for sale in sale_orders:
+                                    invoice_lines = []
                                     if sale.sale_commande_fleet_ids:
                                         if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
 
@@ -86,8 +87,9 @@ class SaleMoveHeritfacture(models.Model):
                                 sale_orders = self.env['sale.order'].search(
                                     [('sale_maintnance', '=', True), ('invoice_status', '=', 'to invoice')])
 
-                                invoice_lines = []
+                                
                                 for sale in sale_orders:
+                                    invoice_lines = []
                                     if sale.sale_commande_fleet_ids:
                                         if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
                                             for line in sale.order_line:

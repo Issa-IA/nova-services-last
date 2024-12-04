@@ -25,7 +25,7 @@ class PartnerInvoiceHerit(models.Model):
                 rec.type_facture = "tout_dossiers"
             else:
                 rec.type_facture = 'par_dossier'
-    
+
     @api.depends('x_studio_kdfm')
     def compute_type_kdfm(self):
         for rec in self:

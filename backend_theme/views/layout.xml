@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-   
-    <template id="code_custom_layout" inherit_id="web.layout" name="Custom Layout">
-       
-    </template>
+
 </odoo>

@@ -17,10 +17,10 @@ class SaleReportHerit(models.Model):
 
     def _select_additional_fields(self):
         res = super()._select_additional_fields()
-        res['sale_marge_report'] = f"SUM(s.sale_comer) AS sale_marge_report"
-        res['sale_chifre_report'] = f"SUM(s.sale_chifre_aff) AS sale_chifre_report"
-        res['sale_contrat_report'] = f"SUM(s.sale_contrat_tot) AS sale_contrat_report"
-        res['sale_client_report'] = f"SUM(s.sale_client_tot) AS sale_client_report"
+        res['sale_marge_report'] = f"SUM(s.sale_comer)"
+        res['sale_chifre_report'] = f"SUM(s.sale_chifre_aff)"
+        res['sale_contrat_report'] = f"SUM(s.sale_contrat_tot)"
+        res['sale_client_report'] = f"SUM(s.sale_client_tot)"
         return res
 
 

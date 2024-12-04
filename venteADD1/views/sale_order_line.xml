@@ -10,7 +10,7 @@
                     name="demande_confirmer_devis"
                     string="Demande de validation"
                     type="object"
-                    attrs="{'invisible': ['|',('state', 'not in', ('draft', 'sent')),('sale_notifcation_ok','=',True)]}"
+                    invisible="state not in ['draft','sent'] or sale_notifcation_ok == True"
                     groups="droits_d_acces.group_Technicien_contact"    
                 />
             </xpath>  
@@ -65,8 +65,8 @@
                                 <field name="street_client" nolabel="1" /><br/>
                                 <field name="zip_client" nolabel="1"  />&#x2063;&#x2063; <field name="city_client" class="oe_inline"  nolabel="1"/>
                             </div>
-                             <field name="sale_type_client1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                             <field name="sale_materiels_vendu" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>  
+                             <field name="sale_type_client1" readonly="state == 'done'" />
+                             <field name="sale_materiels_vendu" readonly="state == 'done'" />
 
                         </group>
                         <group name="order_details_1">
@@ -129,7 +129,9 @@
             </xpath>
                 
             <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
-                <field name="order_line_serie" attrs="{'invisible': [('order_line_serie', '=', 'False'),('product_uom_qty', '=!', '1')]}"/>
+                <field name="order_line_serie"
+                       invisible="order_line_serie == False and product_uom_qty != 1"
+                       />
             </xpath>
 
 
@@ -161,7 +163,7 @@
             </xpath>
 
 
-            <xpath expr="//field[@name='tax_totals_json']" position="after">
+            <xpath expr="//field[@name='tax_totals']" position="after">
                 <field name="sale_marge" />
             </xpath>
 
@@ -178,35 +180,35 @@
                                 <tbody>
                                             <tr>
                                                 <td><strong>Type </strong> </td>
-                                                <td><field name="sale_type" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><field name="sale_type" nolabel="1"  readonly="state == 'done'" /> </td>
                                                 <td><strong>&#160;&#160;&#160;&#160;&#160;Durée</strong> </td>
-                                                <td><field name="sale_duree" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><field name="sale_duree" nolabel="1" readonly="state == 'done'" />   </td>
                                                 <td><strong>Periodicité</strong> </td>
-                                                <td><field name="sale_periodicite" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><field name="sale_periodicite" nolabel="1" readonly="state == 'done'" />   </td>
                                              </tr>
                                               <tr>
                                                 <td><strong>Leaser</strong> </td>
-                                                <td><field name="sale_leaser" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><field name="sale_leaser" nolabel="1" readonly="state == 'done'" /> </td>
                                                 <td><strong>&#160;&#160;&#160;&#160;&#160;N° d'accord</strong> </td>
-                                                <td><field name="sale_accord" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><field name="sale_accord" nolabel="1"  readonly="state == 'done'"/>   </td>
                                                 <td><strong>Mode de reglement</strong> </td>
-                                                <td><field name="sale_reglement" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><field name="sale_reglement" nolabel="1" readonly="state == 'done'" />   </td>
                                              </tr>
                                               <tr>
                                                 <td><strong>Montant financé</strong> </td>
-                                                <td><field name="sale_finance" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><field name="sale_finance" nolabel="1" readonly="state == 'done'" /> </td>
                                                 <td><strong>&#160;&#160;&#160;&#160;&#160;Loyer</strong> </td>
-                                                <td><field name="sale_loyer" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><field name="sale_loyer" nolabel="1"  readonly="state == 'done'"/>   </td>
                                                 <td><strong>Frais de logistique à facturer</strong> </td>
-                                                <td><field name="sale_frais" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><field name="sale_frais" nolabel="1"  readonly="state == 'done'"/>   </td>
                                              </tr>
                                              <tr>
                                                 <td><strong>Frais de restitution</strong> </td>
-                                                 <td><field name="sale_frais_restitution" nolabel="1" invisible="1" /> <field name="sale_frais_restitution_1" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /></td>
+                                                 <td><field name="sale_frais_restitution" nolabel="1" invisible="1" /> <field name="sale_frais_restitution_1" nolabel="1" readonly="state == 'done'" /></td>
                                                 <td><strong>Frais de livraison</strong> </td>
-                                                <td><field name="sale_frais_livraison_new" nolabel="1" invisible="1" />  <field name="sale_frais_livraison_new_1" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"  /> </td>    
+                                                <td><field name="sale_frais_livraison_new" nolabel="1" invisible="1" />  <field name="sale_frais_livraison_new_1" nolabel="1" readonly="state == 'done'" /> </td>
                                                 <td><strong>Calage</strong> </td>
-                                                <td><field name="sale_collage" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>     
+                                                <td><field name="sale_collage" nolabel="1" readonly="state == 'done'"/>   </td>
                                              </tr>
 
                                   </tbody>
@@ -221,21 +223,21 @@
                         
                         <group string="reprises PRSOPECT">
                             
-                            <field name="sale_rachat_matriel" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                             <field name="sale_montatnt_IR" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                            <field name="sale_Gratuite" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_rachat_matriel" readonly="state == 'done'"/>
+                             <field name="sale_montatnt_IR" readonly="state == 'done'"/>
+                            <field name="sale_Gratuite" readonly="state == 'done'"/>
                            
                         </group>
                          
                         <group string="BUDGETS">
-                            <field name="sale_partenariat" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                            <field name="sale_date_fin_F" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                            <field name="sale_solde_2_fois" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                            <field name="sale_date_2_solde" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
+                            <field name="sale_partenariat" readonly="state == 'done'"/>
+                            <field name="sale_date_fin_F" readonly="state == 'done'"/>
+                            <field name="sale_solde_2_fois" readonly="state == 'done'"/>
+                            <field name="sale_date_2_solde" readonly="state == 'done'"/>
                         </group>
                     </group>
                     <group string="reprises  clients">
-                            <field name="sale_bonretour"  nolabel="1"  widget="one2many" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                            <field name="sale_bonretour"  nolabel="1"  widget="one2many" readonly="state == 'done'"/>
                    </group>    
                 </page>
             </xpath>
@@ -255,22 +257,22 @@
                                             <tr>
                                                 <td><strong> Cout copie Signé </strong> </td>
 
-                                                <td><field name="sale_cout_signe_nb" nolabel="1" class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/></td>
+                                                <td><field name="sale_cout_signe_nb" nolabel="1" class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/></td>
 
-                                                <td>  <field name="sale_cout_signe_col" nolabel="1" class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/> </td>
+                                                <td>  <field name="sale_cout_signe_col" nolabel="1" class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/> </td>
                                              </tr>
                                              <tr>
                                                 <td><strong> Cout copie Actuel </strong> </td>
 
-                                                <td><field name="sale_cout_actuel_nb" nolabel="1"  class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/> </td>
+                                                <td><field name="sale_cout_actuel_nb" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/> </td>
 
-                                                <td><field name="sale_cout_actuel_col" nolabel="1"  class="oe_inline" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>   </td>
+                                                <td><field name="sale_cout_actuel_col" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/>   </td>
                                              </tr>
                                               <tr>
                                                 <td><strong> Ecart Actuel/Signé </strong> </td>
 
-                                                <td><field name="sale_cout_actuel_signe_nb" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}" nolabel="1"/> <field name="sale_cout_actuel_signe_nb" nolabel="1"  attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&lt;', 0)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_cout_actuel_signe_nb', '&lt;', 0)]}"/>  </td>
-                                                <td><field name="sale_cout_actuel_signe_col" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}" nolabel="1"/> <field name="sale_cout_actuel_signe_col" nolabel="1"  attrs="{'invisible':[('sale_cout_actuel_signe_col', '&lt;', 0)]}" class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_cout_actuel_signe_col', '&lt;', 0)]}" />  </td>
+                                                <td><field name="sale_cout_actuel_signe_nb" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  nolabel="1"/> <field name="sale_cout_actuel_signe_nb" nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0" />  </td>
+                                                <td><field name="sale_cout_actuel_signe_col" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001" nolabel="1"/> <field name="sale_cout_actuel_signe_col" nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  />  </td>
 
                                              </tr>
 
@@ -290,21 +292,21 @@
                                             <tr>
                                                 <td><strong> Forfait copie Signé </strong> </td>
 
-                                                <td><field name="sale_forfait_signe_nb" nolabel="1"  attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><field name="sale_forfait_signe_nb" nolabel="1"  readonly="state == 'done'" /> </td>
 
-                                                <td><field name="sale_forfait_signe_col" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><field name="sale_forfait_signe_col" nolabel="1" readonly="state == 'done'" />   </td>
                                              </tr>
                                              <tr>
                                                 <td><strong> Forfait copie Actuel</strong> </td>
 
-                                                <td><field name="sale_forfait_actuel_nb" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" /> </td>
+                                                <td><field name="sale_forfait_actuel_nb" nolabel="1" readonly="state == 'done'" /> </td>
 
-                                                <td><field name="sale_forfait_actuel_col" nolabel="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />   </td>
+                                                <td><field name="sale_forfait_actuel_col" nolabel="1" readonly="state == 'done'" />   </td>
                                              </tr>
                                               <tr>
                                                 <td><strong> Ecart Actuel/Signé </strong> </td>
-                                                   <td><field name="sale_forfait_actuel_signe_nb" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_forfait_actuel_signe_nb', '&gt;', -0.000000000000000000000000001)]}"/><field name="sale_forfait_actuel_signe_nb" nolabel="1"  attrs="{'invisible':[('sale_forfait_actuel_signe_nb', '&lt;', 0)]}"/> </td>
-                                                   <td><field name="sale_forfait_actuel_signe_col" nolabel="1"  style="color:Red;" attrs="{'invisible':[('sale_forfait_actuel_signe_col', '&gt;', -0.000000000000000000000000001)]}"/><field name="sale_forfait_actuel_signe_col" nolabel="1"  attrs="{'invisible':[('sale_forfait_actuel_signe_col', '&lt;', 0)]}"/> </td>
+                                                   <td><field name="sale_forfait_actuel_signe_nb" nolabel="1"  style="color:Red;" invisible="sale_forfait_actuel_signe_nb &gt; -0.000000000000000000000000001" /><field name="sale_forfait_actuel_signe_nb" nolabel="1" invisible="sale_forfait_actuel_signe_nb &lt; 0"  /> </td>
+                                                   <td><field name="sale_forfait_actuel_signe_col" nolabel="1"  style="color:Red;"  invisible="sale_forfait_actuel_signe_col &gt; -0.000000000000000000000000001" /><field name="sale_forfait_actuel_signe_col" nolabel="1" invisible="sale_forfait_actuel_signe_col &lt; 0" /> </td>
                                               </tr>
                                   </tbody>
                             </table>
@@ -312,18 +314,18 @@
                           </group>
 
                                  <group >
-                                            <field name="sale_abonnement_service" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                                            <field name="sale_abonnement_service_actuel" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                                            <field name="sale_abonnement_service" readonly="state == 'done'"/>
+                                            <field name="sale_abonnement_service_actuel" readonly="state == 'done'"/>
                                             <label for="sale_abonnement_actuel_signe" />
                                                  <div>
-                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" style="color:Red;" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&gt;', -0.000000000000000000000000001)]}"/>&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" style="color:Red;" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&gt;', -0.000000000000000000000000001)]}"/>
-                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&lt;', 0)]}"/>&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" attrs="{'invisible':[('sale_abonnement_actuel_signe', '&lt;', 0)]}"/>                                         
+                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" style="color:Red;" invisible="sale_abonnement_actuel_signe &gt; -0.000000000000000000000000001" />&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" style="color:Red;" invisible="sale_abonnement_actuel_signe &gt; -0.000000000000000000000000001"/>
+                                                    <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" invisible="sale_abonnement_actuel_signe &lt; 0" />&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_abonnement_actuel_signe &lt; 0" />
                                                 </div>
                                   </group>
                                   <group >
-                                            <field name="sale_autre_frais" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
-                                           <field name="sale_loyer_fact" attrs="{'readonly': [ ('state', 'in', ['done'])]}" />
-                                          <field name="sale_pfr_fournissuer" invisible="1" attrs="{'readonly': [ ('state', 'in', ['done'])]}"  />
+                                            <field name="sale_autre_frais" readonly="state == 'done'" />
+                                           <field name="sale_loyer_fact" readonly="state == 'done'" />
+                                          <field name="sale_pfr_fournissuer" invisible="1" readonly="state == 'done'"  />
                                           <field name="sale_cout_sup_pourcent" invisible="1" />
                                  </group>
 

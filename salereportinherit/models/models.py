@@ -8,12 +8,20 @@ class SaleReportHerit(models.Model):
     sale_contrat_report = fields.Float(string="%NB Contrat tot", readonly=True)
 
 
-    def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
-        fields['sale_marge_report'] = ", SUM(s.sale_comer) AS sale_marge_report"
-        fields['sale_chifre_report'] = ", SUM(s.sale_chifre_aff) AS sale_chifre_report"    
-        fields['sale_contrat_report'] = ", SUM(s.sale_contrat_tot) AS sale_contrat_report"
-        fields['sale_client_report'] = ", SUM(s.sale_client_tot) AS sale_client_report" 
-        return super(SaleReportHerit, self)._query(with_clause, fields, groupby, from_clause)
+    # def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
+    #     fields['sale_marge_report'] = ", SUM(s.sale_comer) AS sale_marge_report"
+    #     fields['sale_chifre_report'] = ", SUM(s.sale_chifre_aff) AS sale_chifre_report"
+    #     fields['sale_contrat_report'] = ", SUM(s.sale_contrat_tot) AS sale_contrat_report"
+    #     fields['sale_client_report'] = ", SUM(s.sale_client_tot) AS sale_client_report"
+    #     return super(SaleReportHerit, self)._query(with_clause, fields, groupby, from_clause)
+
+    def _select_additional_fields(self):
+        res = super()._select_additional_fields()
+        res['sale_marge_report'] = f", SUM(s.sale_comer) AS sale_marge_report"
+        res['sale_chifre_report'] = f", SUM(s.sale_chifre_aff) AS sale_chifre_report"
+        res['sale_contrat_report'] = f", SUM(s.sale_contrat_tot) AS sale_contrat_report"
+        res['sale_client_report'] = f", SUM(s.sale_client_tot) AS sale_client_report"
+        return res
 
 
 

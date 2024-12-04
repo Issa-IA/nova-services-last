@@ -1,11 +1,12 @@
-
+# Copyright (C) 2014-2015  Grupo ESOC <www.grupoesoc.es>
+# License AGPL-3.0 or later (https://www.gnuorg/licenses/agpl.html).
 {
     "name": "XML Reports",
-    "version": "15.0.1.0.1",
+    "version": "17.0.1.0.0",
     "category": "Reporting",
-    "website": "",
+    "website": "https://github.com/OCA/reporting-engine",
     "development_status": "Production/Stable",
-    "author": "",
+    "author": "Tecnativa, Odoo Community Association (OCA), Avoin.Systems",
     "license": "AGPL-3",
     "installable": True,
     "application": False,

@@ -12,7 +12,9 @@
 
                     </xpath>
 			<xpath expr="//field[@name='description']" position="after">
-			<field widget="signature" name="signature_helpdesk" string="Signature" attrs="{&quot;invisible&quot;: [[&quot;team_id&quot;,&quot;!=&quot;,2]]}"/>
+			<field widget="signature" name="signature_helpdesk" string="Signature"
+                   invisible="team_id != 2"
+                   />
   		</xpath>
 
                 </field>

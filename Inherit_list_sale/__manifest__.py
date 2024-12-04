@@ -4,7 +4,7 @@
     "name": "Etiquette list",
     "summary": """
         Sales""",
-    "version": "15.0.1.4.1",
+    "version": "0.1",
     "license": "AGPL-3",
     "category": "Sales/CRM",
     "author":

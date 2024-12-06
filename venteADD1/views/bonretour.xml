@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="bonretour_list_view">
+      <field name="name">bon de retourr</field>
+      <field name="model">bonretour</field>
+      <field name="arch" type="xml">
+        <tree editable ="bottom">
+         <field name="bonretour_article"/>
+         <field name="bonretour_serie"  />
+          <field name="bonretour_montant"  />
+         <field name="bonretour_date_rachat_prevue"  />
+         <field name="bonretour_leaser"  />
+         <field name="bonretour_dossier"  />
+        </tree>
+      </field>
+    </record>
+
+        <record id="bonretourform" model="ir.ui.view">
+            <field name="name">bon de retourr</field>
+             <field name="model">bonretour</field>
+            <field name="arch" type="xml">
+                <form >
+                    <group>
+                         <field name="bonretour_article"/>
+                         <field name="bonretour_serie"  />
+                          <field name="bonretour_montant"  />
+                          <field name="bonretour_date_rachat_prevue"  />
+                          <field name="bonretour_leaser"  />
+                         <field name="bonretour_dossier"  />
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+</odoo>

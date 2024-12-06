@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="creat_Park_wizard" model="ir.ui.view">
+            <field name="name">creatPark.wizard.form</field>
+            <field name="model">creatpark</field>
+            <field name="arch" type="xml">
+                <form >
+                        <strong> Vous voulez créer un parc matériel ? </strong>
+                    <footer>
+                        <button name="create_parck" string="Confirm" type="object" class ="oe_highlight"/>
+                        <button string="Cancel" class ="oe_highlight" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+</odoo>

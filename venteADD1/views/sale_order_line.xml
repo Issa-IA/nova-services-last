@@ -105,14 +105,12 @@
                             <field name="date_instalation_park" invisible="1"/>
                             <field name="sale_date_traitement" />
                             <field name="partner_invoice_id" string="Organisme de facturation" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice'}" readonly="state == 'cancel' or locked"/>
-                            <label for="street_client" string="adress" style="color:white;"/>
-
-                            <field name="partner_shipping_id" groups="account.group_delivery_invoice_address" context="{'default_type':'delivery'}" readonly="state == 'cancel' or locked"/>
-                           <label for="street_livraison" string="adress" style="color:white;"/>
-                            <div>
-                                <field name="street_livraison" nolabel="1" /><br/>
-                                <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
-                            </div>
+                           <field name="partner_shipping_id" groups="account.group_delivery_invoice_address" context="{'default_type':'delivery'}" readonly="state == 'cancel' or locked"/>
+                             <label for="street_livraison" string="" style="color:white;"/>
+                                <div>
+                                    <field name="street_livraison" nolabel="1" /><br/>
+                                    <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
+                                </div>
                         </group>
                     </group>
 

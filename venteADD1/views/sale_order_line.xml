@@ -54,7 +54,9 @@
                 </button>
 
             </xpath>
-
+             <xpath expr="//form/sheet/group[1]/field[@name='partner_id']" position="attributes">
+                 <attribute name="context">{'res_partner_search_mode': 'customer', 'show_address': False, 'show_vat': False}</attribute>
+               </xpath>
 
 
             <xpath expr="//form/sheet/group[1]" position="after">

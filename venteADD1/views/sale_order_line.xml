@@ -146,7 +146,7 @@
             -->
             <xpath expr="//form/sheet/notebook/page/group[1]" position="after">
                 <group name="note_group1" col="6" class="mt-2 mt-md-0">
-                   <group colspan="6">
+                               <group colspan="4">
                                     <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/>
                                 </group>
                                 <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total1">

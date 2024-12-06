@@ -91,7 +91,6 @@
                 <group name="sale_header_1">
                         <group name="partner_details_1">
                              <field name="partner_id_new" invisible="1" domain="[('user_id','=',context.get('uid'))]"/>
-                             <field name="partner_id"  placeholder="Type to find a customer..." readonly="state in ['cancel', 'sale']"/>
                              <label for="street_client" string=" " style="color:white;"/>
                             <div>
                                 <field name="street_client" nolabel="1" /><br/>

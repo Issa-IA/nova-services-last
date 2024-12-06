@@ -56,6 +56,7 @@
             </xpath>
 
 
+
             <xpath expr="//form/sheet/group[1]" position="after">
                    <!--
                      <group name="sale_header_1">
@@ -87,14 +88,15 @@
                         </group>
                     </group>
                     -->
-                <group name="sale_header_1">
+                       <group name="sale_header_1">
                         <group name="partner_details_1">
                              <field name="partner_id_new" invisible="1" domain="[('user_id','=',context.get('uid'))]"/>
-                             <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}" placeholder="Type to find a customer..." readonly="state in ['cancel', 'sale']"/>
+                             <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': False, 'show_vat': False}" placeholder="Type to find a customer..." readonly="state in ['cancel', 'sale']"/>
                              <label for="street_client" string=" " style="color:white;"/>
                             <div>
                                 <field name="street_client" nolabel="1" /><br/>
-                                <field name="zip_client" nolabel="1"  />&#x2063;&#x2063; <field name="city_client" class="oe_inline"  nolabel="1"/>
+                                <field name="zip_client" nolabel="1"  class="oe_inline"/>&#x2063;&#x2063;
+                                <field name="city_client" class="oe_inline"  nolabel="1"/>
                             </div>
                              <field name="sale_type_client1" readonly="state == 'done'" />
                              <field  name="sale_materiels_vendu" readonly="state == 'done'" />
@@ -104,15 +106,16 @@
                             <field name="date_last_cout_update_vrai" invisible="1" />
                             <field name="date_instalation_park" invisible="1"/>
                             <field name="sale_date_traitement" />
-                            <field name="partner_invoice_id" string="Organisme de facturation" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice'}" readonly="state == 'cancel' or locked"/>
-                           <field name="partner_shipping_id" groups="account.group_delivery_invoice_address" context="{'default_type':'delivery'}" readonly="state == 'cancel' or locked"/>
+                            <field name="partner_invoice_id" string="Organisme de facturation" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice', 'show_address': False, 'show_vat': False}" readonly="state == 'cancel' or locked"/>
+                           <field name="partner_shipping_id" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice', 'show_address': False, 'show_vat': False}" readonly="state == 'cancel' or locked"/>
                              <label for="street_livraison" string="" style="color:white;"/>
                                 <div>
                                     <field name="street_livraison" nolabel="1" /><br/>
-                                    <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
+                                    <field name="zip_livraison" nolabel="1" class="oe_inline" />&#x2063;&#x2063;
+                                    <field name="city_livraison" class="oe_inline"  nolabel="1"/>
                                 </div>
+                          </group>
                         </group>
-                    </group>
 
 
             </xpath>

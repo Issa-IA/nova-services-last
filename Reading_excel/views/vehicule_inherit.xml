@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
 
 
-            <xpath expr="//form/sheet/div[1]" position="after" >
+            <xpath expr="//form/sheet/div[1]" position="before" >
                 <div class="oe_button_box" name="button_box_1">
 
 

@@ -170,7 +170,7 @@ class SaleOrderHerit(models.Model):
     sale_type_client = fields.Selection([('nouveau_client', 'Nouveau client'), ('conversion', 'Conversion'),('additionnel', 'Additionnel')], string='Type de vente')
     sale_type_client1 = fields.Selection([('nouveau_client', 'Nouveau client'), ('conversion', 'Conversion'),
                                          ('additionnel', 'Additionnel')], string='Type de vente')
-    sale_materiels_vendu   = fields.Integer(string="MACHINES")    
+    sale_materiels_vendu   = fields.Integer(string="Nb Matériels")
     street_client = fields.Char(compute="compute_street_client")
     zip_client = fields.Char(compute="compute_zip_client")
     city_client = fields.Char(compute="compute_city_client")

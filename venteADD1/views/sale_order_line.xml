@@ -1,7 +1,6 @@
 <odoo>
 <data>
-    <!-- id="sale_order_form_inherit1" -->
-<record id="sale_order_form_inherit1_mig" model="ir.ui.view">
+<record id="sale_order_form_inherit1" model="ir.ui.view">
         <field name="name">sale.order.form.inherit1</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
@@ -58,57 +57,35 @@
 
             <xpath expr="//form/sheet/group[1]" position="after">
                      <group name="sale_header_1">
-
                         <group name="partner_details_1">
-                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_vat': True}" placeholder="Type to find a customer..." readonly="state in ['cancel', 'sale']"/>
-                             <label for="street_client" string="adress" style="color:white;"/>
+                             <field name="partner_id_new" invisible="1" domain="[('user_id','=',context.get('uid'))]"/> 
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_vat': True}" options="{&quot;always_reload&quot;: True}"/>
+                            <label for="street_client" string="adress" style="color:white;"/>
                             <div>
                                 <field name="street_client" nolabel="1" /><br/>
                                 <field name="zip_client" nolabel="1"  />&#x2063;&#x2063; <field name="city_client" class="oe_inline"  nolabel="1"/>
                             </div>
                              <field name="sale_type_client1" readonly="state == 'done'" />
-                             <field name="sale_materiels_vendu" readonly="state == 'done'" />
-                            <field name="partner_invoice_id" groups="account.group_delivery_invoice_address" context="{'default_type':'invoice', 'show_address': False, 'show_vat': False}" readonly="state == 'cancel' or locked"/>
-                             <label for="street_client" string="adress" style="color:white;"/>
-                             <field name="partner_shipping_id" groups="account.group_delivery_invoice_address" context="{'default_type':'delivery', 'show_address': False, 'show_vat': False}" readonly="state == 'cancel' or locked"/>
-                            <label for="street_livraison" string="adress" style="color:white;"/>
-                            <div>
-                                <field name="street_livraison" nolabel="1" /><br/>
-                                <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
-                            </div>
-                            <field name="partner_id_new" invisible="1" domain="[('user_id','=',context.get('uid'))]"/>
-
-
+                             <field  name="sale_materiels_vendu" readonly="state == 'done'" />
 
                         </group>
                         <group name="order_details_1">
                             <field name="date_last_cout_update_vrai" invisible="1" /> 
                             <field name="date_instalation_park" invisible="1"/>     
                             <field name="sale_date_traitement" />                               
-                            <field name="validity_date" invisible="state == 'sale'" readonly="state in ['cancel', 'sale']"/>
-                            <div class="o_td_label" groups="base.group_no_one" invisible="state in ['sale', 'cancel']">
-                                <label for="date_order" string="Quotation Date"/>
+                            <field name="partner_invoice_id" string="Organisme de facturation" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}" options="{&quot;always_reload&quot;: True}"/>
+                            <label for="street_client" string="adress" style="color:white;"/>
+                            <!--<div>
+                                <field name="street_fact" nolabel="1" /><br/>
+                                <field name="zip_fact" nolabel="1"  />&#x2063;&#x2063; <field name="city_fact" class="oe_inline"  nolabel="1"/>
                             </div>
-                            <field name="date_order" nolabel="1" groups="base.group_no_one" invisible="state in ['sale', 'cancel']" readonly="state in ['cancel', 'sale']"/>
-                            <div class="o_td_label" invisible="state in ['draft', 'sent']">
-                                <label for="date_order" string="Order Date"/>
+                            -->
+                            <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}" options="{&quot;always_reload&quot;: True}"/>
+                           <label for="street_livraison" string="adress" style="color:white;"/>
+                            <div>
+                                <field name="street_livraison" nolabel="1" /><br/>
+                                <field name="zip_livraison" nolabel="1"  />&#x2063;&#x2063; <field name="city_livraison" class="oe_inline"  nolabel="1"/>
                             </div>
-                            <field name="date_order" invisible="state in ['draft', 'sent']" readonly="state in ['cancel', 'sale']" nolabel="1"/>
-                            <field name="has_active_pricelist" invisible="1"/>
-                            <field name="show_update_pricelist" invisible="1"/>
-                            <label for="pricelist_id" groups="product.group_product_pricelist" invisible="not has_active_pricelist"/>
-                            <div groups="product.group_product_pricelist" class="o_row" invisible="not has_active_pricelist">
-                                <field name="pricelist_id" options="{'no_open':True,'no_create': True}" readonly="state in ['cancel', 'sale']"/>
-                                <button name="action_update_prices" type="object" string=" Update Prices" help="Recompute all prices based on this pricelist" class="btn-link mb-1 px-0" icon="fa-refresh" confirm="This will update the unit price of all products based on the new pricelist." invisible="not show_update_pricelist or state in ['sale', 'cancel']"/>
-                            </div>
-                            <field name="country_code" invisible="1"/>
-                            <field name="company_id" invisible="1"/>
-                            <field name="currency_id" invisible="1"/>
-                            <field name="pricelist_id" invisible="1" readonly="state in ['cancel', 'sale']" groups="!product.group_product_pricelist"/>
-                            <field name="tax_country_id" invisible="1"/>
-                            <field name="tax_calculation_rounding_method" invisible="1"/>
-                            <field name="payment_term_id" options="{'no_open': True, 'no_create': True}"/>
-
                         </group>
                     </group>
             </xpath>
@@ -168,8 +145,8 @@
             -->
             <xpath expr="//form/sheet/notebook/page/group[1]" position="after">
                 <group name="note_group1" col="6" class="mt-2 mt-md-0">
-                               <group colspan="4">
-                                    <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/>
+                                <group colspan="4">
+                                    <field name="note" class="oe-bordered-editor" nolabel="1" placeholder="Terms and conditions..."/>
                                 </group>
                                 <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total1">
                                      <field name="sale_total_achat" colspan="2" invisible="1"/>
@@ -177,11 +154,8 @@
                                      <field name="sale_marge" colspan="2"/>
                                     <field name="sale_marge_reel" colspan="2"/>
                                 </group>
-                                <div class="clearfix"/>
-
+                                <div class="oe_clear"/>
                  </group>
-
-
             </xpath>
 
             <xpath expr="//form/sheet/notebook/page/group[1]" position="attributes">

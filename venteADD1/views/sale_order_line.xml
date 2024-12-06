@@ -94,7 +94,7 @@
                              <label for="street_client" string=" " style="color:white;"/>
                             <div>
                                 <field name="street_client" nolabel="1" /><br/>
-                                <field name="zip_client" nolabel="1"  class="oe_inline"/>
+                                <field name="zip_client" nolabel="1"  class="oe_inline"/>&#x2063;&#x2063;
                                 <field name="city_client" class="oe_inline"  nolabel="1"/>
                             </div>
                              <field name="sale_type_client1" readonly="state == 'done'" />
@@ -110,7 +110,7 @@
                              <label for="street_livraison" string="" style="color:white;"/>
                                 <div>
                                     <field name="street_livraison" nolabel="1" /><br/>
-                                    <field name="zip_livraison" nolabel="1" class="oe_inline" />
+                                    <field name="zip_livraison" nolabel="1" class="oe_inline" />&#x2063;&#x2063;
                                     <field name="city_livraison" class="oe_inline"  nolabel="1"/>
                                 </div>
                         </group>

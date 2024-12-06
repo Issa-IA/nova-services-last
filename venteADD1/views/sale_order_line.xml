@@ -1,6 +1,7 @@
 <odoo>
 <data>
-<record id="sale_order_form_inherit1" model="ir.ui.view">
+    <!-- id="sale_order_form_inherit1" -->
+<record id="sale_order_form_inherit1_mig" model="ir.ui.view">
         <field name="name">sale.order.form.inherit1</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>

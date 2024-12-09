@@ -162,7 +162,7 @@
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
         <field name="arch" type="xml">
-            <!--
+
             <xpath expr="//div[1]" position="after">
 
                 <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
@@ -201,11 +201,11 @@
                         </div>
 
             </xpath>
-            
+
             <xpath expr="//div[1]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
-            -->
+
         </field>
     </record>
 

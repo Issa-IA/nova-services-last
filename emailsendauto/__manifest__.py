@@ -16,7 +16,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','product', 'sale','contacts'],
+    'depends': ['base','product', 'sale','contacts', 'fleetADD1'],
 
     # always loaded
     'data': [

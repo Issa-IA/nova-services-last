@@ -162,16 +162,16 @@
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
         <field name="arch" type="xml">
-
             <xpath expr="//div[1]" position="after">
-
                 <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
                            <div class="o_kanban_image" t-attf-style="background-image:url('#{kanban_image('fleet.vehicle', 'image_materiel', record.id.raw_value)}')"/>
                             <div class="oe_kanban_details">
                                 <ul>
                                     <li>
                                         <strong class="o_kanban_record_title">
-
+                                            <!--
+                                             <t t-if="record.fleet_serie.raw_value"><field name="fleet_dossier_devis"/></t>
+                                             -->
                                             <t t-if="record.fleet_dossier_devis.raw_value">Dossier N°: <field name="fleet_dossier_devis"/></t>
 
                                         </strong>
@@ -201,10 +201,13 @@
                         </div>
 
             </xpath>
-
             <xpath expr="//div[1]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
+
+
+
+
 
         </field>
     </record>

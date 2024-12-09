@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet', 'product', 'sale','contacts', 'Reading_excel'],
+    'depends': ['base','fleet', 'product', 'sale','contacts'],
 
     # always loaded
     'data': [

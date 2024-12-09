@@ -46,6 +46,7 @@ class TypeLeaser(models.Model):
 #add field periodicité
 class FleetContINHERIT(models.Model):
     _inherit = 'fleet.vehicle'
+    partner_id = fields.Many2one('res.partner', string='Client', index=True)
     fleet_type_materiel=  fields.Char(string="Type de matériel")
     fleet_type_materiels_fin = fields.Selection([('print', 'Print'), ('sauvegarde', 'Sauvegarde'), ('solution', 'Solution'), ('ecran', 'Ecran')],string='Type de matériel', related="fleet_Modele.type_materiels")
     @api.onchange('fleet_type_materiels_fin')
@@ -240,7 +241,7 @@ class FleetContINHERIT(models.Model):
     ####################
     #  infos MATÉRIELS #
     ####################
-    partner_id = fields.Many2one('res.partner', ondelete='Set null', string='Client', index=True)
+
     fleet_user_id = fields.Many2one('res.users',  string='Commercial',default=lambda self: self.env.user)
     
     ##############################

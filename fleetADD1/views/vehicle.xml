@@ -201,14 +201,11 @@
                         </div>
 
             </xpath>
+            <!--
             <xpath expr="//div[1]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
-
-
-
-
-
+            -->
         </field>
     </record>
 

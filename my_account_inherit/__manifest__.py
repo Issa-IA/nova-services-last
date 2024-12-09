@@ -10,7 +10,7 @@
     "author":
     "shayma",
     "website": "",
-    "depends": ["mail", "portal"],
+    "depends": ["mail", "portal", 'base','product', 'sale','contacts', 'fleetADD1'],
     "data": [
         "view/inherit_part_fleet.xml",
         "view/fleet_template.xml",

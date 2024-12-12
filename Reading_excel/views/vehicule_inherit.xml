@@ -6,6 +6,14 @@
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
         <field name="arch" type="xml">
 
+             <xpath expr="//button[@name='open_assignation_logs']" position="attributes" >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            
+
 
             <xpath expr="//form/sheet/div[1]" position="inside" >
 
@@ -38,7 +46,7 @@
                                     <span class="o_stat_text">Devis</span>
                             </div>
                        </button>
-                 
+
 
             </xpath>
 

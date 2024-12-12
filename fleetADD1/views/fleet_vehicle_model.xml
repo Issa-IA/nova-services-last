@@ -51,11 +51,9 @@
                 </group>
                 </group>
             </xpath>
-            <!--
             <xpath expr="//form/sheet/group[1]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
-            -->
 
             <!-- notebook information -->
             <xpath expr="//form/sheet/notebook[1]" position="after">

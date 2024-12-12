@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
 
 
-            <xpath expr="//form/sheet/div[1]" position="after" >
-                <div class="oe_button_box" name="button_box_1">
+            <xpath expr="//form/sheet/div[1]" position="inside" >
+
 
 
                               <button name="action_open_comp_noir" type="object" class="oe_stat_button" icon="fa-tachometer">
@@ -38,7 +38,7 @@
                                     <span class="o_stat_text">Devis</span>
                             </div>
                        </button>
-                 </div>
+                 
 
             </xpath>
 

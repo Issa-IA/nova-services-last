@@ -5,9 +5,7 @@
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_open_attachments']" position="attributes" >
-                <attribute name="invisible">True</attribute>
-            </xpath>
+            
             <xpath expr="//button[@name='action_open_employee']" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>

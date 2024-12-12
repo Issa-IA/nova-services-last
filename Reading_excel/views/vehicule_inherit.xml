@@ -8,31 +8,26 @@
 
 
 
-             <xpath expr="//button[@name='open_assignation_logs']" position="attributes" >
-                <attribute name="invisible">True</attribute>
-            </xpath>
-            <xpath expr="//button[@name='action_view_bills']" position="attributes" >
+             <xpath expr="//button[1]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
 
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+            <xpath expr="//button[2]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+            <xpath expr="//button[3]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+            <xpath expr="//button[4]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+            <xpath expr="//button[5]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
+            <xpath expr="//button[6]" position="attributes" >
                 <attribute name="invisible">True</attribute>
             </xpath>
-            <xpath expr="//button[@name='return_action_to_open']" position="attributes" >
-                <attribute name="invisible">True</attribute>
-            </xpath>
+
 
 
 

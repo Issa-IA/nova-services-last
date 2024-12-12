@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
         <field name="arch" type="xml">
 
-            
+
 
              <xpath expr="//button[@name='open_assignation_logs']" position="attributes" >
                 <attribute name="invisible">True</attribute>
@@ -73,5 +73,44 @@
 
       </field>
     </record>
+
+    <record id="fleet_vehicle_inherit_inherit_1" model="ir.ui.view">
+        <field name="name">fleet_vehicle_inherit_1_1</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="documents_fleet.fleet_vehicle_view_form_inherit_documents_fleet"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_open_attachments']" position="attributes" >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+      </field>
+    </record>
+    <record id="fleet_vehicle_inherit_inherit_2" model="ir.ui.view">
+        <field name="name">fleet_vehicle_inherit_1_2</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="hr_fleet.fleet_vehicle_view_form_inherit_hr"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_open_employee']" position="attributes" >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+      </field>
+    </record>
+
+    <record id="fleet_vehicle_inherit_inherit_3" model="ir.ui.view">
+        <field name="name">fleet_vehicle_inherit_1_3</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="account_fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_view_bills']" position="attributes" >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+
+      </field>
+    </record>
+
 </data>
 </odoo>

@@ -272,7 +272,8 @@
                         </group>
                     </group>
                     <br></br>
-                    <strong>reprises  clients </strong>
+                    <strong>REPRISES PHYSIQUES DE MATERIELS</strong>
+                    <strong>Bon de retour</strong>
 
 
                     <field name="sale_bonretour"  nolabel="1"  widget="one2many" readonly="state == 'done'"/>

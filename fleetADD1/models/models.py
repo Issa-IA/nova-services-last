@@ -310,6 +310,20 @@ class FleetContINHERIT(models.Model):
    ############
     #  Vehicle #
     ############
+    @api.depends('fleet_serie','fleet_Modele', 'fleet_serie')
+    def _compute_display_name(self):
+        for model in self:
+            if model.fleet_marque:
+                if model.fleet_Modele:
+                    if model.fleet_serie:
+                        name = model.fleet_marque.name + '/' + model.fleet_Modele.name + '(' + model.fleet_serie + ')'
+                    else:
+                        name = model.fleet_marque.name + '/' + model.fleet_Modele.name + '(' + "Pas de N° serie" + ')'
+                else:
+                    name = model.fleet_marque.name
+            else:
+                name = "Pas de matériel"
+            model.display_name = name
     
 
 

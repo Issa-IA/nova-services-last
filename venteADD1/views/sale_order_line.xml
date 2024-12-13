@@ -271,7 +271,9 @@
                             <field name="sale_date_2_solde" readonly="state == 'done'"/>
                         </group>
                     </group>
-                    reprises  clients
+                    <br></br>
+                    <strong>reprises  clients </strong>
+
 
                     <field name="sale_bonretour"  nolabel="1"  widget="one2many" readonly="state == 'done'"/>
 

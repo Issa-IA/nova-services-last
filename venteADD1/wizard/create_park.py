@@ -212,7 +212,7 @@ class CreatParkWizard(models.Model):
                  for num in rec.list_serial_number:
                      if num.cocher == True:
                          list_numer_serie.append(num.name)
-                         lot_id = self.env['stock.production.lot'].search([("product_id", "=", rec.product_id.id), ("name", "=", num.name)])
+                         lot_id = self.env['stock.lot'].search([("product_id", "=", rec.product_id.id), ("name", "=", num.name)])
                          list_lot_id.append(lot_id)
                  if list_lot_id:
                      list_record = []

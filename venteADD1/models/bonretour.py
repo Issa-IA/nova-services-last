@@ -135,7 +135,7 @@ class Stockpikingretour(models.Model):
         for rec in self:
             if rec.stock_retour_ok or rec.stock_reception_ok:
                 for ligne in rec.move_ids_without_package:            
-                    lot_id = self.env['stock.production.lot'].search([("name", "=", ligne.acount_retour_serie)])
+                    lot_id = self.env['stock.lot'].search([("name", "=", ligne.acount_retour_serie)])
                     lot_id.update({'ref': 'Reprise'+ ' '+ rec.partner_id.name})
         return    res
     
@@ -232,7 +232,7 @@ class SaleOrderbonretour(models.Model):
                     [('stock_sale', '=', rec.id), (('stock_type', '=', 'reception'))])
                 if sp_stock:
                     for retour in rec.sale_bonretour:
-                        lot_id = self.env['stock.production.lot'].search(
+                        lot_id = self.env['stock.lot'].search(
                             [("product_id", "=", retour.bonretour_article.id),
                              ("name", "=", retour.bonretour_serie)])
                         if not lot_id:
@@ -261,7 +261,7 @@ class SaleOrderbonretour(models.Model):
                     if rec.sale_bonretour:
                         list1 = []
                         for retour in rec.sale_bonretour:
-                            lot_id = self.env['stock.production.lot'].search(
+                            lot_id = self.env['stock.lot'].search(
                                 [("product_id", "=", retour.bonretour_article.id),
                                  ("name", "=", retour.bonretour_serie)])
                             if lot_id:
@@ -288,7 +288,7 @@ class SaleOrderbonretour(models.Model):
                             new_reception = self.env['stock.picking'].create(vals)
 
                             for retour in rec.sale_bonretour:
-                                lot_id = self.env['stock.production.lot'].search(
+                                lot_id = self.env['stock.lot'].search(
                                     [("product_id", "=", retour.bonretour_article.id),
                                      ("name", "=", retour.bonretour_serie)])
                                 if not lot_id:
@@ -320,7 +320,7 @@ class SaleOrderbonretour(models.Model):
                     [('stock_sale', '=', rec.id), (('stock_type', '=', 'retour'))])
                 if sp_stock:
                     for retour in rec.sale_bonretour:
-                        lot_id = self.env['stock.production.lot'].search(
+                        lot_id = self.env['stock.lot'].search(
                             [("product_id", "=", retour.bonretour_article.id),
                              ("name", "=", retour.bonretour_serie)])
                         if  lot_id and not  retour.bonretour_recep_ok:
@@ -348,7 +348,7 @@ class SaleOrderbonretour(models.Model):
                     if rec.sale_bonretour:
                         list1 = []
                         for retour in rec.sale_bonretour:
-                            lot_id = self.env['stock.production.lot'].search(
+                            lot_id = self.env['stock.lot'].search(
                                 [("product_id", "=", retour.bonretour_article.id),
                                  ("name", "=", retour.bonretour_serie)])
                             if lot_id and not  retour.bonretour_recep_ok:
@@ -375,7 +375,7 @@ class SaleOrderbonretour(models.Model):
                             new_reception = self.env['stock.picking'].create(vals)
 
                             for retour in rec.sale_bonretour:
-                                lot_id = self.env['stock.production.lot'].search(
+                                lot_id = self.env['stock.lot'].search(
                                     [("product_id", "=", retour.bonretour_article.id),
                                      ("name", "=", retour.bonretour_serie)])
                                 if  lot_id and not  retour.bonretour_recep_ok:

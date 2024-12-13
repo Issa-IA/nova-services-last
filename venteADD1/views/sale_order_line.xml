@@ -271,9 +271,11 @@
                             <field name="sale_date_2_solde" readonly="state == 'done'"/>
                         </group>
                     </group>
-                    <page string="reprises  clients" name="reprises  clients">
+                    <notebook>
+                     <page string="reprises  clients" name="reprises  clients">
                             <field name="sale_bonretour"  nolabel="1"  widget="one2many" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
-                    </page>
+                     </page>
+                    </notebook>
                 </page>
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">

@@ -60,6 +60,44 @@
                     </xpath>
                 </field>
         </record>
+        <record id="partner_form_invoice_account_1" model="ir.ui.view">
+                <field name="name">partner.form.invoice_1</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="account.view_partner_property_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//page[@name='accounting']" position="after" >
+                        <page string="Facturation" name="facturation">
+                            <group>
+                                <group>
+                                    <field name="goup_commerc_ok"  invisible="1"></field>
+
+                                    <field  name="x_studio_type_facture"/>
+
+                                    <field  name="type_facture" invisible="1"/>
+                                    <field name="cout_sup_pourcent"></field>
+                                    <field name="pfr"></field>
+                                    <field name="code_service"></field>
+                                     <field name="augmentation_sav_bool"></field>
+                                    <field name="augmentation_sav" invisible="augmentation_sav_bool != True"></field>
+                                </group>
+                                <group>
+                                    <field name="moyen_de_paiement"></field>
+
+                                        <field name="goup_commerc_ok_1"  invisible="1"></field>
+
+                                        <field name="x_studio_kdfm"></field>
+                                        <field name="x_studio_statut_de_compte"></field>
+                                        <field name="x_studio_plus_que_pro"></field>
+
+                                </group>
+                            </group>
+
+                        </page>
+
+                    </xpath>
+
+                </field>
+        </record>
 
 </data>
 </odoo>

@@ -273,7 +273,7 @@
                     </group>
                     reprises  clients
 
-                    <field name="sale_bonretour"  nolabel="1"  widget="one2many" attrs="{'readonly': [ ('state', 'in', ['done'])]}"/>
+                    <field name="sale_bonretour"  nolabel="1"  widget="one2many" readonly="state == 'done'"/>
 
 
                 </page>

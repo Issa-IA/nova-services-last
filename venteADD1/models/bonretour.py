@@ -218,188 +218,188 @@ class SaleOrderbonretour(models.Model):
 
 
 
-    # def write(self, values):
-    #     res = super(SaleOrderbonretour, self).write(values)
-    #     # here you can do accordingly
-    #     return self.create_stock_piking()
-    #
-    # def create_stock_piking(self):
-    #     stock_type = self.env['stock.picking.type'].search([])
-    #
-    #     for rec in self:
-    #         if len(stock_type) > 1:
-    #             sp_stock = self.env['stock.picking'].search(
-    #                 [('stock_sale', '=', rec.id), (('stock_type', '=', 'reception'))])
-    #             if sp_stock:
-    #                 for retour in rec.sale_bonretour:
-    #                     lot_id = self.env['stock.production.lot'].search(
-    #                         [("product_id", "=", retour.bonretour_article.id),
-    #                          ("name", "=", retour.bonretour_serie)])
-    #                     if not lot_id:
-    #                         if retour not in sp_stock.stock_bonretour:
-    #                             retour.bonretour_recep_ok = True
-    #                             move = self.env['stock.move'].create(
-    #                                 {'company_id': rec.company_id.id,
-    #                                  'date': date.today(),
-    #                                  'location_dest_id': 8,
-    #                                  'location_id': 5,
-    #                                  'name': 'new',
-    #                                  'procure_method': rec.procure_method,
-    #                                  'product_id': retour.bonretour_article.id,
-    #                                  'product_uom': retour.bonretour_article.uom_id.id,
-    #                                  'product_uom_qty': 1,
-    #                                  'picking_id': sp_stock[0].id,
-    #                                  'stock_move_bonretour': retour.id,
-    #
-    #                                  'acount_retour_serie': retour.bonretour_serie,
-    #                                  })
-    #                             retour.bonretour_stock_move = move.id
-    #                             retour.bonretour_stock_piking = sp_stock[0].id
-    #
-    #                     # sp_stock[0].update({'state': 'assigned', })
-    #             else:
-    #                 if rec.sale_bonretour:
-    #                     list1 = []
-    #                     for retour in rec.sale_bonretour:
-    #                         lot_id = self.env['stock.production.lot'].search(
-    #                             [("product_id", "=", retour.bonretour_article.id),
-    #                              ("name", "=", retour.bonretour_serie)])
-    #                         if lot_id:
-    #                             list1.append(lot_id)
-    #                     if len(rec.sale_bonretour) > len(list1):
-    #
-    #                         vals = {'name': 'Recep'+' '+ str(rec.name),
-    #                                 'stock_reception_ok':True,
-    #                                 'partner_id': rec.partner_id.id,
-    #                                 'move_type': rec.move_type,
-    #                                 'location_id': 5,
-    #                                 'location_dest_id': 8,
-    #                                 'state': 'assigned',
-    #                                 'picking_type_id': stock_type[0].id,
-    #                                 'stock_sale': rec.id,
-    #                                 'stock_type': 'reception',
-    #                                 'stock_compteur_depart_Nb':'0',
-    #                                 'stock_compteur_depart_C':'0',
-    #                                 'stock_compteur_retour_Nb':'0',
-    #                                 'stock_compteur_retour_C':'0',
-    #
-    #                                 }
-    #                         # self.location_dest_id.id
-    #                         new_reception = self.env['stock.picking'].create(vals)
-    #
-    #                         for retour in rec.sale_bonretour:
-    #                             lot_id = self.env['stock.production.lot'].search(
-    #                                 [("product_id", "=", retour.bonretour_article.id),
-    #                                  ("name", "=", retour.bonretour_serie)])
-    #                             if not lot_id:
-    #                                 # product_uom = \
-    #                                 # self.env['product.template'].search_read([('id', '=', retour.bonretour_article.id)])[0]['uom_id'][0]
-    #                                 move_ne = self.env['stock.move'].create(
-    #                                     {'company_id': rec.company_id.id,
-    #                                      'date': date.today(),
-    #                                      'location_dest_id': 8,
-    #                                      'location_id': 5,
-    #                                      'name': 'new',
-    #                                      'procure_method': rec.procure_method,
-    #                                      'product_id': retour.bonretour_article.id,
-    #                                      'product_uom': retour.bonretour_article.uom_id.id,
-    #                                      'product_uom_qty': 1,
-    #                                      'picking_id': new_reception.id,
-    #                                      'acount_retour_serie': retour.bonretour_serie,
-    #                                      'stock_move_bonretour': retour.id,
-    #
-    #                                      })
-    #
-    #                                 retour.bonretour_stock_move = move_ne.id
-    #                                 retour.bonretour_stock_piking = new_reception.id
-    #                                 retour.bonretour_recep_ok = True
-    #                             # new_reception.update({'state': 'assigned', })
-    #     for rec in self:
-    #         if len(stock_type) > 1:
-    #             sp_stock = self.env['stock.picking'].search(
-    #                 [('stock_sale', '=', rec.id), (('stock_type', '=', 'retour'))])
-    #             if sp_stock:
-    #                 for retour in rec.sale_bonretour:
-    #                     lot_id = self.env['stock.production.lot'].search(
-    #                         [("product_id", "=", retour.bonretour_article.id),
-    #                          ("name", "=", retour.bonretour_serie)])
-    #                     if  lot_id and not  retour.bonretour_recep_ok:
-    #                         if retour not in sp_stock.stock_bonretour:
-    #                             move = self.env['stock.move'].create(
-    #                                 {'company_id': rec.company_id.id,
-    #                                  'date': date.today(),
-    #                                  'location_dest_id': 8,
-    #                                  'location_id': 5,
-    #                                  'name': 'new',
-    #                                  'procure_method': rec.procure_method,
-    #                                  'product_id': retour.bonretour_article.id,
-    #                                  'product_uom': retour.bonretour_article.uom_id.id,
-    #                                  'product_uom_qty': 1,
-    #                                  'picking_id': sp_stock[0].id,
-    #                                  'stock_move_bonretour': retour.id,
-    #
-    #                                  'acount_retour_serie': retour.bonretour_serie,
-    #                                  })
-    #                             retour.bonretour_stock_move = move.id
-    #                             retour.bonretour_stock_piking = sp_stock[0].id
-    #
-    #                     # sp_stock[0].update({'state': 'assigned', })
-    #             else:
-    #                 if rec.sale_bonretour:
-    #                     list1 = []
-    #                     for retour in rec.sale_bonretour:
-    #                         lot_id = self.env['stock.production.lot'].search(
-    #                             [("product_id", "=", retour.bonretour_article.id),
-    #                              ("name", "=", retour.bonretour_serie)])
-    #                         if lot_id and not  retour.bonretour_recep_ok:
-    #                             list1.append(lot_id)
-    #                     if list1:
-    #
-    #                         vals = {'name': 'Retour'+' '+str(rec.name),
-    #                                 'stock_retour_ok':True,
-    #                                 'partner_id': rec.partner_id.id,
-    #                                 'move_type': rec.move_type,
-    #                                 'location_id': 5,
-    #                                 'location_dest_id': 8,
-    #                                 'state': 'assigned',
-    #                                 'picking_type_id': stock_type[3].id,
-    #                                 'stock_sale': rec.id,
-    #                                 'stock_type': 'retour',
-    #                                 'stock_compteur_depart_Nb':'0',
-    #                                 'stock_compteur_depart_C':'0',
-    #                                 'stock_compteur_retour_Nb':'0',
-    #                                 'stock_compteur_retour_C':'0',
-    #
-    #                                 }
-    #                         # self.location_dest_id.id
-    #                         new_reception = self.env['stock.picking'].create(vals)
-    #
-    #                         for retour in rec.sale_bonretour:
-    #                             lot_id = self.env['stock.production.lot'].search(
-    #                                 [("product_id", "=", retour.bonretour_article.id),
-    #                                  ("name", "=", retour.bonretour_serie)])
-    #                             if  lot_id and not  retour.bonretour_recep_ok:
-    #                                 # product_uom = \
-    #                                 # self.env['product.template'].search_read([('id', '=', retour.bonretour_article.id)])[0]['uom_id'][0]
-    #                                 move_ne = self.env['stock.move'].create(
-    #                                     {'company_id': rec.company_id.id,
-    #                                      'date': date.today(),
-    #                                      'location_dest_id': 8,
-    #                                      'location_id': 5,
-    #                                      'name': 'new',
-    #                                      'procure_method': rec.procure_method,
-    #                                      'product_id': retour.bonretour_article.id,
-    #                                      'product_uom': retour.bonretour_article.uom_id.id,
-    #                                      'product_uom_qty': 1,
-    #                                      'picking_id': new_reception.id,
-    #                                      'acount_retour_serie': retour.bonretour_serie,
-    #                                      'stock_move_bonretour': retour.id,
-    #
-    #                                      })
-    #
-    #                                 retour.bonretour_stock_move = move_ne.id
-    #                                 retour.bonretour_stock_piking = new_reception.id
-    #                             # new_reception.update({'state': 'assigned', })
+    def write(self, values):
+        res = super(SaleOrderbonretour, self).write(values)
+        # here you can do accordingly
+        return self.create_stock_piking()
+
+    def create_stock_piking(self):
+        stock_type = self.env['stock.picking.type'].search([])
+
+        for rec in self:
+            if len(stock_type) > 1:
+                sp_stock = self.env['stock.picking'].search(
+                    [('stock_sale', '=', rec.id), (('stock_type', '=', 'reception'))])
+                if sp_stock:
+                    for retour in rec.sale_bonretour:
+                        lot_id = self.env['stock.production.lot'].search(
+                            [("product_id", "=", retour.bonretour_article.id),
+                             ("name", "=", retour.bonretour_serie)])
+                        if not lot_id:
+                            if retour not in sp_stock.stock_bonretour:
+                                retour.bonretour_recep_ok = True
+                                move = self.env['stock.move'].create(
+                                    {'company_id': rec.company_id.id,
+                                     'date': date.today(),
+                                     'location_dest_id': 8,
+                                     'location_id': 5,
+                                     'name': 'new',
+                                     'procure_method': rec.procure_method,
+                                     'product_id': retour.bonretour_article.id,
+                                     'product_uom': retour.bonretour_article.uom_id.id,
+                                     'product_uom_qty': 1,
+                                     'picking_id': sp_stock[0].id,
+                                     'stock_move_bonretour': retour.id,
+
+                                     'acount_retour_serie': retour.bonretour_serie,
+                                     })
+                                retour.bonretour_stock_move = move.id
+                                retour.bonretour_stock_piking = sp_stock[0].id
+
+                        # sp_stock[0].update({'state': 'assigned', })
+                else:
+                    if rec.sale_bonretour:
+                        list1 = []
+                        for retour in rec.sale_bonretour:
+                            lot_id = self.env['stock.production.lot'].search(
+                                [("product_id", "=", retour.bonretour_article.id),
+                                 ("name", "=", retour.bonretour_serie)])
+                            if lot_id:
+                                list1.append(lot_id)
+                        if len(rec.sale_bonretour) > len(list1):
+
+                            vals = {'name': 'Recep'+' '+ str(rec.name),
+                                    'stock_reception_ok':True,
+                                    'partner_id': rec.partner_id.id,
+                                    'move_type': rec.move_type,
+                                    'location_id': 5,
+                                    'location_dest_id': 8,
+                                    'state': 'assigned',
+                                    'picking_type_id': stock_type[0].id,
+                                    'stock_sale': rec.id,
+                                    'stock_type': 'reception',
+                                    'stock_compteur_depart_Nb':'0',
+                                    'stock_compteur_depart_C':'0',
+                                    'stock_compteur_retour_Nb':'0',
+                                    'stock_compteur_retour_C':'0',
+
+                                    }
+                            # self.location_dest_id.id
+                            new_reception = self.env['stock.picking'].create(vals)
+
+                            for retour in rec.sale_bonretour:
+                                lot_id = self.env['stock.production.lot'].search(
+                                    [("product_id", "=", retour.bonretour_article.id),
+                                     ("name", "=", retour.bonretour_serie)])
+                                if not lot_id:
+                                    # product_uom = \
+                                    # self.env['product.template'].search_read([('id', '=', retour.bonretour_article.id)])[0]['uom_id'][0]
+                                    move_ne = self.env['stock.move'].create(
+                                        {'company_id': rec.company_id.id,
+                                         'date': date.today(),
+                                         'location_dest_id': 8,
+                                         'location_id': 5,
+                                         'name': 'new',
+                                         'procure_method': rec.procure_method,
+                                         'product_id': retour.bonretour_article.id,
+                                         'product_uom': retour.bonretour_article.uom_id.id,
+                                         'product_uom_qty': 1,
+                                         'picking_id': new_reception.id,
+                                         'acount_retour_serie': retour.bonretour_serie,
+                                         'stock_move_bonretour': retour.id,
+
+                                         })
+
+                                    retour.bonretour_stock_move = move_ne.id
+                                    retour.bonretour_stock_piking = new_reception.id
+                                    retour.bonretour_recep_ok = True
+                                # new_reception.update({'state': 'assigned', })
+        for rec in self:
+            if len(stock_type) > 1:
+                sp_stock = self.env['stock.picking'].search(
+                    [('stock_sale', '=', rec.id), (('stock_type', '=', 'retour'))])
+                if sp_stock:
+                    for retour in rec.sale_bonretour:
+                        lot_id = self.env['stock.production.lot'].search(
+                            [("product_id", "=", retour.bonretour_article.id),
+                             ("name", "=", retour.bonretour_serie)])
+                        if  lot_id and not  retour.bonretour_recep_ok:
+                            if retour not in sp_stock.stock_bonretour:
+                                move = self.env['stock.move'].create(
+                                    {'company_id': rec.company_id.id,
+                                     'date': date.today(),
+                                     'location_dest_id': 8,
+                                     'location_id': 5,
+                                     'name': 'new',
+                                     'procure_method': rec.procure_method,
+                                     'product_id': retour.bonretour_article.id,
+                                     'product_uom': retour.bonretour_article.uom_id.id,
+                                     'product_uom_qty': 1,
+                                     'picking_id': sp_stock[0].id,
+                                     'stock_move_bonretour': retour.id,
+
+                                     'acount_retour_serie': retour.bonretour_serie,
+                                     })
+                                retour.bonretour_stock_move = move.id
+                                retour.bonretour_stock_piking = sp_stock[0].id
+
+                        # sp_stock[0].update({'state': 'assigned', })
+                else:
+                    if rec.sale_bonretour:
+                        list1 = []
+                        for retour in rec.sale_bonretour:
+                            lot_id = self.env['stock.production.lot'].search(
+                                [("product_id", "=", retour.bonretour_article.id),
+                                 ("name", "=", retour.bonretour_serie)])
+                            if lot_id and not  retour.bonretour_recep_ok:
+                                list1.append(lot_id)
+                        if list1:
+
+                            vals = {'name': 'Retour'+' '+str(rec.name),
+                                    'stock_retour_ok':True,
+                                    'partner_id': rec.partner_id.id,
+                                    'move_type': rec.move_type,
+                                    'location_id': 5,
+                                    'location_dest_id': 8,
+                                    'state': 'assigned',
+                                    'picking_type_id': stock_type[3].id,
+                                    'stock_sale': rec.id,
+                                    'stock_type': 'retour',
+                                    'stock_compteur_depart_Nb':'0',
+                                    'stock_compteur_depart_C':'0',
+                                    'stock_compteur_retour_Nb':'0',
+                                    'stock_compteur_retour_C':'0',
+
+                                    }
+                            # self.location_dest_id.id
+                            new_reception = self.env['stock.picking'].create(vals)
+
+                            for retour in rec.sale_bonretour:
+                                lot_id = self.env['stock.production.lot'].search(
+                                    [("product_id", "=", retour.bonretour_article.id),
+                                     ("name", "=", retour.bonretour_serie)])
+                                if  lot_id and not  retour.bonretour_recep_ok:
+                                    # product_uom = \
+                                    # self.env['product.template'].search_read([('id', '=', retour.bonretour_article.id)])[0]['uom_id'][0]
+                                    move_ne = self.env['stock.move'].create(
+                                        {'company_id': rec.company_id.id,
+                                         'date': date.today(),
+                                         'location_dest_id': 8,
+                                         'location_id': 5,
+                                         'name': 'new',
+                                         'procure_method': rec.procure_method,
+                                         'product_id': retour.bonretour_article.id,
+                                         'product_uom': retour.bonretour_article.uom_id.id,
+                                         'product_uom_qty': 1,
+                                         'picking_id': new_reception.id,
+                                         'acount_retour_serie': retour.bonretour_serie,
+                                         'stock_move_bonretour': retour.id,
+
+                                         })
+
+                                    retour.bonretour_stock_move = move_ne.id
+                                    retour.bonretour_stock_piking = new_reception.id
+                                # new_reception.update({'state': 'assigned', })
 
 """
         self.env['stock.move'].create(

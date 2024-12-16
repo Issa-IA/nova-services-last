@@ -284,10 +284,9 @@
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
                 <page string="Maintenance" name="maintenance">
-                <group >
-                    <group >
-                        <group >
-                         <table  style="width:100%;" class="table table-sm">
+                     <group>
+                         <group>
+                            <table  style="width:100%;" class="table table-sm">
                                   <thead>
                                     <tr>
                                         <th > </th>
@@ -320,9 +319,8 @@
 
                                   </tbody>
                             </table>
-                             </group>
-                         <group >
-
+                          </group>
+                    <group>
 
 
 
@@ -358,11 +356,10 @@
                             </table>
                              </group>
 
-                            </group>
-                            <group >
-
-
                                  <group >
+
+
+
                                             <field name="sale_abonnement_service" readonly="state == 'done'"/>
                                             <field name="sale_abonnement_service_actuel" readonly="state == 'done'"/>
                                             <label for="sale_abonnement_actuel_signe" />
@@ -370,16 +367,17 @@
                                                     <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" style="color:Red;" invisible="sale_abonnement_actuel_signe &gt; -0.000000000000000000000000001" />&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" style="color:Red;" invisible="sale_abonnement_actuel_signe &gt; -0.000000000000000000000000001"/>
                                                     <field name="sale_abonnement_actuel_signe" nolabel="1" class="oe_inline" invisible="sale_abonnement_actuel_signe &lt; 0" />&#x2063; &#x2063;<field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_abonnement_actuel_signe &lt; 0" />
                                                 </div>
-                                  </group>
+                                    </group>
                                   <group >
                                             <field name="sale_autre_frais" readonly="state == 'done'" />
                                            <field name="sale_loyer_fact" readonly="state == 'done'" />
                                           <field name="sale_pfr_fournissuer" invisible="1" readonly="state == 'done'"  />
                                           <field name="sale_cout_sup_pourcent" invisible="1" />
-                                 </group>
-                             </group>
 
-                          </group>
+
+                                         </group>
+
+                 </group>
                 </page>
             </xpath>
 

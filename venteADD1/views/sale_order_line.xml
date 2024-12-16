@@ -359,7 +359,7 @@
                              </group>
 
                             </group>
-
+                            <group >
 
 
                                  <group >
@@ -377,6 +377,7 @@
                                           <field name="sale_pfr_fournissuer" invisible="1" readonly="state == 'done'"  />
                                           <field name="sale_cout_sup_pourcent" invisible="1" />
                                  </group>
+                             </group>
 
                           </group>
                 </page>

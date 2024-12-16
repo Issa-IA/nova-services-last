@@ -5,6 +5,7 @@ class SaleMoveHeritfacturee(models.Model):
     _inherit = 'sale.order'
     sale_date_Facture = fields.Date("Date de prochaine facturation")
     sale_park = fields.Boolean(default=False)
+    sale_bon_facture_ok = fields.Boolean(default=True)
     sale_periode = fields.Integer(default='0')
     #########first fact
     sale_connect = fields.Many2one( "sale.order")

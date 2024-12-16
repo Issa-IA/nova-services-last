@@ -286,6 +286,7 @@
                 <page string="Maintenance" name="maintenance">
                 <group >
                         <group>
+
                          <table  style="width:100%;" class="table table-sm">
                                   <thead>
                                     <tr>
@@ -321,6 +322,7 @@
                             </table>
 
 
+                       <group>
                     <table  style="width:100%;" class="table table-sm" >
                                   <thead>
                                     <tr>
@@ -351,6 +353,7 @@
                                               </tr>
                                   </tbody>
                             </table>
+                           </group>
 
                           </group>
 

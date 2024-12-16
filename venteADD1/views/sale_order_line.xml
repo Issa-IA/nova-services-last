@@ -284,10 +284,9 @@
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
                 <page string="Maintenance" name="maintenance">
-                <group>
-                 <group>
-                     <group>
-                           <group>
+                <group >
+                    <group >
+                        <group >
                          <table  style="width:100%;" class="table table-sm">
                                   <thead>
                                     <tr>
@@ -321,7 +320,9 @@
 
                                   </tbody>
                             </table>
-                      </group>
+                             </group>
+                         <group >
+
 
 
 
@@ -355,10 +356,11 @@
                                               </tr>
                                   </tbody>
                             </table>
-                         </group>
+                             </group>
+
+                            </group>
 
 
-                          </group>
 
                                  <group >
                                             <field name="sale_abonnement_service" readonly="state == 'done'"/>
@@ -376,7 +378,7 @@
                                           <field name="sale_cout_sup_pourcent" invisible="1" />
                                  </group>
 
-                  </group>
+                          </group>
                 </page>
             </xpath>
 

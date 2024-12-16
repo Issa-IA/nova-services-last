@@ -19,68 +19,71 @@ class SaleMoveHeritfacture(models.Model):
 
                                 
                                 for sale in sale_orders:
-                                    invoice_lines = []
-                                    if sale.sale_commande_fleet_ids:
-                                        if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
+                                    if sale.sale_bon_facture_ok == False:
+                                        invoice_lines = []
+                                        if sale.sale_commande_fleet_ids:
+                                            if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
 
-                                            for line in sale.order_line:
-                                                if line.display_type:
-                                                    vals = {
-                                                        'name': line.name,
-                                                        'display_type': line.display_type,
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                                else:
-                                                    vals = {
-                                                        'tax_ids':line.tax_id,
-                                                        'name': line.name,
-                                                        'price_unit': line.price_unit,
-                                                        'quantity': line.product_uom_qty,
-                                                        'product_id': line.product_id.id,
-                                                        'product_uom_id': line.product_uom.id,
-                                                        'sale_line_ids': [(6, 0, [line.id])],
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                            self.env['account.move'].create({
-                                                'ref': sale.client_order_ref,
-                                                'move_type': 'out_invoice',
-                                                'invoice_origin': sale.name,
-                                                'invoice_user_id': sale.user_id.id,
-                                                'partner_id': sale.partner_id.id,
-                                                'invoice_line_ids': invoice_lines,
-                                                'acount_maintnance': True,
-                                            })
-                                            sale.invoice_status = 'invoiced'
-                                    elif sale.sale_connect:
-                                        if sale.sale_connect.id == sale_fact.id:
-                                            for line in sale.order_line:
-                                                if line.display_type:
-                                                    vals = {
-                                                        'name': line.name,
-                                                        'display_type': line.display_type,
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                                else:
-                                                    vals = {
-                                                        'tax_ids':line.tax_id,
-                                                        'name': line.name,
-                                                        'price_unit': line.price_unit,
-                                                        'quantity': line.product_uom_qty,
-                                                        'product_id': line.product_id.id,
-                                                        'product_uom_id': line.product_uom.id,
-                                                        'sale_line_ids': [(6, 0, [line.id])],
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                            self.env['account.move'].create({
-                                                'ref': sale.client_order_ref,
-                                                'move_type': 'out_invoice',
-                                                'invoice_origin': sale.name,
-                                                'invoice_user_id': sale.user_id.id,
-                                                'partner_id': sale.partner_id.id,
-                                                'invoice_line_ids': invoice_lines,
-                                                'acount_maintnance': True,
-                                            })
-                                            sale.invoice_status = 'invoiced'
+                                                for line in sale.order_line:
+                                                    if line.display_type:
+                                                        vals = {
+                                                            'name': line.name,
+                                                            'display_type': line.display_type,
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                    else:
+                                                        vals = {
+                                                            'tax_ids':line.tax_id,
+                                                            'name': line.name,
+                                                            'price_unit': line.price_unit,
+                                                            'quantity': line.product_uom_qty,
+                                                            'product_id': line.product_id.id,
+                                                            'product_uom_id': line.product_uom.id,
+                                                            'sale_line_ids': [(6, 0, [line.id])],
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                self.env['account.move'].create({
+                                                    'ref': sale.client_order_ref,
+                                                    'move_type': 'out_invoice',
+                                                    'invoice_origin': sale.name,
+                                                    'invoice_user_id': sale.user_id.id,
+                                                    'partner_id': sale.partner_id.id,
+                                                    'invoice_line_ids': invoice_lines,
+                                                    'acount_maintnance': True,
+                                                })
+                                                sale.invoice_status = 'invoiced'
+                                                sale.sale_bon_facture_ok = True
+                                        elif sale.sale_connect:
+                                            if sale.sale_connect.id == sale_fact.id:
+                                                for line in sale.order_line:
+                                                    if line.display_type:
+                                                        vals = {
+                                                            'name': line.name,
+                                                            'display_type': line.display_type,
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                    else:
+                                                        vals = {
+                                                            'tax_ids':line.tax_id,
+                                                            'name': line.name,
+                                                            'price_unit': line.price_unit,
+                                                            'quantity': line.product_uom_qty,
+                                                            'product_id': line.product_id.id,
+                                                            'product_uom_id': line.product_uom.id,
+                                                            'sale_line_ids': [(6, 0, [line.id])],
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                self.env['account.move'].create({
+                                                    'ref': sale.client_order_ref,
+                                                    'move_type': 'out_invoice',
+                                                    'invoice_origin': sale.name,
+                                                    'invoice_user_id': sale.user_id.id,
+                                                    'partner_id': sale.partner_id.id,
+                                                    'invoice_line_ids': invoice_lines,
+                                                    'acount_maintnance': True,
+                                                })
+                                                sale.invoice_status = 'invoiced'
+                                                sale.sale_bon_facture_ok = True
                         if sale_fact.sale_periode ==3:
                             if sale_fact.sale_date_Facture + relativedelta(months=3) <= date.today():
                                 sale_fact.sale_date_Facture += relativedelta(months=3)
@@ -89,68 +92,71 @@ class SaleMoveHeritfacture(models.Model):
 
                                 
                                 for sale in sale_orders:
-                                    invoice_lines = []
-                                    if sale.sale_commande_fleet_ids:
-                                        if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
-                                            for line in sale.order_line:
-                                                if line.display_type:
-                                                    vals = {
-                                                        'name': line.name,
-                                                        'display_type': line.display_type,
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                                else:
-                                                    vals = {
-                                                        'tax_ids':line.tax_id,
-                                                        'name': line.name,
-                                                        'price_unit': line.price_unit,
-                                                        'quantity': line.product_uom_qty,
-                                                        'product_id': line.product_id.id,
-                                                        'product_uom_id': line.product_uom.id,
-                                                        'sale_line_ids': [(6, 0, [line.id])],
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                            self.env['account.move'].create({
-                                                'ref': sale.client_order_ref,
-                                                'move_type': 'out_invoice',
-                                                'invoice_origin': sale.name,
-                                                'invoice_user_id': sale.user_id.id,
-                                                'partner_id': sale.partner_id.id,
-                                                'invoice_line_ids': invoice_lines,
-                                                'acount_maintnance': True,
-                                            })
-                                            sale.invoice_status = 'invoiced'
-                                            
-                                    elif sale.sale_connect:
-                                        if sale.sale_connect.id == sale_fact.id:
-                                            for line in sale.order_line:
-                                                if line.display_type:
-                                                    vals = {
-                                                        'name': line.name,
-                                                        'display_type': line.display_type,
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                                else:
-                                                    vals = {
-                                                        'tax_ids':line.tax_id,
-                                                        'name': line.name,
-                                                        'price_unit': line.price_unit,
-                                                        'quantity': line.product_uom_qty,
-                                                        'product_id': line.product_id.id,
-                                                        'product_uom_id': line.product_uom.id,
-                                                        'sale_line_ids': [(6, 0, [line.id])],
-                                                    }
-                                                    invoice_lines.append((0, 0, vals))
-                                            self.env['account.move'].create({
-                                                'ref': sale.client_order_ref,
-                                                'move_type': 'out_invoice',
-                                                'invoice_origin': sale.name,
-                                                'invoice_user_id': sale.user_id.id,
-                                                'partner_id': sale.partner_id.id,
-                                                'invoice_line_ids': invoice_lines,
-                                                'acount_maintnance': True,
-                                            })
-                                            sale.invoice_status = 'invoiced'
+                                    if sale.sale_bon_facture_ok == False:
+                                        invoice_lines = []
+                                        if sale.sale_commande_fleet_ids:
+                                            if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
+                                                for line in sale.order_line:
+                                                    if line.display_type:
+                                                        vals = {
+                                                            'name': line.name,
+                                                            'display_type': line.display_type,
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                    else:
+                                                        vals = {
+                                                            'tax_ids':line.tax_id,
+                                                            'name': line.name,
+                                                            'price_unit': line.price_unit,
+                                                            'quantity': line.product_uom_qty,
+                                                            'product_id': line.product_id.id,
+                                                            'product_uom_id': line.product_uom.id,
+                                                            'sale_line_ids': [(6, 0, [line.id])],
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                self.env['account.move'].create({
+                                                    'ref': sale.client_order_ref,
+                                                    'move_type': 'out_invoice',
+                                                    'invoice_origin': sale.name,
+                                                    'invoice_user_id': sale.user_id.id,
+                                                    'partner_id': sale.partner_id.id,
+                                                    'invoice_line_ids': invoice_lines,
+                                                    'acount_maintnance': True,
+                                                })
+                                                sale.invoice_status = 'invoiced'
+                                                sale.sale_bon_facture_ok = True
+
+                                        elif sale.sale_connect:
+                                            if sale.sale_connect.id == sale_fact.id:
+                                                for line in sale.order_line:
+                                                    if line.display_type:
+                                                        vals = {
+                                                            'name': line.name,
+                                                            'display_type': line.display_type,
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                    else:
+                                                        vals = {
+                                                            'tax_ids':line.tax_id,
+                                                            'name': line.name,
+                                                            'price_unit': line.price_unit,
+                                                            'quantity': line.product_uom_qty,
+                                                            'product_id': line.product_id.id,
+                                                            'product_uom_id': line.product_uom.id,
+                                                            'sale_line_ids': [(6, 0, [line.id])],
+                                                        }
+                                                        invoice_lines.append((0, 0, vals))
+                                                self.env['account.move'].create({
+                                                    'ref': sale.client_order_ref,
+                                                    'move_type': 'out_invoice',
+                                                    'invoice_origin': sale.name,
+                                                    'invoice_user_id': sale.user_id.id,
+                                                    'partner_id': sale.partner_id.id,
+                                                    'invoice_line_ids': invoice_lines,
+                                                    'acount_maintnance': True,
+                                                })
+                                                sale.invoice_status = 'invoiced'
+                                                sale.sale_bon_facture_ok = True
 
 
 

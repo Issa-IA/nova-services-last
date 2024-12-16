@@ -284,6 +284,7 @@
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
                 <page string="Maintenance" name="maintenance">
+                <group>
                  <group>
                      <group>
                            <group>
@@ -375,7 +376,7 @@
                                           <field name="sale_cout_sup_pourcent" invisible="1" />
                                  </group>
 
-
+                  </group>
                 </page>
             </xpath>
 

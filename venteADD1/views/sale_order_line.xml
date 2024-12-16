@@ -284,8 +284,8 @@
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
                 <page string="Maintenance" name="maintenance">
-
-                        <group>
+                 <group>
+                     <group>
                            <group>
                          <table  style="width:100%;" class="table table-sm">
                                   <thead>
@@ -320,7 +320,7 @@
 
                                   </tbody>
                             </table>
-                               </group>
+                      </group>
 
 
 
@@ -354,6 +354,7 @@
                                               </tr>
                                   </tbody>
                             </table>
+                         </group>
 
 
                           </group>

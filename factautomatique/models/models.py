@@ -77,6 +77,7 @@ class factAuto(models.Model):
                         'warehouse_id': j[0].warehouse_id.id,
                         'state': 'sale',
                         'sale_maintnance':True,
+                        'sale_bon_facture_ok': False,
                     }
                     purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
                     purchase_id = purchase_id1.id
@@ -266,6 +267,7 @@ class factAuto(models.Model):
                             'warehouse_id': j[0].warehouse_id.id,
                             'state': 'sale',
                             'sale_maintnance': True,
+                            'sale_bon_facture_ok': False,
                         }
                         purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
                         purchase_id = purchase_id1.id

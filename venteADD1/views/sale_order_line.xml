@@ -285,11 +285,14 @@
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">
                 <page string="Maintenance" name="maintenance">
 
-                         <group>
+
                             <table  style="width:100%;" class="table table-sm">
                                   <thead>
                                     <tr>
                                         <th > </th>
+                                        <th ><strong>NB </strong></th>
+                                        <th ><strong>Couleur </strong></th>
+                                         <th > </th>
                                         <th ><strong>NB </strong></th>
                                         <th ><strong>Couleur </strong></th>
                                     </tr>
@@ -301,39 +304,6 @@
                                                 <td><field name="sale_cout_signe_nb" nolabel="1" class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/></td>
 
                                                 <td>  <field name="sale_cout_signe_col" nolabel="1" class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/> </td>
-                                             </tr>
-                                             <tr>
-                                                <td><strong> Cout copie Actuel </strong> </td>
-
-                                                <td><field name="sale_cout_actuel_nb" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/> </td>
-
-                                                <td><field name="sale_cout_actuel_col" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/>   </td>
-                                             </tr>
-                                              <tr>
-                                                <td><strong> Ecart Actuel/Signé </strong> </td>
-
-                                                <td><field name="sale_cout_actuel_signe_nb" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  nolabel="1"/> <field name="sale_cout_actuel_signe_nb" nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0" />  </td>
-                                                <td><field name="sale_cout_actuel_signe_col" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001" nolabel="1"/> <field name="sale_cout_actuel_signe_col" nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  />  </td>
-
-                                             </tr>
-
-                                  </tbody>
-                            </table>
-                          </group>
-
-
-
-
-                    <table  style="width:100%;" class="table table-sm" >
-                                  <thead>
-                                    <tr>
-                                        <th > </th>
-                                        <th ><strong>NB </strong></th>
-                                        <th ><strong>Couleur </strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                            <tr>
                                                 <td><strong> Forfait copie Signé </strong> </td>
 
                                                 <td><field name="sale_forfait_signe_nb" nolabel="1"  readonly="state == 'done'" /> </td>
@@ -341,19 +311,36 @@
                                                 <td><field name="sale_forfait_signe_col" nolabel="1" readonly="state == 'done'" />   </td>
                                              </tr>
                                              <tr>
-                                                <td><strong> Forfait copie Actuel</strong> </td>
+                                                <td><strong> Cout copie Actuel </strong> </td>
+
+                                                <td><field name="sale_cout_actuel_nb" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/> </td>
+
+                                                <td><field name="sale_cout_actuel_col" nolabel="1"  class="oe_inline" readonly="state == 'done'"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" readonly="state == 'done'"/>   </td>
+                                             <td><strong> Forfait copie Actuel</strong> </td>
 
                                                 <td><field name="sale_forfait_actuel_nb" nolabel="1" readonly="state == 'done'" /> </td>
 
                                                 <td><field name="sale_forfait_actuel_col" nolabel="1" readonly="state == 'done'" />   </td>
+
                                              </tr>
                                               <tr>
                                                 <td><strong> Ecart Actuel/Signé </strong> </td>
+
+                                                <td><field name="sale_cout_actuel_signe_nb" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_nb &gt; -0.000000000000000000000000001"  nolabel="1"/> <field name="sale_cout_actuel_signe_nb" nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_nb &lt; 0" />  </td>
+                                                <td><field name="sale_cout_actuel_signe_col" nolabel="1"  style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline" style="color:Red;" invisible="sale_cout_actuel_signe_col &gt; -0.000000000000000000000000001" nolabel="1"/> <field name="sale_cout_actuel_signe_col" nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  class="oe_inline"/>&#x2063;&#x2063; <field name="sale_char" class="oe_inline"  nolabel="1" invisible="sale_cout_actuel_signe_col &lt; 0"  />  </td>
+                                                <td><strong> Ecart Actuel/Signé </strong> </td>
                                                    <td><field name="sale_forfait_actuel_signe_nb" nolabel="1"  style="color:Red;" invisible="sale_forfait_actuel_signe_nb &gt; -0.000000000000000000000000001" /><field name="sale_forfait_actuel_signe_nb" nolabel="1" invisible="sale_forfait_actuel_signe_nb &lt; 0"  /> </td>
                                                    <td><field name="sale_forfait_actuel_signe_col" nolabel="1"  style="color:Red;"  invisible="sale_forfait_actuel_signe_col &gt; -0.000000000000000000000000001" /><field name="sale_forfait_actuel_signe_col" nolabel="1" invisible="sale_forfait_actuel_signe_col &lt; 0" /> </td>
-                                              </tr>
+
+                                             </tr>
+
                                   </tbody>
                             </table>
+                          
+
+
+
+
 
                             <group >
                                  <group >

@@ -249,7 +249,7 @@
                                   </tbody>
                             </table>
 
-                   
+
                 </page>
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="before">

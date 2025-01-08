@@ -62,7 +62,7 @@ class clientfleetserielarticle(models.Model):
     def _compute_display_name(self):
         for model in self:
             if model.fleet_id:
-                name = model.display_name
+                name = model.fleet_id.display_name
             else:
                 name = "Pas de Parc"
             model.display_name = name

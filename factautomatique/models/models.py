@@ -273,6 +273,16 @@ class factAuto(models.Model):
                         purchase_id = purchase_id1.id
                         print(purchase_id1)
                         print(purchase_id1.sale_maintnance)
+                        if j[0].sale_pfr_fournissuer:
+                                            res = {
+                                                'tax_id':j[0].pfr_fournisseur.taxes_id,
+                                                'order_id': purchase_id,
+                                                'product_id': j[0].pfr_fournisseur.id,
+                                                'name': j[0].pfr_fournisseur.name,
+                                                'price_unit': j[0].sale_pfr_fournissuer,
+                                                'product_uom_qty': '1',
+                                            }
+                                            self.env['sale.order.line'].sudo().create(res)
 
 
                 qte_by_dossier_forfait_coleur = 0
@@ -430,16 +440,7 @@ class factAuto(models.Model):
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res) 
-                    if j[0].sale_pfr_fournissuer:
-                                            res = {
-                                                'tax_id':j[0].pfr_fournisseur.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': j[0].pfr_fournisseur.id,
-                                                'name': j[0].pfr_fournisseur.name,
-                                                'price_unit': j[0].sale_pfr_fournissuer,
-                                                'product_uom_qty': '1',
-                                            }
-                                            self.env['sale.order.line'].sudo().create(res)    
+                        
 
 
 

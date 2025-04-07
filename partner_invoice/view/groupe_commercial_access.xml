@@ -1,0 +1,74 @@
+<odoo>
+<data>
+
+<record id="contact_form_view_form2_edit" model="ir.ui.view">
+            <field name="name">contact.form.inherit2_edit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="partner_invoice.partner_form_invoice_edit_1" />
+
+    <!--
+            <field name="groups_id" eval="[(6, 0, [ref('droits_d_acces.group_Technicien_contact') ])]" />
+            -->
+
+            <field name="arch" type="xml">
+                <field name="augmentation_sav_bool" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                <field name="augmentation_sav" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                 <field name="code_service" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                     <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                <field name="pfr" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+
+                <field name="x_studio_type_facture" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                <field name="x_studio_kdfm" position="attributes">
+                   <attribute name="invisible">True</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                <field name="x_studio_plus_que_pro" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                <field name="x_studio_statut_de_compte" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+
+                <field name="cout_sup_pourcent" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                 <field name="goup_commerc_ok" position="attributes">
+                   <attribute name="invisible">0</attribute>
+                     <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>    
+                 <field name="goup_commerc_ok_1" position="attributes">
+                   <attribute name="invisible">0</attribute>
+                     <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>        
+                <field name="moyen_de_paiement" position="attributes">
+                   <attribute name="readonly">1</attribute>
+                    <attribute name="groups">droits_d_acces.group_Technicien_contact</attribute>
+                </field>
+                
+            </field>
+
+</record>
+
+
+</data>
+</odoo>
+
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="creat_facturationauto" model="ir.ui.view">
+            <field name="name">facturationauto.form</field>
+            <field name="model">facturationauto</field>
+            <field name="arch" type="xml">
+                <form >
+                        <strong> Créer un bon de commande ? </strong>
+                    <footer>
+                        <button name="create_facturation" string="Confirm" type="object" class ="oe_highlight"/>
+                        <button string="Cancel" class ="oe_highlight" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_facture_action" model="ir.actions.act_window">
+            <field name="name">Genrer facture maintenance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">facturationauto</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="creat_facturationauto"/>
+            <field name="target">new</field>
+        </record>
+
+       <menuitem name="Générer facture maintenance"
+                  id="create_facture_action_id"
+                  parent="fleet.fleet_vehicles"
+                  action="create_facture_action"
+                  />
+
+</odoo>
+
+

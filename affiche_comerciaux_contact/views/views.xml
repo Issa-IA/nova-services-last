@@ -6,10 +6,10 @@
       <field name="name">afichercontacts list</field>
       <field name="model">afichercontacts</field>
       <field name="arch" type="xml">
-        <tree editable ="bottom" create="0">
+        <list editable ="bottom" create="0">
             <field name="comercial_contact_affiche"/>
             <field name="comercial_contact_retirer"/>
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -37,7 +37,7 @@
      <record model="ir.actions.act_window" id="list_contact_day_window_1">
       <field name="name">Contacts</field>
       <field name="res_model">res.partner</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
      </record>
      <menuitem name="RTP" id="list_contact_action_1" parent="contacts.menu_contacts"
       groups="affiche_comerciaux_contact.acces_contact_user"    action="list_contact_day_window_1" sequence="92"/>
@@ -55,7 +55,7 @@
     <record model="ir.actions.act_window" id="type_Aficher_window">
       <field name="name">Afficher la liste</field>
       <field name="res_model">afichercontacts</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
     </record>
     <menuitem name="Afficher ou masquer la liste des contacts" id="create_Aficher_action" parent="sale.menu_sale_config"
               action="type_Aficher_window" sequence="91"/>

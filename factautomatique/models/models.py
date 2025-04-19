@@ -440,7 +440,7 @@ class factAuto(models.Model):
                             'product_uom_qty': '1',
                         }
                         self.env['sale.order.line'].sudo().create(res) 
-                      
+                        
 
 
 
@@ -478,7 +478,7 @@ class SaleOrderHeritage(models.Model):
     abonnements = fields.Many2one('product.product', string="Montant abonnement",
                                              default=lambda self: self.env['product.product'].search([('id', '=', 5)]))
     Frais_livraison = fields.Many2one('product.product', string="Frais d'installation",
-                                  default=lambda self: self.env['product.product'].search([('id', '=', 7)]))
+                                  default=lambda self: self.env['product.product'].search([('id', '=', 42224)]))
     
     Frais_loyer = fields.Many2one('product.product', string="Montant du loyer",
                                   default=lambda self: self.env['product.product'].search([('id', '=', 4855)]))

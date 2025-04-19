@@ -6,11 +6,11 @@
       <field name="name">compTeurNoirModel list</field>
       <field name="model">compteurnoirmodel</field>
       <field name="arch" type="xml">
-        <tree editable ="top" default_order="create_date desc">
+        <list editable ="top" default_order="create_date desc">
           <field name="numero_serie"/>
             <field name="compteur_Noir"/>
             <field name="create_date"/>
-        </tree>
+        </list>
       </field>
     </record>
 

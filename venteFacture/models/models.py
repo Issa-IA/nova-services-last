@@ -23,7 +23,7 @@ class SaleMoveHeritfacture(models.Model):
                                         invoice_lines = []
                                         if sale.sale_commande_fleet_ids:
                                             if sale.sale_commande_fleet_ids[0].fleet_id.fleet_devis_id.id == sale_fact.id:
-    
+
                                                 for line in sale.order_line:
                                                     if line.display_type:
                                                         vals = {
@@ -125,7 +125,7 @@ class SaleMoveHeritfacture(models.Model):
                                                 })
                                                 sale.invoice_status = 'invoiced'
                                                 sale.sale_bon_facture_ok = True
-                                                
+
                                         elif sale.sale_connect:
                                             if sale.sale_connect.id == sale_fact.id:
                                                 for line in sale.order_line:

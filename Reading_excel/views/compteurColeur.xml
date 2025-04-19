@@ -5,11 +5,11 @@
       <field name="name">compTeurCouleurModel list</field>
       <field name="model">compteurcoleurmodel</field>
       <field name="arch" type="xml">
-        <tree editable ="top" default_order="create_date desc">
+        <list editable ="top" default_order="create_date desc">
             <field name="numero_serie"/>
             <field name="compteur_Couleur"/>
             <field name="create_date"/>
-        </tree>
+        </list>
       </field>
     </record>
 

@@ -1,0 +1,13 @@
+<odoo>
+<data>
+
+ <xpath expr="//field[@name='sale_materiels_vendu']" position="after">
+    <field name="sale_park" groups="base.group_system"/>
+    <field name="etiquette_maintenance" groups="base.group_system"/>
+    <field name="sale_date_Facture" groups="base.group_system"/>
+  </xpath>
+  <xpath expr="//field[@name='sale_date_traitement']" position="after">
+    <field name="x_studio_anne_de_vente"/>
+  </xpath>
+</data>
+</odoo>

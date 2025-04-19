@@ -50,7 +50,7 @@ class SaleOrderLineHeritButton(models.Model):
         vals = {'sale_order_line': self.id, }
         # self.location_dest_id.id
         new_list_seriel = self.env['listofserielnumber'].create(vals)
-        list1            =  self.env['stock.production.lot'].search([("product_id","=",self.product_id.id)])
+        list1            =  self.env['stock.lot'].search([("product_id","=",self.product_id.id)])
         list =[]
         for num in list1:
             if num.product_qty:

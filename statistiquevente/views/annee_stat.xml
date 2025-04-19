@@ -6,7 +6,7 @@
       <field name="name">stat par an list</field>
       <field name="model">anneevente</field>
       <field name="arch" type="xml">
-        <tree default_order='annee desc'>
+        <list default_order='annee desc'>
           <field name="annee"/>
           <field name="annee_team"/>
           <field name="annee_chifre_ob"/>
@@ -23,7 +23,7 @@
           <field name="annee_client"/>
           <field name="annee_materiels_ob"/> 
           <field name="annee_materiels"/> 
-        </tree>
+        </list>
       </field>
     </record>
 
@@ -60,8 +60,9 @@
   <record model="ir.actions.act_window" id="stat_annee_window">
       <field name="name">Rapports</field>
       <field name="res_model">anneevente</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">list,form</field>
   </record>
+
   <menuitem name="Rapports commerciaux" id="affiche_stat_action" parent="sale.sale_menu_root" 
              groups="studio_customization.contact_administrate_d69236b8-7968-4c59-8b7e-3cdfee8fa082" action="stat_annee_window" sequence="200"/>
 </data>

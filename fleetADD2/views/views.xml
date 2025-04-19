@@ -6,13 +6,13 @@
       <field name="name">fleetserielarticle list</field>
       <field name="model">fleetserielarticle</field>
       <field name="arch" type="xml">
-        <tree editable ="bottom">
+        <list editable ="bottom">
             <field name="fleet_id"/>
             <field name="client_id"/>
             <field name="article_id"/>
             <field name="num_serie"/>
 
-        </tree>
+        </list>
       </field>
     </record>
 

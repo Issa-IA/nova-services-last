@@ -69,7 +69,7 @@ class FleetContINHERITFact(models.Model):
             'res_model': 'compteurnoirmodel',
             'view_type': 'form',
             'domain': [('fleet_id', '=', self.id)],
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'target': 'current',
 
         }
@@ -88,7 +88,7 @@ class FleetContINHERITFact(models.Model):
             'res_model': 'compteurcoleurmodel',
             'view_type': 'form',
             'domain': [('fleet_id', '=', self.id)],
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'target': 'current',
         }
     ########## smart button to compteur
@@ -101,7 +101,7 @@ class FleetContINHERITFact(models.Model):
                 'res_model': 'moycompteurnoircol',
                 'view_type': 'form',
                 'domain': [('fleet_id', '=', self.id)],
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'target': 'current',
             }
 

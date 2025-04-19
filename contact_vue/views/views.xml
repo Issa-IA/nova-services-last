@@ -24,13 +24,15 @@
                 </button>
             </xpath>
 
-            <xpath expr="//page[@name='contact_addresses']/field/kanban/templates/t/div/div[2]/field[@name='name']" position="after">                
+            <xpath expr="//form/sheet/notebook/page[@name='contact_addresses']/field/kanban/templates/t/main/field[@name='name']" position="after">
                 <div t-if="record.title.raw_value"><field name="title"/></div>
             </xpath>
-            
-            <xpath expr="//notebook/page/field[@name='child_ids']" position="attributes">
-                <attribute name="context">{'default_parent_id': active_id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'contact'}</attribute>
+
+
+            <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']" position="attributes">
+                <attribute name="context">{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'contact'}</attribute>
             </xpath>
+
 
     </field>
     </record>

@@ -13,7 +13,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet','sale'],
+    'depends': ['base','fleet','sale','product', 'sale','contacts', 'fleetADD1'],
     #'external_dependencies': {'python': ['StringIO'],},
 
     # always loaded

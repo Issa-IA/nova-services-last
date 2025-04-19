@@ -1,6 +1,6 @@
 <odoo>
 <data> 
-        <record id="inherit_res_partner_form_resil" model="ir.ui.view">
+        <record id="inherit_res_partner_form_resil_1" model="ir.ui.view">
             <field name="name">res.partner.form.resil</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -18,7 +18,7 @@
           <field name="name">Origine</field>
           <field name="type">ir.actions.act_window</field>
           <field name="res_model">partner.origin</field>
-          <field name="view_mode">tree,form</field>
+          <field name="view_mode">list,form</field>
         </record>
 
         <menuitem name="Origine" id="origin_partner" parent="contacts.res_partner_menu_config"
@@ -28,9 +28,9 @@
                 <field name="name">origine.list</field>
                 <field name="model">partner.origin</field>
                 <field name="arch" type="xml">
-                    <tree>
+                    <list>
                         <field name="name"/>
-                    </tree>
+                    </list>
                 </field>
      </record>
 
@@ -40,9 +40,15 @@
                 <field name="inherit_id" ref="base.view_partner_form"/>
                 <field name="arch" type="xml">
                             <xpath expr="//sheet/div[2]/h1[1]/field[2]" position="after">   
-                                     <span> - </span> <field name="type_contact" style="background-color: #5E8EBA;" attrs="{'invisible': ['|',('type_contact','=','Prospect'),('type_contact','=','RESIL')]}"/>
-                                    <field name="type_contact" attrs="{'invisible': ['|',('type_contact','=','Client'),('type_contact','=','RESIL')]}"/>
-                                    <field name="type_contact" style="background-color:red;" attrs="{'invisible': ['|',('type_contact','=','Client'),('type_contact','=','Prospect')]}"/>
+                                     <span> - </span> <field name="type_contact" style="background-color: #5E8EBA;"
+                                                             invisible="type_contact== 'Prospect' or type_contact == 'RESIL'"
+                                                             />
+                                    <field name="type_contact"
+                                           invisible="type_contact== 'Client' or type_contact == 'RESIL'"
+                                           />
+                                    <field name="type_contact" style="background-color:red;"
+                                           invisible="type_contact== 'Client' or type_contact == 'Prospect'"
+                                          />
                       
                       </xpath>
                    
@@ -77,14 +83,14 @@
 
                             </group>
                             <field name="partenariat_ids" class="test">
-                                    <tree string="suivie partenariat"  editable="bottom">
+                                    <list string="suivie partenariat"  editable="bottom">
                                             <field name="dossier_num"></field>
                                         <field name="annee"  options="{'format': 'YYYY'}"/>
                                             <field name="currency_id" string="Payment Currency" optional="hide"/>
                                         <field name="montant_a_regler" widget="monetary" options="{'currency_field': 'currency_id'}" style="justify-content: center; display :flex ;"> €</field>
                                         <field name="statut"></field>
                                         <field name="date_reglement"></field>
-                                    </tree>
+                                    </list>
                                 </field>
 
                         </page>

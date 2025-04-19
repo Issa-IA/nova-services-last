@@ -170,7 +170,7 @@ class SaleOrderHerit(models.Model):
     sale_type_client = fields.Selection([('nouveau_client', 'Nouveau client'), ('conversion', 'Conversion'),('additionnel', 'Additionnel')], string='Type de vente')
     sale_type_client1 = fields.Selection([('nouveau_client', 'Nouveau client'), ('conversion', 'Conversion'),
                                          ('additionnel', 'Additionnel')], string='Type de vente')
-    sale_materiels_vendu   = fields.Integer(string="MACHINES")    
+    sale_materiels_vendu   = fields.Integer(string="Nb Matériels")
     street_client = fields.Char(compute="compute_street_client")
     zip_client = fields.Char(compute="compute_zip_client")
     city_client = fields.Char(compute="compute_city_client")
@@ -250,7 +250,7 @@ class SaleOrderHerit(models.Model):
 
     #########  Financement page
     #group 1
-    sale_type    = fields.Selection([('location', 'Location'), ('vente', 'Vente')],string='Type',default='location')
+    sale_type    = fields.Selection([('location', 'Location'), ('vente', 'Vente')],string='Type',default='vente')
     sale_leaser  = fields.Many2one( "typeleaser",string='Leaser')
     sale_finance = fields.Monetary(string="Montant financé")
     sale_frais_restitution = fields.Monetary(string="Frais de restitution",default=0.0)
@@ -430,16 +430,20 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             if rec.sale_maintnance:
                 rec.sale_marge = 0
+            elif not rec.sale_finance:
+                rec.sale_marge = rec.sale_total_vente-rec.sale_frais_livraison_new - rec.sale_total_rachat - rec.sale_montatnt_IR + rec.sale_frais - rec.sale_total_vente - rec.sale_frais_restitution - rec.sale_vr_client - rec.sale_ir_prospects - rec.sale_vr_client_2 - rec.sale_rachat_matriel - rec.sale_Gratuite - rec.sale_partenariat - rec.sale_solde_2_fois
             else:
                 rec.sale_marge = rec.sale_finance - rec.sale_frais_livraison_new- rec.sale_total_rachat-rec.sale_montatnt_IR + rec.sale_frais -rec.sale_total_vente- rec.sale_frais_restitution -rec.sale_vr_client-rec.sale_ir_prospects-rec.sale_vr_client_2-rec.sale_rachat_matriel-rec.sale_Gratuite-rec.sale_partenariat-rec.sale_solde_2_fois
             
-    @api.onchange("sale_total_rachat","sale_montatnt_IR","sale_total_achat", "sale_finance", "sale_frais","sale_vr_client",
+    @api.onchange("sale_total_rachat","sale_total_vente","sale_montatnt_IR","sale_total_achat", "sale_finance", "sale_frais","sale_vr_client",
                   "sale_ir_prospects", "sale_vr_client_2", "sale_rachat_matriel", "sale_Gratuite", "sale_partenariat",
                   "sale_solde_2_fois")
     def sale_marge_reel_fuc(self):
         for rec in self:
             if rec.sale_maintnance:
                 rec.sale_marge_reel =0
+            elif not rec.sale_finance:
+                rec.sale_marge_reel = rec.sale_total_vente -rec.sale_total_rachat - rec.sale_montatnt_IR + rec.sale_frais - rec.sale_total_achat - rec.sale_vr_client - rec.sale_ir_prospects - rec.sale_vr_client_2 - rec.sale_rachat_matriel - rec.sale_Gratuite - rec.sale_partenariat - rec.sale_solde_2_fois
             else:
                 rec.sale_marge_reel = rec.sale_finance -rec.sale_total_rachat-rec.sale_montatnt_IR + rec.sale_frais - rec.sale_total_achat - rec.sale_vr_client - rec.sale_ir_prospects - rec.sale_vr_client_2 - rec.sale_rachat_matriel - rec.sale_Gratuite - rec.sale_partenariat - rec.sale_solde_2_fois
 

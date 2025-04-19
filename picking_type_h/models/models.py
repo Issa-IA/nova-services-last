@@ -65,6 +65,6 @@ class Stocktypeinherit(models.Model):
             'res_model': 'stock.picking',
             'view_type': 'form',
             'domain': [ ('id_type_fait', '=',1),('picking_type_id', '=',8)],
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
 
         }

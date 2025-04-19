@@ -14,7 +14,8 @@
             </xpath>
 
             <xpath expr="//page[@name='inventory']" position="after">
-                <page name="infoMat" string="infos MATÉRIELS" attrs="{'invisible': [('parc_ok', '=', False)]}">
+                <page name="infoMat" string="infos MATÉRIELS"
+                      invisible="parc_ok == False">
                     <group>
                         <field name="product_Modele"/>
                         <field name="product_marque"/>

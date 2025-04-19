@@ -6,7 +6,7 @@
       <field name="name">Mois list</field>
       <field name="model">moisvente</field>
       <field name="arch" type="xml">
-          <tree >
+          <list >
               <field name="mois_int"/>
               <field name="mois"/>   
               <field name="moi_chifre_aff_ob"/>
@@ -23,7 +23,7 @@
               <field name="moi_client"/>
              <field name="moi_materiels_ob"/>
              <field name="moi_materiels"/>
-          </tree>
+          </list>
       </field>
     </record>
 

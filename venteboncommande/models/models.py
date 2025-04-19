@@ -132,7 +132,7 @@ class SaleMoveHeritbondecommande(models.Model):
                                         'sale_maintnance': True,
                                         'sale_not_update_bon_commande': True,
                                         'sale_connect':sale_bon_commande.id,
-                                        'sale_bon_facture_ok':False,
+                                        'sale_bon_facture_ok': False,
                                     }
                                     purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
                                     purchase_id = purchase_id1.id

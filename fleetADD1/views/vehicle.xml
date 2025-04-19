@@ -26,7 +26,9 @@
 
                         <label for="fleet_dossier_devis"/>
                         <h1>
-                            <field name="fleet_dossier_devis" placeholder="S256" attrs="{'readonly':[('fleet_artic_id','!=',False)]}"/>
+                            <field name="fleet_dossier_devis" placeholder="S256"
+                                   readonly="fleet_artic_id != False"
+                                   />
                             <field name="fleet_artic_id"  invisible="1"/>
                         </h1>
                         <label for="tag_ids"/>
@@ -40,10 +42,11 @@
 
             </xpath>
 
-           
+           <!--
              <xpath expr="//form/sheet/div[1]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
+            -->
             <xpath expr="//form/sheet/div[2]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
@@ -154,7 +157,7 @@
 
         </field>
     </record>
-
+     <!--
     <record id="view_fleet_vehicle_inherited" model="ir.ui.view">
         <field name="name">fleet.vehicle.inherited</field>
         <field name="model">fleet.vehicle</field>
@@ -167,9 +170,7 @@
                                 <ul>
                                     <li>
                                         <strong class="o_kanban_record_title">
-                                            <!--
-                                             <t t-if="record.fleet_serie.raw_value"><field name="fleet_dossier_devis"/></t>
-                                             -->
+
                                             <t t-if="record.fleet_dossier_devis.raw_value">Dossier N°: <field name="fleet_dossier_devis"/></t>
 
                                         </strong>
@@ -208,6 +209,43 @@
 
 
         </field>
+    </record>
+    -->
+
+    <record id="view_fleet_vehicle_inherited" model="ir.ui.view">
+        <field name="name">fleet.vehicle.inherited</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//main[1]" position="after">
+                <main>
+                            <div>
+                                <t t-if="record.fleet_dossier_devis.raw_value"><strong><i class="fa fa-map-marker" title="Location"/> Dossier N°: <field name="fleet_dossier_devis"/></strong></t>
+                            </div>
+                             <div class="small">
+
+                                <t t-if="record.fleet_serie.raw_value">N° serie: <field name="fleet_serie"/></t>
+                                <br></br>
+
+                                 <t t-if="record.partner_id.raw_value">Client : <field name="partner_id"/></t>
+                                 <br></br>
+
+                                  <t t-if="record.fleet_serie.raw_value"><field name="fleet_serie" invisible="1"/></t>
+                                  <t t-if="record.fleet_marque.raw_value"><field name="fleet_marque"/>&#x2063;(<field name="fleet_Modele"/>)</t>
+                                  <br></br>
+
+                                 <t t-if="record.fleet_expiration_date.raw_value">Date de fin de contrat : <field name="fleet_expiration_date"/></t>
+
+                             </div>
+
+
+                        </main>
+            </xpath>
+            <xpath expr="//main[1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+    </field>
     </record>
 
 </data>

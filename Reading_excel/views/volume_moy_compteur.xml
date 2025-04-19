@@ -5,13 +5,13 @@
       <field name="name">moycompteurnoircol list</field>
       <field name="model">moycompteurnoircol</field>
       <field name="arch" type="xml">
-        <tree editable ="top" default_order="create_date desc">
+        <list editable ="top" default_order="create_date desc">
             <field name="anne_numero"/>
             <field name="moy_compteur_Couleur"/>
             <field name="moy_compteur_Noir"/>
             <field name="numero_serie"/>
             <field name="fleet_id"/>
-        </tree>
+        </list>
       </field>
     </record>
 

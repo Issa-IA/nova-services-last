@@ -6,13 +6,13 @@
       <field name="name">liste de bon de commande et matériel</field>
       <field name="model">listboncommandefleet</field>
       <field name="arch" type="xml">
-        <tree>
+        <list>
           <field name="name"/>
           <field name="fleet_id"/>
           <field name="devis_id"/>
           <field name="comp_couleur_diff"/>
           <field name="comp_noir_diff"/>
-        </tree>
+        </list>
       </field>
     </record>
     <record model="ir.ui.view" id="listboncommandefleet_form_view">

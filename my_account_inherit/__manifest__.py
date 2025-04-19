@@ -4,13 +4,13 @@
     "name": "Partner fleet",
     "summary": """
         Helpdesk""",
-    "version": "15.0.1.4.1",
+    "version": "0.1",
     "license": "AGPL-3",
     "category": "Human Resources/Fleet",
     "author":
     "shayma",
     "website": "",
-    "depends": ["mail", "portal"],
+    "depends": ["mail", "portal", 'base','product', 'sale','contacts', 'fleetADD1'],
     "data": [
         "view/inherit_part_fleet.xml",
         "view/fleet_template.xml",

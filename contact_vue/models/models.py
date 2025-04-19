@@ -39,7 +39,7 @@ class   Contactinhertit(models.Model):
             'res_model': 'account.move',
             'view_type': 'form',
             'domain': [('partner_id', '=', self.id), ('acount_maintnance', '=', 'True')],
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'target': 'current',
 
         }

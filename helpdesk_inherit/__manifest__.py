@@ -15,6 +15,7 @@
         'uom',
         'base',
         'helpdesk',
+        'fleetADD2'
     ],
     'data': [
         'view/hepdesk_inherit_view.xml',

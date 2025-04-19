@@ -45,6 +45,8 @@ class clientfleetserielarticle(models.Model):
             self.article_id = self.fleet_id.fleet_artic_id.id
 
 
+
+
     def name_get(self):
         result = []
         for model in self:
@@ -55,4 +57,15 @@ class clientfleetserielarticle(models.Model):
                 name = "Pas de Parc"
             result.append((model.id, name))
         return result
+
+    @api.depends('fleet_id')
+    def _compute_display_name(self):
+        for model in self:
+            if model.fleet_id:
+                name = model.fleet_id.display_name
+            else:
+                name = "Pas de Parc"
+            model.display_name = name
+
+
 

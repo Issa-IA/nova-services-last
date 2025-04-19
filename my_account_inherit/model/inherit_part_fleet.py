@@ -14,7 +14,7 @@ class Partner(models.Model):
     def action_view_fleet(self):
         return {
             "name": self.name,
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "fleet.vehicle",
             "type": "ir.actions.act_window",
             "domain": [("partner_id", "child_of", self.id)],

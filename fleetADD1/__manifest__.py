@@ -24,6 +24,7 @@
     'data': [
          'security/ir.model.access.csv',
         #'security/security.xml',
+        
         'views/fleet_vehicle_model.xml',
         'views/vehicle.xml',
         'views/typeleaser.xml',

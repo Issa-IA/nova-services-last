@@ -1,7 +1,7 @@
 <odoo>
 <data>
 
-    <record id="contact_inherit_1" model="ir.ui.view">
+    <record id="contact_inherit" model="ir.ui.view">
         <field name="name">contact inherit</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>

@@ -8,11 +8,11 @@ class SaleStateHerit(models.Model):
 
     def write(self, vals):        
         for rec in self:  
-            if rec.state == 'done':
+            if rec.state == 'sale':
                 if rec.invoice_count > 0 :                
                         vals.update({'state':'invoiced'})   
             if rec.state == 'invoiced':
                  if rec.invoice_count == 0 :
-                        vals.update({'state':'done'})
+                        vals.update({'state':'sale'})
         res=super(SaleStateHerit, self).write(vals)
         return res

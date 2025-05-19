@@ -64,7 +64,7 @@ class Stocktypeinherit(models.Model):
             'name': 'Prêts en cours',
             'res_model': 'stock.picking',
             'view_type': 'form',
-            'domain': [ ('id_type_fait', '=',1),('picking_type_id', '=',8)],
+            'domain': [ ('id_type_fait', '=',1),('picking_type_id', '=',8), ('return_count','=', 0), ('state','=', 'done')],
             'view_mode': 'list,form',
 
         }

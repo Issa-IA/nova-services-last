@@ -54,7 +54,7 @@ class Stocktypeinherit(models.Model):
     def _compute_picking_count_done(self):
         for rec in self:
             fact_count = self.env['stock.picking'].search_count(
-                [('id_type_fait', '=',1),('picking_type_id', '=',8)])
+                [('id_type_fait', '=',1),('picking_type_id', '=',8), ('return_count','=!', 0), ('state','=', 'done')])
             rec.count_picking_done = fact_count
             print("rec.count_picking_done",rec.count_picking_done)
 

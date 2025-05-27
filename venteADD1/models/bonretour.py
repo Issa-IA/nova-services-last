@@ -75,7 +75,7 @@ class SaleOrderfacture(models.Model):
                                 # 'account_id': rec.partner_id.property_account_payable_id.id,
                                 'tax_ids': retour.bonretour_article.supplier_taxes_id.ids,
                                 # 'tax_ids': retour.bonretour_article.taxes_id.ids,                                       
-                                'account_id': 468,
+                                # 'account_id': 468,
 
                             })
 

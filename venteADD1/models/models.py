@@ -182,6 +182,10 @@ class SaleOrderHerit(models.Model):
         for rec in self:
             rec.sale_dossier = rec.opportunity_id.num_dossier
             rec.sale_type_client1 = rec.opportunity_id.action_field
+            if rec.sale_type_client1 == 'nouveau_client':
+                rec.sale_new_contact = 1
+            else:
+                rec.sale_new_contact = 0
 
 
     @api.onchange("partner_id")

@@ -1,0 +1,20 @@
+<odoo>
+<data>
+ <record id="update_duree_estimation_valuee" model="ir.cron">
+            <field name="name">update duree restante</field>
+            <field name="active" eval="True" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+  <!--
+            <field name="numbercall">-1</field>
+            <field name="doall">1</field>
+
+     <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 23:59:59')" />     -->
+             <field name="model_id" ref="model_fleet_vehicle" />
+             <field name="code">model.updateDate()</field>
+</record>
+</data>
+</odoo>
+
+
+

@@ -1,8 +1,9 @@
-from odoo import models, api
+from odoo import models, api, _
 from datetime import date
 from dateutil.relativedelta import relativedelta
 # from odoo.exceptions import UserError
-
+import logging
+_logger = logging.getLogger(__name__)
 class SaleMoveHeritfacture(models.Model):
     _inherit = 'sale.order'
 
@@ -15,8 +16,9 @@ class SaleMoveHeritfacture(models.Model):
             ('sale_periode','in',[1,3]),
         ])
 
-        # so_print_ids = []
+        total_invoices: int = 0
         sale_orders_to_invoice_ids = self.env['sale.order'].search([
+            ('company_id','=',self.env.company.id),
             ('sale_maintnance', '=', True),
             ('invoice_status', '=', 'to invoice'),
             ('sale_bon_facture_ok','=', False),
@@ -36,13 +38,13 @@ class SaleMoveHeritfacture(models.Model):
                                 ('invoice_origin', '=', so_to_inv_id.name),
                                 ('acount_maintnance', '=', True),
                             ], limit=1)
-                            # print(existing)
-                            # so_print_ids.append(so_to_inv_id.id)
-                            # continue
+
                             if existing:
                                 so_to_inv_id.invoice_status = 'invoiced'
                                 so_to_inv_id.sale_bon_facture_ok = True
                                 continue
+
+                            total_invoices += 1
 
                             for line in so_to_inv_id.order_line:
                                 if line.display_type:
@@ -75,6 +77,4 @@ class SaleMoveHeritfacture(models.Model):
                             so_to_inv_id.invoice_status = 'invoiced'
                             so_to_inv_id.sale_bon_facture_ok = True
 
-
-        # raise UserError("len so_print_ids: " + str(len(so_print_ids))
-        # + " set so_print_ids: " + str(set(so_print_ids)))
+        _logger.info("The invoices have been created successfully. %s invoices have been created.", total_invoices)

@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 class SaleMoveHeritbondecommande(models.Model):
     _inherit = 'sale.order'
     def curboncommande(self):
-        sale_a_cree_bon_commande =  self.env['sale.order'].search([('sale_park','=',True)])
+        sale_a_cree_bon_commande =  self.env['sale.order'].search([('sale_park','=',True), ('company_id','=',self.env.company.id)])
 
         for sale_bon_commande in sale_a_cree_bon_commande:
             if sale_bon_commande.partner_id.augmentation_sav_bool == True:

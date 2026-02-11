@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+    <record id="action_sale_order_create_so_and_po" model="ir.cron">
+        <field name="name">So to generate</field>
+        <field name="active" eval="True" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="model_sale_order" />
+        <field name="code">model.create_sale_orders()</field>
+    </record>
+</odoo>

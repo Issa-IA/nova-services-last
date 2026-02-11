@@ -10,6 +10,7 @@
     'company': 'shayma',
     'maintainer': 'shayma',
     'website': "www.company.com",
+    'license': 'LGPL-3',
     "depends": ['base', 'mail'],
     "data": [
         #'views/layout.xml',
@@ -28,7 +29,6 @@
     # },
     # 'images': [
     # ],
-    # 'license': 'LGPL-3',
     # 'pre_init_hook': 'test_pre_init_hook',
     # 'post_init_hook': 'test_post_init_hook',
     # 'installable': True,

@@ -6,6 +6,23 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    # def _get_taxes_for_company(self, product, company):
+    #     """
+    #     Récupère les taxes du produit valides pour la société cible.
+    #     Remonte la hiérarchie des sociétés (parent) pour trouver les taxes
+    #     configurées sur la société principale.
+    #     Si aucune taxe trouvée (sociétés non liées), retourne les taxes
+    #     du produit pour contourner le check société.
+    #     """
+    #     if not product or not product.taxes_id:
+    #         return self.env['account.tax']
+    #     taxes = product.taxes_id._filter_taxes_by_company(company)
+    #     if not taxes:
+    #         # Sociétés non hiérarchiques : utiliser les taxes du produit
+    #         # avec allowed_company_ids pour outrepasser le check société
+    #         taxes = product.sudo().taxes_id
+    #     return taxes
+
     def create_so(self, sale_order_id):
         sale_vals = {
             'company_id': sale_order_id.company_id.id,
@@ -102,7 +119,7 @@ class SaleOrder(models.Model):
         sale_order_id.devis_a_cree_commande = False
 
     @api.model
-    def create_sale_orders(self, force_trigger=False):
+    def create_sale_orders(self):
         today = fields.Date.context_today(self)
         threshold = today + relativedelta(days=1) - relativedelta(years=1)
 
@@ -128,5 +145,6 @@ class SaleOrder(models.Model):
 
         for sale_order_id in sale_order_ids:
             sale_date_facture = sale_order_id.sale_date_Facture + relativedelta(months=sale_order_id.sale_periode)-relativedelta(days=1)
-            if sale_date_facture <= date.today() and sale_order_id.sale_date_Facture <=sale_order_id.sale_date_de_fin_contrat:
+            #  and sale_order_id.sale_date_Facture <=sale_order_id.sale_date_de_fin_contrat - retrait le 16/02/26
+            if sale_date_facture <= date.today():
                 self.create_so(sale_order_id)

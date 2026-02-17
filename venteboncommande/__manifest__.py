@@ -11,7 +11,7 @@
     """,
 
     'category': 'Sales',
-    'version': '18.0.0.0.2',
+    'version': '18.0.0.0.3',
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly

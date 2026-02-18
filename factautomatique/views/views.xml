@@ -23,7 +23,7 @@
             <field name="target">new</field>
         </record>
 
-       <menuitem name="Générer facture maintenance"
+        <menuitem name="Générer facture maintenance"
                   id="create_facture_action_id"
                   parent="fleet.fleet_vehicles"
                   action="create_facture_action"

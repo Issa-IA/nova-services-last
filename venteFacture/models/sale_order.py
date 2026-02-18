@@ -87,3 +87,4 @@ class SaleMoveHeritfacture(models.Model):
                         so_to_inv_id.sale_bon_facture_ok = True
 
         _logger.info("The invoices have been created successfully. %s invoices have been created.", total_invoices)
+        return total_invoices

@@ -105,17 +105,20 @@ class SaleOrder(models.Model):
             sale_order_id.sale_cout_actuel_col = sale_order_id.sale_cout_actuel_col + sale_order_id.sale_cout_actuel_col*sale_order_id.partner_id.augmentation_sav
             sale_order_id.date_last_cout_update_vrai = sale_order_id.date_last_cout_update_vrai + relativedelta(years=1)
         
-        sale_order_ids =  self.env['sale.order'].search([
-            ('sale_park','=',True), 
-            ('company_id','=',self.env.company.id),
-            ('sale_date_de_fin_contrat','!=',False),
-            ('sale_date_Facture','!=',False),
-            ('sale_periode','in',[1,3]),
-            ('devis_a_cree_commande','=',True),
+        sale_order_ids = self.env['sale.order'].search([
+            ('sale_park', '=', True),
+            ('company_id', '=', self.env.company.id),
+            ('sale_date_de_fin_contrat', '!=', False),
+            ('sale_date_Facture', '!=', False),
+            ('sale_periode', 'in', [1, 3]),
+            ('devis_a_cree_commande', '=', True),
         ])
 
+        count = 0
         for sale_order_id in sale_order_ids:
             sale_date_facture = sale_order_id.sale_date_Facture + relativedelta(months=sale_order_id.sale_periode)-relativedelta(days=1)
             #  and sale_order_id.sale_date_Facture <=sale_order_id.sale_date_de_fin_contrat - retrait le 16/02/26
             if sale_date_facture <= date.today():
                 self.with_company(sale_order_id.company_id.id)._create_so(sale_order_id)
+                count += 1
+        return count

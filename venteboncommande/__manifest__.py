@@ -15,12 +15,13 @@
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','account','venteADD1'],
+    'depends': ['base', 'sale', 'account', 'venteADD1', 'fleet'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'data/actions.xml',
+        'data/menu.xml',
     ],
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_server_create_invoice_from_sale_order" model="ir.actions.server">
+        <field name="name">Créer factures maintenance</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+result = model.create_invoice_from_sale_order()
+message = "%s facture(s) maintenance créée(s)." % result if result else "Aucune facture à créer."
+action = {
+    'type': 'ir.actions.client',
+    'tag': 'display_notification',
+    'params': {
+        'type': 'success',
+        'message': message,
+        'sticky': False,
+    }
+}
+        ]]></field>
+    </record>
+
+    <menuitem name="Créer factures maintenance"
+              id="menuitem_create_invoice_from_sale_order"
+              parent="fleet.fleet_vehicles"
+              action="action_server_create_invoice_from_sale_order"
+              sequence="20"
+              />
+</odoo>

@@ -5,6 +5,6 @@
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
         <field name="model_id" ref="model_sale_order" />
-        <field name="code">model.create_sale_orders()</field>
+        <field name="code">model.action_prepare_sale_orders()</field>
     </record>
 </odoo>

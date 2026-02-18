@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def create_so(self, sale_order_id):
+    def _create_so(self, sale_order_id):
         sale_vals = {
             'company_id': sale_order_id.company_id.id,
             'date_order': datetime.now(),
@@ -36,7 +36,6 @@ class SaleOrder(models.Model):
         
         if sale_order_id.sale_forfait_actuel_col:
             res = {
-                'tax_id':sale_order_id.cout_copie_coleurs.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.cout_copie_coleurs.id,
                 'price_unit': cout_copie_coluer,
@@ -46,7 +45,6 @@ class SaleOrder(models.Model):
 
         if sale_order_id.sale_forfait_actuel_nb:
             res = {
-                'tax_id':sale_order_id.cout_copie_noires.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.cout_copie_noires.id,
                 'price_unit': cout_copie_noir,
@@ -56,7 +54,6 @@ class SaleOrder(models.Model):
 
         if sale_order_id.sale_abonnement_service:
             res = {
-                'tax_id':sale_order_id.abonnements.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.abonnements.id,
                 'price_unit': sale_order_id.sale_abonnement_service_actuel,
@@ -66,7 +63,6 @@ class SaleOrder(models.Model):
 
         if sale_order_id.sale_autre_frais:
             res = {
-                'tax_id':sale_order_id.services.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.services.id,
                 'price_unit': sale_order_id.sale_autre_frais,
@@ -76,7 +72,6 @@ class SaleOrder(models.Model):
 
         if sale_order_id.sale_loyer_fact:
             res = {
-                'tax_id':sale_order_id.Frais_loyer.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.Frais_loyer.id,
                 'price_unit': sale_order_id.sale_loyer_fact,
@@ -86,7 +81,6 @@ class SaleOrder(models.Model):
             
         if sale_order_id.sale_pfr_fournissuer:
             res = {
-                'tax_id':sale_order_id.pfr_fournisseur.taxes_id,
                 'order_id': new_sale_order_id,
                 'product_id': sale_order_id.pfr_fournisseur.id,
                 'price_unit': sale_order_id.sale_pfr_fournissuer,
@@ -96,7 +90,7 @@ class SaleOrder(models.Model):
         sale_order_id.devis_a_cree_commande = False
 
     @api.model
-    def create_sale_orders(self):
+    def action_prepare_sale_orders(self):
         today = fields.Date.context_today(self)
         threshold = today + relativedelta(days=1) - relativedelta(years=1)
 
@@ -124,4 +118,4 @@ class SaleOrder(models.Model):
             sale_date_facture = sale_order_id.sale_date_Facture + relativedelta(months=sale_order_id.sale_periode)-relativedelta(days=1)
             #  and sale_order_id.sale_date_Facture <=sale_order_id.sale_date_de_fin_contrat - retrait le 16/02/26
             if sale_date_facture <= date.today():
-                self.create_so(sale_order_id)
+                self.with_company(sale_order_id.company_id.id)._create_so(sale_order_id)

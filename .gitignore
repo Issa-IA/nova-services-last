@@ -1,0 +1,15 @@
+__pycache__/
+.DS_Store
+.env*
+venv*
+node_modules
+*.log
+public
+*.pyc
+.temp
+.cache
+.idea/
+pycharm/run
+*.py[oc]
+odoo.conf
+.vscode/

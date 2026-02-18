@@ -162,4 +162,3 @@ class SaleMoveHeritfacture(models.Model):
 
 
 
-

@@ -19,7 +19,10 @@ class typformat(models.Model):
 
 class fleetNameGET(models.Model):
     _inherit = 'fleet.vehicle.model'
-    type_materiels = fields.Selection([('print', 'Print'), ('sauvegarde', 'Sauvegarde'), ('solution', 'Solution'), ('ecran', 'Ecran')],string='Type de matériel')
+    type_materiels = fields.Selection(
+        [('print', 'Print'), ('sauvegarde', 'Sauvegarde'), ('solution', 'Solution'), ('ecran', 'Ecran'), ('telephonie', 'Telephonie')],
+        string='Type de matériel',
+    )
     model_format1 = fields.Many2one('typformat',string='Format')
     model_format = fields.Selection([('a3', 'A3'), ('a2', 'A4')], string='Format')
     model_attachment_ids = fields.Many2many(comodel_name='ir.attachment', string='Pièces jointes')
@@ -48,7 +51,12 @@ class FleetContINHERIT(models.Model):
     _inherit = 'fleet.vehicle'
     partner_id = fields.Many2one('res.partner', string='Client', index=True)
     fleet_type_materiel=  fields.Char(string="Type de matériel")
-    fleet_type_materiels_fin = fields.Selection([('print', 'Print'), ('sauvegarde', 'Sauvegarde'), ('solution', 'Solution'), ('ecran', 'Ecran')],string='Type de matériel', related="fleet_Modele.type_materiels")
+    fleet_type_materiels_fin = fields.Selection(
+        [('print', 'Print'), ('sauvegarde', 'Sauvegarde'), ('solution', 'Solution'), ('ecran', 'Ecran'), ('telephonie', 'Telephonie')],
+        string='Type de matériel', 
+        related="fleet_Modele.type_materiels",
+        store=True
+    )
     @api.onchange('fleet_type_materiels_fin')
     def search_type_materiel_for_contact(self):
         for rec in self:
@@ -60,20 +68,24 @@ class FleetContINHERIT(models.Model):
                     sauvegarde_ok = False
                     solution_ok = False
                     ecran_ok = False
-                    for parc in rec.partner_id.partner_parc_ids:                        
-                        if parc.fleet_type_materiels_fin == "print":                            
+                    telephonie_ok = False
+                    for parc in rec.partner_id.partner_parc_ids:
+                        if parc.fleet_type_materiels_fin == "print":
                             print_ok =True
-                        if parc.fleet_type_materiels_fin == "sauvegarde":                            
+                        if parc.fleet_type_materiels_fin == "sauvegarde":
                             sauvegarde_ok=True
-                        if parc.fleet_type_materiels_fin == "solution":                            
+                        if parc.fleet_type_materiels_fin == "solution":
                             solution_ok =True
-                        if parc.fleet_type_materiels_fin == "ecran":                            
+                        if parc.fleet_type_materiels_fin == "ecran":
                             ecran_ok =True
+                        if parc.fleet_type_materiels_fin == "telephonie":
+                            telephonie_ok = True
                     rec.partner_id.type_print = print_ok
                     rec.partner_id.type_sauvegarde = sauvegarde_ok
                     rec.partner_id.type_solution = solution_ok
                     rec.partner_id.type_ecran = ecran_ok
-                        
+                    rec.partner_id.type_telephonie = telephonie_ok
+
                 if rec.fleet_type_materiels_fin == "sauvegarde":
                     rec.partner_id.type_sauvegarde = True
                 else:
@@ -81,19 +93,23 @@ class FleetContINHERIT(models.Model):
                     sauvegarde_ok = False
                     solution_ok = False
                     ecran_ok = False
-                    for parc in rec.partner_id.partner_parc_ids:                        
-                        if parc.fleet_type_materiels_fin == "print":                            
+                    telephonie_ok = False
+                    for parc in rec.partner_id.partner_parc_ids:
+                        if parc.fleet_type_materiels_fin == "print":
                             print_ok =True
-                        if parc.fleet_type_materiels_fin == "sauvegarde":                            
+                        if parc.fleet_type_materiels_fin == "sauvegarde":
                             sauvegarde_ok=True
-                        if parc.fleet_type_materiels_fin == "solution":                            
+                        if parc.fleet_type_materiels_fin == "solution":
                             solution_ok =True
-                        if parc.fleet_type_materiels_fin == "ecran":                            
+                        if parc.fleet_type_materiels_fin == "ecran":
                             ecran_ok =True
+                        if parc.fleet_type_materiels_fin == "telephonie":
+                            telephonie_ok = True
                     rec.partner_id.type_print = print_ok
                     rec.partner_id.type_sauvegarde = sauvegarde_ok
                     rec.partner_id.type_solution = solution_ok
                     rec.partner_id.type_ecran = ecran_ok
+                    rec.partner_id.type_telephonie = telephonie_ok
                 if rec.fleet_type_materiels_fin == "solution":
                     rec.partner_id.type_solution = True
                 else:
@@ -101,19 +117,23 @@ class FleetContINHERIT(models.Model):
                     sauvegarde_ok = False
                     solution_ok = False
                     ecran_ok = False
-                    for parc in rec.partner_id.partner_parc_ids:                        
-                        if parc.fleet_type_materiels_fin == "print":                            
+                    telephonie_ok = False
+                    for parc in rec.partner_id.partner_parc_ids:
+                        if parc.fleet_type_materiels_fin == "print":
                             print_ok =True
-                        if parc.fleet_type_materiels_fin == "sauvegarde":                            
+                        if parc.fleet_type_materiels_fin == "sauvegarde":
                             sauvegarde_ok=True
-                        if parc.fleet_type_materiels_fin == "solution":                            
+                        if parc.fleet_type_materiels_fin == "solution":
                             solution_ok =True
-                        if parc.fleet_type_materiels_fin == "ecran":                            
+                        if parc.fleet_type_materiels_fin == "ecran":
                             ecran_ok =True
+                        if parc.fleet_type_materiels_fin == "telephonie":
+                            telephonie_ok = True
                     rec.partner_id.type_print = print_ok
                     rec.partner_id.type_sauvegarde = sauvegarde_ok
                     rec.partner_id.type_solution = solution_ok
                     rec.partner_id.type_ecran = ecran_ok
+                    rec.partner_id.type_telephonie = telephonie_ok
                 if rec.fleet_type_materiels_fin == "ecran":
                     rec.partner_id.type_ecran = True
                 else:
@@ -121,19 +141,47 @@ class FleetContINHERIT(models.Model):
                     sauvegarde_ok = False
                     solution_ok = False
                     ecran_ok = False
-                    for parc in rec.partner_id.partner_parc_ids:                        
-                        if parc.fleet_type_materiels_fin == "print":                            
+                    telephonie_ok = False
+                    for parc in rec.partner_id.partner_parc_ids:
+                        if parc.fleet_type_materiels_fin == "print":
                             print_ok =True
-                        if parc.fleet_type_materiels_fin == "sauvegarde":                            
+                        if parc.fleet_type_materiels_fin == "sauvegarde":
                             sauvegarde_ok=True
-                        if parc.fleet_type_materiels_fin == "solution":                            
+                        if parc.fleet_type_materiels_fin == "solution":
                             solution_ok =True
-                        if parc.fleet_type_materiels_fin == "ecran":                            
+                        if parc.fleet_type_materiels_fin == "ecran":
                             ecran_ok =True
+                        if parc.fleet_type_materiels_fin == "telephonie":
+                            telephonie_ok = True
                     rec.partner_id.type_print = print_ok
                     rec.partner_id.type_sauvegarde = sauvegarde_ok
                     rec.partner_id.type_solution = solution_ok
                     rec.partner_id.type_ecran = ecran_ok
+                    rec.partner_id.type_telephonie = telephonie_ok
+                if rec.fleet_type_materiels_fin == "telephonie":
+                    rec.partner_id.type_telephonie = True
+                else:
+                    print_ok =False
+                    sauvegarde_ok = False
+                    solution_ok = False
+                    ecran_ok = False
+                    telephonie_ok = False
+                    for parc in rec.partner_id.partner_parc_ids:
+                        if parc.fleet_type_materiels_fin == "print":
+                            print_ok = True
+                        if parc.fleet_type_materiels_fin == "sauvegarde":
+                            sauvegarde_ok = True
+                        if parc.fleet_type_materiels_fin == "solution":
+                            solution_ok = True
+                        if parc.fleet_type_materiels_fin == "ecran":
+                            ecran_ok = True
+                        if parc.fleet_type_materiels_fin == "telephonie":
+                            telephonie_ok = True
+                    rec.partner_id.type_print = print_ok
+                    rec.partner_id.type_sauvegarde = sauvegarde_ok
+                    rec.partner_id.type_solution = solution_ok
+                    rec.partner_id.type_ecran = ecran_ok
+                    rec.partner_id.type_telephonie = telephonie_ok
     
     image_materiel  = fields.Binary()
     model_id = fields.Many2one(required=False )

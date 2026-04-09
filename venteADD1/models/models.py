@@ -10,7 +10,8 @@ class PartnerModelHeritt(models.Model):
     type_sauvegarde = fields.Boolean(string="Type de matériel Sauvegarde",default=False)
     type_solution = fields.Boolean(string="Type de matériel Solution",default=False)
     type_ecran = fields.Boolean(string="Type de matériel Ecran", default=False)
-    
+    type_telephonie = fields.Boolean(string="Type de matériel Téléphonie", default=False)
+
     @api.onchange('partner_parc_ids')
     def search_type_materiel(self):
         for rec in self:
@@ -23,6 +24,8 @@ class PartnerModelHeritt(models.Model):
                     rec.type_solution = True
                 if parc.fleet_type_materiels_fin == "ecran":
                     rec.type_ecran = True
+                if parc.fleet_type_materiels_fin == "telephonie":
+                    rec.type_telephonie = True
 
 
 class SaleOrderLineHerit(models.Model):

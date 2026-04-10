@@ -15,7 +15,7 @@
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','contacts','product', 'fleet'],
+    'depends': ['base', 'sale', 'crm', 'contacts', 'product', 'fleet', 'stock'],
 
     # always loaded
     'data': [

@@ -11,6 +11,8 @@ class PartnerModelHeritt(models.Model):
     type_solution = fields.Boolean(string="Type de matériel Solution",default=False)
     type_ecran = fields.Boolean(string="Type de matériel Ecran", default=False)
     type_telephonie = fields.Boolean(string="Type de matériel Téléphonie", default=False)
+    type_traceur = fields.Boolean(string="Type de matériel Traceur", default=False)
+    type_informatique = fields.Boolean(string="Type de matériel Informatique", default=False)
 
     @api.onchange('partner_parc_ids')
     def search_type_materiel(self):
@@ -26,6 +28,10 @@ class PartnerModelHeritt(models.Model):
                     rec.type_ecran = True
                 if parc.fleet_type_materiels_fin == "telephonie":
                     rec.type_telephonie = True
+                if parc.fleet_type_materiels_fin == "traceur":
+                    rec.type_traceur = True
+                if parc.fleet_type_materiels_fin == "informatique":
+                    rec.type_informatique = True
 
 
 class SaleOrderLineHerit(models.Model):
@@ -180,11 +186,21 @@ class SaleOrderHerit(models.Model):
     ############### champs Numéro dossier,
     sale_dossier = fields.Char(string='Dossier N°', compute="rcuperenumerodossier")
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        Lead = self.env["crm.lead"]
+        for vals in vals_list:
+            opp_id = vals.get("opportunity_id")
+            if opp_id and not vals.get("sale_type_client1"):
+                opp = Lead.browse(opp_id)
+                if opp.exists() and opp.action_field:
+                    vals["sale_type_client1"] = opp.action_field
+        return super().create(vals_list)
+
     @api.onchange("opportunity_id")
     def rcuperenumerodossier(self):
         for rec in self:
             rec.sale_dossier = rec.opportunity_id.num_dossier
-            rec.sale_type_client1 = rec.opportunity_id.action_field
             if rec.sale_type_client1 == 'nouveau_client':
                 rec.sale_new_contact = 1
             else:
@@ -500,8 +516,6 @@ class SaleOrderHerit(models.Model):
         }
 
     def createParck(self):
-        print("bbbbbbbbbbbbbbb")
-
         return {
             'type': 'ir.actions.act_window',
             'name': " ",

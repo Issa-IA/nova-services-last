@@ -27,6 +27,8 @@
                 <filter name="type_sauvegarde" string="Type de matériel Sauvegarde"  domain="[('type_sauvegarde','=',True)]"/>  
                 <filter name="type_solution" string="Type de matériel Solution"  domain="[('type_solution','=',True)]"/>  
                 <filter name="type_ecran" string="Type de matériel Ecran"  domain="[('type_ecran','=',True)]"/>  
+                <filter name="type_traceur" string="Type de matériel Traceur" domain="[('type_traceur','=',True)]"/>
+                <filter name="type_informatique" string="Type de matériel Informatique" domain="[('type_informatique','=',True)]"/>
             </xpath>
         </field>
 </record>

@@ -18,3 +18,14 @@ class StockHerit(models.Model):
             else:
                 rec.etiquette_maintenance = False
 
+    def action_confirm(self):
+        res =  super().action_confirm()
+        for rec in self:
+            if rec.sale_maintnance :
+                rec.etiquette_maintenance = 'maintenance'
+            elif rec.sale_dossier:
+                rec.etiquette_maintenance = 'cvi'
+                rec.sale_new_contrat = 1
+            else:
+                rec.etiquette_maintenance = False
+        return res

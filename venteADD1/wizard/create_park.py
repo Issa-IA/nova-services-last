@@ -269,7 +269,6 @@ class CreatParkWizard(models.Model):
                                  'fleet_date_2_solde': self.devis_dossier.sale_date_2_solde,
                                  'fleet_date_inst': date.today(),
                                  'fleet_dossier_devis': self.devis_dossier.sale_dossier,
-                                 'fleet_user_id': self.devis_dossier.user_id.id,
                                  'fleet_devis_id': self.devis_dossier.id,}
                             parc_id1 = self.env['fleet.vehicle'].create(vals)
                             vals = {

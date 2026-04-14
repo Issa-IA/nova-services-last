@@ -396,7 +396,15 @@ class FleetVehicle(models.Model):
     #  infos MATÉRIELS #
     ####################
 
-    fleet_user_id = fields.Many2one('res.users',  string='Commercial',default=lambda self: self.env.user)
+    fleet_user_id = fields.Many2one('res.users',  string='Commercial', compute='_compute_fleet_user_id', store=True)
+
+    @api.depends('partner_id', 'partner_id.user_id')
+    def _compute_fleet_user_id(self):
+        for rec in self:
+            if rec.partner_id:
+                rec.fleet_user_id = rec.partner_id.user_id
+            else:
+                rec.fleet_user_id = False
     
     ##############################
     fleet_serie = fields.Char(string="N° serie")

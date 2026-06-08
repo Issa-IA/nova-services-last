@@ -133,10 +133,27 @@ class Stockpikingretour(models.Model):
     stock_reception_ok = fields.Boolean(default=False)
     
     def button_validate(self):
-        res = super(Stockpikingretour, self).button_validate()
+        # Valorisation au montant du rachat avant validation
         for rec in self:
             if rec.stock_retour_ok or rec.stock_reception_ok:
-                for ligne in rec.move_ids_without_package:            
+                for ligne in rec.move_ids_without_package:
+                    bonretour = ligne.stock_move_bonretour
+                    if not bonretour or bonretour.bonretour_montant <= 0:
+                        continue
+                    montant = bonretour.bonretour_montant
+                    # AVCO / FIFO : price_unit est utilisé pour créer la couche de valorisation
+                    ligne.price_unit = montant
+                    # Coût standard : price_unit est ignoré, on met à jour le prix standard du produit
+                    if ligne.product_id.categ_id.property_cost_method == 'standard':
+                        ligne.product_id.with_company(rec.company_id).sudo().write({
+                            'standard_price': montant
+                        })
+
+        res = super(Stockpikingretour, self).button_validate()
+
+        for rec in self:
+            if rec.stock_retour_ok or rec.stock_reception_ok:
+                for ligne in rec.move_ids_without_package:
                     lot_id = self.env['stock.lot'].search([("name", "=", ligne.acount_retour_serie)])
                     lot_id.update({'ref': 'Reprise'+ ' '+ rec.partner_id.name})
         return    res

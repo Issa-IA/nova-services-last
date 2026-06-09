@@ -2,44 +2,41 @@
 <odoo>
 
     <record model="ir.ui.view" id="bonretour_list_view_new">
-      <field name="name">bon de retourr</field>
-      <field name="model">bonretour</field>
-      <field name="arch" type="xml">
-        <list editable ="bottom">
-         <field name="bonretour_article"/>
-         <field name="bonretour_serie"  />
-          <field name="bonretour_montant"  />
-         <field name="bonretour_date_rachat_prevue"  />
-         <field name="bonretour_leaser"  />
-         <field name="bonretour_dossier"  />
-          <field name="bonretour_location_id"/>  
-          <field name="bonretour_location_dest_id"/>  
-            
-        </list>
-      </field>
+        <field name="name">bon de retourr</field>
+        <field name="model">bonretour</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="bonretour_article"/>
+                <field name="bonretour_serie"/>
+                <field name="bonretour_montant"/>
+                <field name="bonretour_date_rachat_prevue"/>
+                <field name="bonretour_leaser"/>
+                <field name="bonretour_dossier"/>
+                <field name="bonretour_location_id"/>
+                <field name="bonretour_location_dest_id"/>
+            </list>
+        </field>
     </record>
 
-        <record id="bonretourform_new" model="ir.ui.view">
-            <field name="name">bon de retourr</field>
-             <field name="model">bonretour</field>
-            <field name="arch" type="xml">
-                <form >
-                    
-                    <group>
-                         <field name="bonretour_article"/>
-                         <field name="bonretour_serie"  />
-                          <field name="bonretour_montant"  />
-                          <field name="bonretour_date_rachat_prevue"  />
-                    </group>
-                    <group>
-                          <field name="bonretour_leaser"  />
-                         <field name="bonretour_dossier"  />
-                         <field name="bonretour_location_id"/>  
-                         <field name="bonretour_location_dest_id"/> 
-                    </group>
-
-                </form>
-            </field>
-        </record>
+    <record id="bonretourform_new" model="ir.ui.view">
+        <field name="name">bon de retourr</field>
+        <field name="model">bonretour</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="bonretour_article"/>
+                    <field name="bonretour_serie"/>
+                    <field name="bonretour_montant"/>
+                    <field name="bonretour_date_rachat_prevue"/>
+                </group>
+                <group>
+                    <field name="bonretour_leaser"/>
+                    <field name="bonretour_dossier"/>
+                    <field name="bonretour_location_id"/>
+                    <field name="bonretour_location_dest_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
 
 </odoo>

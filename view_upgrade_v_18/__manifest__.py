@@ -19,12 +19,7 @@
 
     # always loaded
     'data': [
-        'views/views.xml',
         'views/helpdesk_inherit_v18_view.xml',
         'views/sale_view_v18_inherit.xml'
-    ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
     ],
 }

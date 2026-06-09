@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnuorg/licenses/agpl.html).
 {
     "name": "XML Reports",
-    "version": "18.0.1.0.0",
-    "category": "Reporting",
+    'version': '18.0.1.0.0',
+    'category': 'Novatec',
     "website": "https://github.com/OCA/reporting-engine",
     "development_status": "Production/Stable",
     "author": "Tecnativa, Odoo Community Association (OCA), Avoin.Systems",

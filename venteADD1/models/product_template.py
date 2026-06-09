@@ -3,8 +3,8 @@ from odoo import api, fields, models
 
 class ProductProductInherit(models.Model):
     _inherit = "product.template"
+    
     parc_ok = fields.Boolean(default=False, string="Peut être un Parc")
-    #serie_number_materiel = fields.Char(string="N° serie")
     product_marque = fields.Many2one("fleet.vehicle.model.brand", string='Marque', related="product_Modele.brand_id")
     product_Modele = fields.Many2one("fleet.vehicle.model", string='Modèle')
     product_type = fields.Char(string='Type', compute="product_type_compute")

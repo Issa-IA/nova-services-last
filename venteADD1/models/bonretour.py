@@ -84,6 +84,26 @@ class Bonretourtable(models.Model):
     bonretour_stock_move = fields.Many2one('stock.move', string="stock move")
     bonretour_recep_ok = fields.Boolean(default=False)
 
+class StockLotReprise(models.Model):
+    _inherit = 'stock.lot'
+    reprise_montant = fields.Float('Montant reprise', digits='Product Price', default=0.0)
+
+
+class StockQuantReprise(models.Model):
+    _inherit = 'stock.quant'
+
+    @api.depends('lot_id.reprise_montant')
+    def _compute_value(self):
+        super()._compute_value()
+        for quant in self:
+            if not quant.lot_id or not quant.location_id:
+                continue
+            if not quant.location_id._should_be_valued():
+                continue
+            if quant.lot_id.reprise_montant > 0:
+                quant.value = quant.quantity * quant.lot_id.reprise_montant
+
+
 class StockmoveLineHeritretour(models.Model):
     _inherit = 'stock.move.line'
     acount_retour_serie_line = fields.Char(string="N° serie à retourner")
@@ -114,39 +134,36 @@ class Stockpikingretour(models.Model):
     stock_reception_ok = fields.Boolean(default=False)
     
     def button_validate(self):
-        # Valorisation au montant du rachat avant validation
         for rec in self:
             if rec.stock_retour_ok or rec.stock_reception_ok:
                 for ligne in rec.move_ids_without_package:
                     bonretour = ligne.stock_move_bonretour
                     if not bonretour or bonretour.bonretour_montant <= 0:
                         continue
-                    # AVCO / FIFO : price_unit est utilisé pour créer la couche de
-                    # valorisation par numéro de série (lot_valuated).
+                    # Pour AVCO/FIFO : price_unit est lu par _get_price_unit() lors de la création SVL
                     ligne.price_unit = bonretour.bonretour_montant
 
         res = super(Stockpikingretour, self).button_validate()
 
+        # Après validation : on écrit reprise_montant sur le lot de chaque mouvement de reprise.
+        # _compute_value de stock.quant retourne alors quantity * lot.reprise_montant, ce qui
+        # affiche exactement bonretour_montant comme valeur dans la vue des emplacements.
         for rec in self:
             if rec.stock_retour_ok or rec.stock_reception_ok:
                 for ligne in rec.move_ids_without_package:
                     bonretour = ligne.stock_move_bonretour
                     if not bonretour or bonretour.bonretour_montant <= 0:
                         continue
-                    montant = bonretour.bonretour_montant
-                    # Valorisation par numéro de série : on écrit le montant sur le lot
-                    # (jamais sur le produit, ce qui écraserait toutes les valeurs).
-                    # En coût standard, _change_standard_price crée la couche de correction ;
-                    # en AVCO/FIFO la valeur est déjà posée via price_unit (correction neutre).
-                    for lot in ligne.move_line_ids.lot_id:
-                        if lot.product_id.lot_valuated:
-                            lot.with_company(rec.company_id).sudo().standard_price = montant
+                    for ml in ligne.move_line_ids:
+                        if ml.lot_id:
+                            ml.lot_id.sudo().reprise_montant = bonretour.bonretour_montant
 
         for rec in self:
             if rec.stock_retour_ok or rec.stock_reception_ok:
                 for ligne in rec.move_ids_without_package:
-                    lot_id = self.env['stock.lot'].search([("name", "=", ligne.acount_retour_serie)])
-                    lot_id.update({'ref': 'Reprise'+ ' '+ rec.partner_id.name})
+                    lot_id = self.env['stock.lot'].search([('name', '=', ligne.acount_retour_serie)])
+                    lot_id.update({'ref': 'Reprise' + ' ' + rec.partner_id.name})
+
         return res
     
     stock_sale = fields.Many2one('sale.order', string="Bon de commande de retour")

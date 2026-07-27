@@ -1,4 +1,3 @@
-
 from odoo import models, fields, api
 from datetime import date
 
@@ -28,6 +27,10 @@ class SaleOrderfacture(models.Model):
     
     def action_confirm(self):
         res = super(SaleOrderfacture, self).action_confirm()
+        # --- Création automatique de facture fournisseur désactivée le 27/07/2026 ---
+        return res
+
+    def _old_action_confirm_disabled(self):
         for rec in self:
             facture_with_ligne = dict()
             for rec in self:
@@ -226,12 +229,14 @@ class SaleOrderbonretour(models.Model):
     sale_bonretour = fields.One2many('bonretour', string="Bon de retour", inverse_name='bonretour_sale_order')
     move_type = fields.Selection(
         [('direct', 'Aussi vite que possible'), ('one', 'Lorsque tous les articles sont prêts')], default='direct')
-    procure_method=fields.Selection([('make_to_stock','Par défaut : prendre dans le stock'),('make_to_order',"	Avancé : appliquer les règles d'approvisionnement")], default='make_to_stock')
+    procure_method=fields.Selection([('make_to_stock','Par défaut : prendre dans le stock'),('make_to_order',"  Avancé : appliquer les règles d'approvisionnement")], default='make_to_stock')
 
 
     def write(self, values):
         res = super().write(values)
-        return self.create_stock_piking()
+        # --- Création automatique de l'ordre de reprise désactivée le 27/07/2026 ---
+        # return self.create_stock_piking()
+        return res
 
     _BONRETOUR_PICKING_CONFIG = {
         'reception': {'name_prefix': 'Recep', 'flag': 'stock_reception_ok', 'picking_type_index': 0},

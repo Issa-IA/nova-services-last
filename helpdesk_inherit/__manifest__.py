@@ -4,8 +4,8 @@
 
 {
     'name': 'helpdesk_inherit',
-    'version': '1.6',
-    'category': 'After-Sales',
+    'version': '18.0.1.0.0',
+    'category': 'Novatec',
     'sequence': 15,
     'summary': 'Helpdesk',
     'description': "",

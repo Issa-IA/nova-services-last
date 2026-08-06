@@ -9,8 +9,9 @@
     'author': "My Company",
     'website': " ",
 
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'Novatec',
+    'version': '18.0.1.0.0',
+    'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
     'depends': ['base','fleet','sale','product', 'sale','contacts', 'fleetADD1'],

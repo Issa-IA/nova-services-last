@@ -35,7 +35,7 @@ class StockHeritpicking(models.Model):
 class CreatParkWizard(models.Model):
     _name = 'creatpark'
     _description = 'Creat Park Auto wizard'
-    devis_dossier = fields.Many2one( "sale.order",string='Numéro de dossier')
+    devis_dossier = fields.Many2one("sale.order",string='Numéro de dossier')
 
     def create_parck(self):
         if self.devis_dossier:            
@@ -66,10 +66,10 @@ class CreatParkWizard(models.Model):
                     'sale_connect':self.devis_dossier.id,
                     'sale_first_bon':True,
                 }
-                purchase_id1 = self.env['sale.order'].sudo().create(sale_vals)
-                purchase_id = purchase_id1.id
+                new_sale_order = self.env['sale.order'].sudo().create(sale_vals)
+                new_sale_order_id = new_sale_order.id
                 res = {
-                    'order_id': purchase_id,
+                    'order_id': new_sale_order_id,
                     'display_type': 'line_section',
                     'name': "Dossier N°" + str(self.devis_dossier.sale_dossier),
                 }
@@ -77,7 +77,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_forfait_signe_col:
                     res = {
                         'tax_id':self.devis_dossier.cout_copie_coleurs.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.cout_copie_coleurs.id,
                         'name': self.devis_dossier.cout_copie_coleurs.name,
                         'price_unit': self.devis_dossier.sale_cout_signe_col,
@@ -88,7 +88,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_forfait_signe_nb:
                     res = {
                         'tax_id':self.devis_dossier.cout_copie_noires.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.cout_copie_noires.id,
                         'name': self.devis_dossier.cout_copie_noires.name,
                         'price_unit': self.devis_dossier.sale_cout_signe_nb,
@@ -98,7 +98,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_abonnement_service:
                     res = {
                         'tax_id':self.devis_dossier.abonnements.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.abonnements.id,
                         'name': self.devis_dossier.abonnements.name,
                         'price_unit': self.devis_dossier.sale_abonnement_service,
@@ -109,7 +109,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_autre_frais:
                     res = {
                         'tax_id':self.devis_dossier.services.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.services.id,
                         'name': self.devis_dossier.services.name,
                         'price_unit': self.devis_dossier.sale_autre_frais,
@@ -119,7 +119,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_frais:
                     res = {
                         'tax_id':self.devis_dossier.Frais_livraison.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.Frais_livraison.id,
                         'name': self.devis_dossier.Frais_livraison.name,
                         'price_unit': self.devis_dossier.sale_frais,
@@ -129,7 +129,7 @@ class CreatParkWizard(models.Model):
                 if self.devis_dossier.sale_loyer_fact:
                     res = {
                         'tax_id':self.devis_dossier.Frais_loyer.taxes_id,
-                        'order_id': purchase_id,
+                        'order_id': new_sale_order_id,
                         'product_id': self.devis_dossier.Frais_loyer.id,
                         'name': self.devis_dossier.Frais_loyer.name,
                         'price_unit': self.devis_dossier.sale_loyer_fact,
@@ -137,48 +137,48 @@ class CreatParkWizard(models.Model):
                     }
                     self.env['sale.order.line'].sudo().create(res)
                 if self.devis_dossier.sale_pfr_fournissuer:
-                                            res = {
-                                                'tax_id':self.devis_dossier.pfr_fournisseur.taxes_id,
-                                                'order_id': purchase_id,
-                                                'product_id': self.devis_dossier.pfr_fournisseur.id,
-                                                'name': self.devis_dossier.pfr_fournisseur.name,
-                                                'price_unit': self.devis_dossier.sale_pfr_fournissuer,
-                                                'product_uom_qty': '1',
-                                            }
-                                            self.env['sale.order.line'].sudo().create(res)                    
-                
-                sale_orders = self.env['sale.order'].search([('id', '=', purchase_id)])
+                    res = {
+                        'tax_id':self.devis_dossier.pfr_fournisseur.taxes_id,
+                        'order_id': new_sale_order_id,
+                        'product_id': self.devis_dossier.pfr_fournisseur.id,
+                        'name': self.devis_dossier.pfr_fournisseur.name,
+                        'price_unit': self.devis_dossier.sale_pfr_fournissuer,
+                        'product_uom_qty': '1',
+                    }
+                    self.env['sale.order.line'].sudo().create(res)
+
+                sale_orders = self.env['sale.order'].search([('id', '=', new_sale_order_id)])
                 invoice_lines = []
                 for sale in sale_orders:                            
-                                    for line in sale.order_line:
-                                        if line.display_type:
-                                            vals = {
-                                                'name': line.name,
-                                                'display_type': line.display_type,
-                                            }
-                                            invoice_lines.append((0, 0, vals))
-                                        else:
-                                            vals = {
-                                                'tax_ids':line.tax_id,
-                                                'name': line.name,
-                                                'price_unit': line.price_unit,
-                                                'quantity': line.product_uom_qty,
-                                                'product_id': line.product_id.id,
-                                                'product_uom_id': line.product_uom.id,
-                                                'sale_line_ids': [(6, 0, [line.id])],
-                                            }
-                                            invoice_lines.append((0, 0, vals))
-                                    self.env['account.move'].create({
-                                        'invoice_date': self.devis_dossier.sale_date_Facture,
-                                        'ref': sale.client_order_ref,
-                                        'move_type': 'out_invoice',
-                                        'invoice_origin': sale.name,
-                                        'invoice_user_id': sale.user_id.id,
-                                        'partner_id': sale.partner_id.id,
-                                        'invoice_line_ids': invoice_lines,
-                                        'acount_maintnance': True,
-                                    })
-                                    sale.invoice_status = 'invoiced'  
+                    for line in sale.order_line:
+                        if line.display_type:
+                            vals = {
+                                'name': line.name,
+                                'display_type': line.display_type,
+                            }
+                            invoice_lines.append((0, 0, vals))
+                        else:
+                            vals = {
+                                'tax_ids':line.tax_id,
+                                'name': line.name,
+                                'price_unit': line.price_unit,
+                                'quantity': line.product_uom_qty,
+                                'product_id': line.product_id.id,
+                                'product_uom_id': line.product_uom.id,
+                                'sale_line_ids': [(6, 0, [line.id])],
+                            }
+                            invoice_lines.append((0, 0, vals))
+                    self.env['account.move'].create({
+                        'invoice_date': self.devis_dossier.sale_date_Facture,
+                        'ref': sale.client_order_ref,
+                        'move_type': 'out_invoice',
+                        'invoice_origin': sale.name,
+                        'invoice_user_id': sale.user_id.id,
+                        'partner_id': sale.partner_id.id,
+                        'invoice_line_ids': invoice_lines,
+                        'acount_maintnance': True,
+                    })
+                    sale.invoice_status = 'invoiced'  
         if self.devis_dossier.order_line:
             if self.devis_dossier.sale_periodicite == 'mens':
                 if self.devis_dossier.sale_duree:
@@ -225,9 +225,7 @@ class CreatParkWizard(models.Model):
                          if len(list_record) >= compteur+ 1:
                              list_record[compteur].update({'lot_id': lot_id_num.id, 'qty_done': 1, })
                              compteur +=1
-                     print("list_lot_id", list_lot_id)
-                     print("list_record", list_record)           
-                 print(list_numer_serie)
+
                  self.devis_dossier.date_instalation_park = date.today()
                  self.devis_dossier.date_last_cout_update_vrai = date.today()               
                  if rec.product_id.parc_ok:
@@ -245,7 +243,7 @@ class CreatParkWizard(models.Model):
                      for number in range(0, int(rec.product_uom_qty)):
                             vals = {
                                  'fleet_serie': list_numer_serie[number],
-                                 'fleet_fournisseur': 8,
+                                 'fleet_fournisseur': self.devis_dossier.company_id.partner_id.id,
                                  'fleet_marque': rec.product_id.product_marque.id,
                                  'fleet_Modele': rec.product_id.product_Modele.id,
                                  'fleet_type_1': rec.product_id.product_type,
@@ -271,7 +269,6 @@ class CreatParkWizard(models.Model):
                                  'fleet_date_2_solde': self.devis_dossier.sale_date_2_solde,
                                  'fleet_date_inst': date.today(),
                                  'fleet_dossier_devis': self.devis_dossier.sale_dossier,
-                                 'fleet_user_id': self.devis_dossier.user_id.id,
                                  'fleet_devis_id': self.devis_dossier.id,}
                             parc_id1 = self.env['fleet.vehicle'].create(vals)
                             vals = {
@@ -280,9 +277,3 @@ class CreatParkWizard(models.Model):
                                  'fleet_id': parc_id1.id,
                                  'article_id': rec.product_id.id, }
                             self.env['fleetserielarticle'].create(vals)
-
-
-
-
-
-

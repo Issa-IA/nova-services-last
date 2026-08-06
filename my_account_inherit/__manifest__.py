@@ -4,9 +4,9 @@
     "name": "Partner fleet",
     "summary": """
         Helpdesk""",
-    "version": "0.1",
+    'version': '18.0.1.0.0',
     "license": "AGPL-3",
-    "category": "Human Resources/Fleet",
+    'category': 'Novatec',
     "author":
     "shayma",
     "website": "",

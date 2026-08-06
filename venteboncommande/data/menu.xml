@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_server_prepare_sale_orders" model="ir.actions.server">
+        <field name="name">Préparer bons de commande</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+result = model.action_prepare_sale_orders()
+message = "%s bon(s) de commande créé(s)." % result if result else "Aucun bon de commande à créer."
+action = {
+    'type': 'ir.actions.client',
+    'tag': 'display_notification',
+    'params': {
+        'type': 'success',
+        'message': message,
+        'sticky': False,
+    }
+}
+        ]]></field>
+    </record>
+
+    <menuitem name="Préparer bons de commande"
+              id="menuitem_prepare_sale_orders"
+              parent="fleet.fleet_vehicles"
+              action="action_server_prepare_sale_orders"
+              sequence="30"
+              />
+</odoo>

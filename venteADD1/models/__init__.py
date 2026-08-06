@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from . import account_move
 from . import models
-from . import product,bonretour
+from . import product_template
+from . import bonretour

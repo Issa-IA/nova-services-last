@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 
@@ -22,8 +22,25 @@ class factAuto(models.Model):
                     if fleet.etat_serie == 'a_jour':
                         if fleet.fleet_expiration_date:
                             if fleet.state_id.id != id and fleet.fleet_date_inst <= date.today():
+                                deja_facture, derniere_date = fleet._periode_deja_facturee()
+                                if deja_facture:
+                                    rec.message_post(body=_(
+                                        "Facturation automatique ignorée pour le dossier N°%(dossier)s "
+                                        "(matériel %(fleet)s) : ce dossier a déjà été facturé le %(date)s pour "
+                                        "la période en cours (périodicité %(periode)s). Vérifiez le relevé de "
+                                        "compteur avant de le repasser à \"à facturer\" si un nouveau relevé "
+                                        "est disponible."
+                                    ) % {
+                                        'dossier': fleet.fleet_dossier_devis or vente.sale_dossier,
+                                        'fleet': fleet.display_name,
+                                        'date': derniere_date,
+                                        'periode': {'mens': 'mensuelle', 'trim': 'trimestrielle'}.get(fleet.fleet_periodicite, fleet.fleet_periodicite),
+                                    })
+                                    fleet.etat_serie = 'n_ajour'
+                                    continue
                                 list_fleet.append(fleet)
                                 fleet.etat_serie = 'n_ajour'
+                                fleet.fact_date_derniere_facturation = date.today()
                     else:
                         if fleet.fleet_expiration_date:
                             if fleet.state_id.id != id and fleet.fleet_date_inst <= date.today():
@@ -502,4 +519,22 @@ class FleetEtatINHERIT(models.Model):
     _inherit = 'fleet.vehicle'
     etat_serie = fields.Selection([('a_jour', 'à facturer'),('n_ajour', 'ne pas facturer')],default='n_ajour')
 
+    fact_date_derniere_facturation = fields.Date(string="Date de dernière facturation automatique")
+
+    _PERIODE_MIN_JOURS = {
+        'mens': 25,
+        'trim': 80,
+    }
+
+    def _periode_deja_facturee(self):
+        self.ensure_one()
+        if not self.fact_date_derniere_facturation:
+            return False, None
+        seuil_jours = self._PERIODE_MIN_JOURS.get(self.fleet_periodicite)
+        if not seuil_jours:
+            return False, None
+        prochaine_date_autorisee = self.fact_date_derniere_facturation + relativedelta(days=seuil_jours)
+        if date.today() < prochaine_date_autorisee:
+            return True, self.fact_date_derniere_facturation
+        return False, None
 

@@ -11,7 +11,7 @@
 
 
     'category': 'Uncategorized',
-    'version': '0.1',
+    'version': '0.2',
 
     # any module necessary for this one to work correctly
     'depends': ['base','sale'],
@@ -26,4 +26,5 @@
     'demo': [
         'demo/demo.xml',
     ],
+       'post_init_hook': '_backfill_fact_date_derniere_facturation',
 }

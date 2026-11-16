@@ -127,14 +127,17 @@ class SaleOrderHerit(models.Model):
     sale_date_traitement = fields.Date("Date de traitement",compute="sale_total_date_traitement")
     
     ############ dashboard 
-    sale_new_contact = fields.Integer(string="New",default=0)
-    @api.onchange("sale_type_client1")
-    def rcuperenewcontact(self):
+    sale_new_contact = fields.Integer(
+        string="New",
+        compute="_compute_sale_new_contact",
+        store=True,
+        readonly=False,
+    )
+
+    @api.depends("sale_type_client1")
+    def _compute_sale_new_contact(self):
         for rec in self:
-            if rec.sale_type_client1 == 'nouveau_client':
-                rec.sale_new_contact = 1
-            else:
-                rec.sale_new_contact = 0
+            rec.sale_new_contact = 1 if rec.sale_type_client1 == 'nouveau_client' else 0
     
     #stat dashbooard
     sale_objectif_marge = fields.Float(string="% Marge", compute="sale_objectif_marge_compute",digits=(16, 4))
@@ -201,10 +204,6 @@ class SaleOrderHerit(models.Model):
     def rcuperenumerodossier(self):
         for rec in self:
             rec.sale_dossier = rec.opportunity_id.num_dossier
-            if rec.sale_type_client1 == 'nouveau_client':
-                rec.sale_new_contact = 1
-            else:
-                rec.sale_new_contact = 0
 
 
     @api.onchange("partner_id")

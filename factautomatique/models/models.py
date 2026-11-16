@@ -10,68 +10,74 @@ class factAuto(models.Model):
         list_client_tout_dossier = {}
         list_client_non_active_dossier = {}
 
-        for rec in self.env['res.partner'].search([]):
+        SaleOrder = self.env['sale.order']
+        today = date.today()
+        etat_inactif = self.env['fleet.vehicle.state'].search([('name', '=', "Inactif")], limit=1)
+
+        # 1 seule écriture au lieu d'une par commande
+        SaleOrder.search([('devis_a_cree_commande', '=', True)]).write({'devis_a_cree_commande': False})
+
+        # Uniquement les matériels qui peuvent être concernés (mêmes conditions qu'avant)
+        fleet_domain = [
+            ('fleet_devis_id', '!=', False),
+            ('fleet_expiration_date', '!=', False),
+            ('fleet_date_inst', '<=', today),
+        ]
+        if etat_inactif:
+            fleet_domain.append(('state_id', '!=', etat_inactif.id))
+        fleets = self.env['fleet.vehicle'].search(fleet_domain)
+        ventes = fleets.mapped('fleet_devis_id')
+        commandes_a_cocher = SaleOrder
+
+        partners = self.env['res.partner'].search([('id', 'in', ventes.mapped('partner_id').ids)])
+        for rec in partners:
             list_vente = {}
             list_vente_non_active = {}
-            for vente in rec.sale_order_ids:
+            for vente in rec.sale_order_ids & ventes:
                 list_fleet = []
                 list_fleet_non_active = []
-                vente.devis_a_cree_commande = False
-                for fleet in vente.sale_parc_ids:
-                    id = self.env['fleet.vehicle.state'].search([('name', '=', "Inactif")])[0].id
+                for fleet in vente.sale_parc_ids & fleets:
                     if fleet.etat_serie == 'a_jour':
-                        if fleet.fleet_expiration_date:
-                            if fleet.state_id.id != id and fleet.fleet_date_inst <= date.today():
-                                deja_facture, derniere_date = fleet._periode_deja_facturee()
-                                if deja_facture:
-                                    rec.message_post(body=_(
-                                        "Facturation automatique ignorée pour le dossier N°%(dossier)s "
-                                        "(matériel %(fleet)s) : ce dossier a déjà été facturé le %(date)s pour "
-                                        "la période en cours (périodicité %(periode)s). Vérifiez le relevé de "
-                                        "compteur avant de le repasser à \"à facturer\" si un nouveau relevé "
-                                        "est disponible."
-                                    ) % {
-                                        'dossier': fleet.fleet_dossier_devis or vente.sale_dossier,
-                                        'fleet': fleet.display_name,
-                                        'date': derniere_date,
-                                        'periode': {'mens': 'mensuelle', 'trim': 'trimestrielle'}.get(fleet.fleet_periodicite, fleet.fleet_periodicite),
-                                    })
-                                    fleet.etat_serie = 'n_ajour'
-                                    continue
-                                list_fleet.append(fleet)
-                                fleet.etat_serie = 'n_ajour'
-                                fleet.fact_date_derniere_facturation = date.today()
+                        deja_facture, derniere_date = fleet._periode_deja_facturee()
+                        if deja_facture:
+                            rec.message_post(body=_(
+                                "Facturation automatique ignorée pour le dossier N°%(dossier)s "
+                                "(matériel %(fleet)s) : ce dossier a déjà été facturé le %(date)s pour "
+                                "la période en cours (périodicité %(periode)s). Vérifiez le relevé de "
+                                "compteur avant de le repasser à \"à facturer\" si un nouveau relevé "
+                                "est disponible."
+                            ) % {
+                                'dossier': fleet.fleet_dossier_devis or vente.sale_dossier,
+                                'fleet': fleet.display_name,
+                                'date': derniere_date,
+                                'periode': {'mens': 'mensuelle', 'trim': 'trimestrielle'}.get(fleet.fleet_periodicite, fleet.fleet_periodicite),
+                            })
+                            fleet.etat_serie = 'n_ajour'
+                            continue
+                        list_fleet.append(fleet)
+                        fleet.etat_serie = 'n_ajour'
+                        fleet.fact_date_derniere_facturation = today
                     else:
-                        if fleet.fleet_expiration_date:
-                            if fleet.state_id.id != id and fleet.fleet_date_inst <= date.today():
-                                list_fleet_non_active.append(fleet)
+                        list_fleet_non_active.append(fleet)
 
-                if list_fleet_non_active != []:
-                    vente.devis_a_cree_commande = True
+                if list_fleet_non_active:
                     list_vente_non_active[vente] = list_fleet_non_active
-                if list_fleet != []:
+                    if not list_fleet:
+                        commandes_a_cocher |= vente
+                if list_fleet:
                     list_vente[vente] = list_fleet
-                    vente.devis_a_cree_commande = False
-                
 
-
-
-            if list_vente != {}:
-
-                print('type', rec.type_facture)
+            if list_vente:
                 if rec.type_facture == 'par_dossier':
                     list_client_par_dossier[rec] = list_vente
                 if rec.type_facture == 'tout_dossiers':
                     list_client_tout_dossier[rec] = list_vente
-            if list_vente_non_active != {}:
-                list_client_non_active_dossier[rec]=list_vente_non_active
+            if list_vente_non_active:
+                list_client_non_active_dossier[rec] = list_vente_non_active
 
-
-        print('par dossier',list_client_par_dossier)
-        print('tout dossier', list_client_tout_dossier)
-        print('list_client_non_active_dossier',list_client_non_active_dossier)
-
-
+        # 1 seule écriture au lieu d'une par commande
+        if commandes_a_cocher:
+            commandes_a_cocher.write({'devis_a_cree_commande': True})
 
         #################### par dossier
 
